@@ -1,3 +1,4 @@
+import { brandMessage } from '../../branding';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { MainPanelLayout } from '../Layout/MainPanelLayout';
 import { Button } from '../ui/button';
@@ -27,11 +28,6 @@ const i18n = defineMessages({
     id: 'appsView.importApp',
     defaultMessage: 'Import App',
   },
-  description: {
-    id: 'appsView.description',
-    defaultMessage:
-      'Applications from your MCP servers and Apps built by goose itself. You can ask it to create new apps through the chat interface and they will appear here.',
-  },
   loading: {
     id: 'appsView.loading',
     defaultMessage: 'Loading apps...',
@@ -39,11 +35,6 @@ const i18n = defineMessages({
   noAppsTitle: {
     id: 'appsView.noAppsTitle',
     defaultMessage: 'No apps available',
-  },
-  noAppsDescription: {
-    id: 'appsView.noAppsDescription',
-    defaultMessage:
-      'Open a chat and ask goose for the app you want to have. It can build one for you and that will appear here. Or if somebody shared an app, you can import it using the button above.',
   },
   customApp: {
     id: 'appsView.customApp',
@@ -191,9 +182,7 @@ export default function AppsView() {
 
   const handleDeleteApp = async (app: GooseApp) => {
     if (
-      !window.confirm(
-        intl.formatMessage(i18n.deleteConfirm, { name: formatAppName(app.name) })
-      )
+      !window.confirm(intl.formatMessage(i18n.deleteConfirm, { name: formatAppName(app.name) }))
     ) {
       return;
     }
@@ -298,7 +287,7 @@ export default function AppsView() {
             </div>
             <div className="mb-4">
               <p className="text-sm text-text-secondary mb-2">
-                {intl.formatMessage(i18n.description)}
+                {intl.formatMessage(brandMessage('appsView.description'))}
               </p>
             </div>
           </div>
@@ -321,7 +310,7 @@ export default function AppsView() {
               <div className="text-center">
                 <h3 className="text-lg font-medium mb-2">{intl.formatMessage(i18n.noAppsTitle)}</h3>
                 <p className="text-sm text-text-secondary">
-                  {intl.formatMessage(i18n.noAppsDescription)}
+                  {intl.formatMessage(brandMessage('appsView.noAppsDescription'))}
                 </p>
               </div>
             </div>

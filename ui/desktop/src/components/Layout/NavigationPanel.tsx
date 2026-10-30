@@ -20,6 +20,9 @@ import { formatMessageTimestamp } from '../../utils/timeUtils';
 import { cn } from '../../utils';
 import type { ProjectGroup } from '../../utils/projectSessions';
 import { defineMessages, useIntl } from '../../i18n';
+import { LanAccountButton } from '../../lan-auth/LanAuthGate';
+import { APP_NAME } from '../../branding';
+import BrandIcon from '../../branding/BrandIcon';
 
 type StreamState = 'idle' | 'loading' | 'streaming' | 'error';
 
@@ -338,6 +341,11 @@ export const Navigation: React.FC<{
     >
       <div className="h-[48px] no-drag" />
 
+      <div className="px-4 pb-3 flex items-center gap-2 text-sm font-semibold text-text-primary">
+        <BrandIcon width={24} height={24} className="shrink-0" />
+        <span className="truncate">{APP_NAME}</span>
+      </div>
+
       <div className="px-2 flex flex-col gap-0.5">
         {visibleItems.map((item) => (
           <NavRow
@@ -424,6 +432,7 @@ export const Navigation: React.FC<{
       </div>
 
       <div className="px-2 pt-2 pb-2 border-t border-border-secondary">
+        <LanAccountButton />
         <NavRow
           item={SETTINGS_NAV_ITEM}
           active={isActive(SETTINGS_NAV_ITEM.path)}

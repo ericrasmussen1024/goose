@@ -1,9 +1,10 @@
+import { brandMessage } from '../../branding';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useConfig } from '../ConfigContext';
 import { useModelAndProvider } from '../ModelAndProviderContext';
 import { acpListProviderDetails, acpReadDefaults, acpSaveDefaults } from '../../acp/providers';
-import { Goose } from '../icons';
+import BrandIcon from '../../branding/BrandIcon';
 import { Button } from '../ui/button';
 import ProviderSelector from './ProviderSelector';
 import OnboardingSuccess from './OnboardingSuccess';
@@ -17,17 +18,9 @@ import {
 import { defineMessages, useIntl } from '../../i18n';
 
 const i18n = defineMessages({
-  welcomeTitle: {
-    id: 'onboardingGuard.welcomeTitle',
-    defaultMessage: 'Welcome to goose',
-  },
   welcomeDescription: {
     id: 'onboardingGuard.welcomeDescription',
     defaultMessage: 'Your local AI agent. Connect an AI model provider to get started.',
-  },
-  checkProviderErrorTitle: {
-    id: 'onboardingGuard.checkProviderErrorTitle',
-    defaultMessage: 'Unable to connect to Goose server',
   },
   checkProviderErrorDescription: {
     id: 'onboardingGuard.checkProviderErrorDescription',
@@ -106,7 +99,12 @@ export default function OnboardingGuard({ children }: OnboardingGuardProps) {
   }, []);
 
   useEffect(() => {
-    if (!isCheckingProvider && !hasProvider && !checkProviderError && !hasTrackedOnboardingStart.current) {
+    if (
+      !isCheckingProvider &&
+      !hasProvider &&
+      !checkProviderError &&
+      !hasTrackedOnboardingStart.current
+    ) {
       trackOnboardingStarted();
       hasTrackedOnboardingStart.current = true;
     }
@@ -150,13 +148,15 @@ export default function OnboardingGuard({ children }: OnboardingGuardProps) {
       <div className="h-screen w-full bg-background-default flex flex-col items-center justify-center">
         <div className="text-center max-w-md">
           <div className="mb-4">
-            <Goose className="size-8 mx-auto" />
+            <BrandIcon className="size-8 mx-auto" />
           </div>
-          <h1 className="text-xl font-light mb-3">{intl.formatMessage(i18n.checkProviderErrorTitle)}</h1>
-          <p className="text-text-muted mb-6">{intl.formatMessage(i18n.checkProviderErrorDescription)}</p>
-          <Button onClick={() => checkProvider()}>
-            {intl.formatMessage(i18n.retry)}
-          </Button>
+          <h1 className="text-xl font-light mb-3">
+            {intl.formatMessage(brandMessage('onboardingGuard.checkProviderErrorTitle'))}
+          </h1>
+          <p className="text-text-muted mb-6">
+            {intl.formatMessage(i18n.checkProviderErrorDescription)}
+          </p>
+          <Button onClick={() => checkProvider()}>{intl.formatMessage(i18n.retry)}</Button>
         </div>
       </div>
     );
@@ -183,9 +183,11 @@ export default function OnboardingGuard({ children }: OnboardingGuardProps) {
               className={`text-left transition-all duration-500 ease-in-out overflow-hidden ${hasSelection ? 'max-h-0 opacity-0 mb-0' : 'max-h-60 opacity-100 mb-8'}`}
             >
               <div className="mb-4">
-                <Goose className="size-8" />
+                <BrandIcon className="size-8" />
               </div>
-              <h1 className="text-2xl sm:text-4xl font-light mb-3">{intl.formatMessage(i18n.welcomeTitle)}</h1>
+              <h1 className="text-2xl sm:text-4xl font-light mb-3">
+                {intl.formatMessage(brandMessage('onboardingGuard.welcomeTitle'))}
+              </h1>
               <p className="text-text-muted text-base sm:text-lg">
                 {intl.formatMessage(i18n.welcomeDescription)}
               </p>

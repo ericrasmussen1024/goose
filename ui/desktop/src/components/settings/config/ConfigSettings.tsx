@@ -1,3 +1,4 @@
+import { brandMessage } from '../../../branding';
 import { useState, useEffect, useMemo } from 'react';
 import { Input } from '../../ui/input';
 import { Button } from '../../ui/button';
@@ -24,14 +25,6 @@ const i18n = defineMessages({
   title: {
     id: 'configSettings.title',
     defaultMessage: 'Configuration',
-  },
-  description: {
-    id: 'configSettings.description',
-    defaultMessage: 'Edit your goose configuration settings',
-  },
-  descriptionWithProvider: {
-    id: 'configSettings.descriptionWithProvider',
-    defaultMessage: 'Edit your goose configuration settings (current settings for {provider})',
   },
   editConfiguration: {
     id: 'configSettings.editConfiguration',
@@ -220,8 +213,10 @@ export default function ConfigSettings() {
         </CardTitle>
         <CardDescription>
           {currentProvider
-            ? intl.formatMessage(i18n.descriptionWithProvider, { provider: currentProvider })
-            : intl.formatMessage(i18n.description)}
+            ? intl.formatMessage(brandMessage('configSettings.descriptionWithProvider'), {
+                provider: currentProvider,
+              })
+            : intl.formatMessage(brandMessage('configSettings.description'))}
         </CardDescription>
       </CardHeader>
       <CardContent className="pt-4 px-4">
@@ -240,8 +235,10 @@ export default function ConfigSettings() {
               </DialogTitle>
               <DialogDescription>
                 {currentProvider
-                  ? intl.formatMessage(i18n.descriptionWithProvider, { provider: currentProvider })
-                  : intl.formatMessage(i18n.description)}
+                  ? intl.formatMessage(brandMessage('configSettings.descriptionWithProvider'), {
+                      provider: currentProvider,
+                    })
+                  : intl.formatMessage(brandMessage('configSettings.description'))}
               </DialogDescription>
             </DialogHeader>
 

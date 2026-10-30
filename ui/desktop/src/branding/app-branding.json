@@ -1,0 +1,2084 @@
+{
+  "Name": "Gilbert",
+  "NameDescription": "The visible application name. Change this one value, then rebuild. Used by desktop UI, native menus/dialogs/notifications, and installer display metadata.",
+  "strings": {
+    "appsView.description": {
+      "kind": "message",
+      "value": "Applications from your MCP servers and Apps built by {Name} itself. You can ask it to create new apps through the chat interface and they will appear here.",
+      "description": "Displayed description text on apps > AppsView. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["apps > AppsView"],
+      "sources": ["src/components/apps/AppsView.tsx:30"],
+      "translations": {
+        "de": "Anwendungen von Ihren MCP-Servern und Apps, die {Name} selbst erstellt hat. Sie können über die Chat-Oberfläche neue Apps anfordern, die dann hier erscheinen.",
+        "es": "Aplicaciones de tus servidores MCP y Apps creadas por {Name}. Puedes pedirle que cree nuevas apps desde la interfaz de chat y aparecerán aquí.",
+        "fr": "Applications provenant de vos serveurs MCP et applications créées par {Name} lui-même. Vous pouvez lui demander de créer de nouvelles applications via l'interface de chat et elles apparaîtront ici.",
+        "hi": "आपके MCP सर्वर से एप्लिकेशन और {Name} द्वारा निर्मित ऐप्स। आप इसे चैट इंटरफ़ेस के माध्यम से नए ऐप्स बनाने के लिए कह सकते हैं और वे यहां दिखाई देंगे।",
+        "id": "Aplikasi dari server MCP Anda dan Aplikasi yang dibuat oleh {Name} sendiri. Anda dapat memintanya membuat aplikasi baru melalui antarmuka obrolan dan aplikasi tersebut akan muncul di sini.",
+        "it": "Applicazioni dai tuoi server MCP e app create da {Name} stesso. Puoi chiedere di creare nuove app tramite l'interfaccia di chat e appariranno qui.",
+        "ja": "MCPサーバーのアプリケーションと、{Name}自身が作成したアプリです。チャット画面で新しいアプリの作成を依頼すると、ここに表示されます。",
+        "ko": "MCP 서버의 애플리케이션과 {Name} 자체에서 구축한 앱입니다. 채팅 인터페이스를 통해 새 앱을 생성하도록 요청할 수 있으며 여기에 표시됩니다.",
+        "ms": "Aplikasi daripada pelayan MCP anda dan Apl yang dibina oleh {Name} sendiri. Anda boleh memintanya mencipta apl baharu melalui antara muka sembang dan ia akan muncul di sini.",
+        "pt": "Aplicações dos seus servidores MCP e aplicações criadas pelo próprio {Name}. Pode pedir-lhe para criar novas aplicações através da interface de chat e elas aparecerão aqui.",
+        "ru": "Приложения с ваших MCP-серверов и приложения, созданные самим {Name}. Вы можете попросить его создать новые приложения через чат, и они появятся здесь.",
+        "tr": "MCP sunucularınızdaki uygulamalar ve {Name} tarafından oluşturulan Uygulamalar. Sohbet arayüzü aracılığıyla yeni uygulamalar oluşturmasını isteyebilirsiniz; bunlar burada görünecektir.",
+        "vi": "Các ứng dụng từ máy chủ MCP của bạn và các ứng dụng do {Name} tự tạo. Bạn có thể yêu cầu nó tạo ứng dụng mới thông qua giao diện trò chuyện và chúng sẽ xuất hiện ở đây.",
+        "zh-CN": "来自你 MCP 服务器的应用，以及 {Name} 自己构建的应用。你可以通过聊天界面让它创建新应用，新应用会显示在这里。",
+        "zh-TW": "來自您 MCP 伺服器的應用程式，以及由 {Name} 自行建立的應用程式。您可以透過聊天介面要求它建立新的應用程式，它們便會出現在這裡。"
+      }
+    },
+    "appsView.noAppsDescription": {
+      "kind": "message",
+      "value": "Open a chat and ask {Name} for the app you want to have. It can build one for you and that will appear here. Or if somebody shared an app, you can import it using the button above.",
+      "description": "Displayed no Apps Description text on apps > AppsView. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["apps > AppsView"],
+      "sources": ["src/components/apps/AppsView.tsx:43"],
+      "translations": {
+        "de": "Öffnen Sie einen Chat und bitten Sie {Name} um die gewünschte App. {Name} kann eine für Sie erstellen, die dann hier erscheint. Oder wenn jemand eine App geteilt hat, können Sie sie über die Schaltfläche oben importieren.",
+        "es": "Abre un chat y pídele a {Name} la app que quieras tener. Puede crearte una y aparecerá aquí. O si alguien compartió una app, puedes importarla con el botón de arriba.",
+        "fr": "Ouvrez un chat et demandez à {Name} l'application que vous souhaitez. Il peut en créer une pour vous et elle apparaîtra ici. Ou si quelqu'un a partagé une application, vous pouvez l'importer à l'aide du bouton ci-dessus.",
+        "hi": "चैट खोलें और {Name} से उस ऐप के बारे में पूछें जो आप चाहते हैं। यह आपके लिए एक निर्माण कर सकता है और वह यहां दिखाई देगा। या यदि किसी ने कोई ऐप साझा किया है, तो आप ऊपर दिए गए बटन का उपयोग करके इसे आयात कर सकते हैं।",
+        "id": "Buka obrolan dan mintalah {Name} membuat aplikasi yang Anda inginkan. {Name} dapat membuatkannya untuk Anda dan aplikasi tersebut akan muncul di sini. Atau jika seseorang membagikan sebuah aplikasi, Anda dapat mengimpornya menggunakan tombol di atas.",
+        "it": "Apri una chat e chiedi a {Name} l'app che desideri avere. Può crearne una per te e apparirà qui. Oppure, se qualcuno ha condiviso un'app, puoi importarla usando il pulsante qui sopra.",
+        "ja": "チャットを開き、欲しいアプリを{Name}に依頼してください。{Name}が作成したアプリがここに表示されます。誰かから共有されたアプリがある場合は、上のボタンでインポートできます。",
+        "ko": "채팅을 열고 원하는 앱을 {Name}에 요청하세요. {Name}가 앱을 만들어 주면 여기에 표시됩니다. 또는 누군가가 앱을 공유한 경우 위 버튼을 사용하여 가져올 수 있습니다.",
+        "ms": "Buka sembang dan minta {Name} untuk apl yang anda mahukan. Ia boleh membina satu untuk anda dan ia akan muncul di sini. Atau jika seseorang berkongsi apl, anda boleh mengimportnya menggunakan butang di atas.",
+        "pt": "Abra um chat e peça ao {Name} a aplicação que pretende. Ele pode criar uma para si e ela aparecerá aqui. Ou, se alguém tiver partilhado uma aplicação, pode importá-la com o botão acima.",
+        "ru": "Откройте чат и попросите {Name} создать нужное приложение. Он может собрать его для вас, после чего оно появится здесь. Если кто-то поделился приложением, импортируйте его кнопкой выше.",
+        "tr": "Bir sohbet açın ve istediğiniz uygulamayı {Name}'a sorun. Sizin için bir uygulama oluşturabilir ve bu uygulama burada görünür. Birisi bir uygulama paylaştıysa yukarıdaki düğmeyi kullanarak içe aktarabilirsiniz.",
+        "vi": "Mở một cuộc trò chuyện và yêu cầu {Name} tạo ứng dụng bạn muốn. Nó có thể tạo cho bạn và ứng dụng sẽ xuất hiện ở đây. Hoặc nếu ai đó đã chia sẻ một ứng dụng, bạn có thể nhập nó bằng nút phía trên.",
+        "zh-CN": "打开聊天，告诉 {Name} 你想要什么应用，它可以为你构建一个，然后出现在这里。或者如果有人分享了一个应用，你可以用上面的按钮导入。",
+        "zh-TW": "開啟聊天並向 {Name} 索取您想要的應用程式。它可以為您建立一個，並顯示在這裡。或者，如果有人分享了應用程式，您可以使用上方的按鈕匯入。"
+      }
+    },
+    "authSettings.description": {
+      "kind": "message",
+      "value": "Manage provider credentials stored locally by {Name}.",
+      "description": "Displayed description text on Settings > auth > AuthSettingsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > auth > AuthSettingsSection"],
+      "sources": ["src/components/settings/auth/AuthSettingsSection.tsx:22"],
+      "translations": {
+        "de": "Verwalten Sie die lokal von {Name} gespeicherten Anbieter-Anmeldeinformationen.",
+        "es": "Gestiona las credenciales de proveedores que {Name} guarda localmente.",
+        "fr": "Gérez les identifiants de fournisseurs stockés localement par {Name}.",
+        "hi": "{Name} द्वारा स्थानीय रूप से संग्रहीत प्रदाता क्रेडेंशियल प्रबंधित करें।",
+        "id": "Kelola kredensial penyedia yang disimpan secara lokal oleh {Name}.",
+        "it": "Gestisci le credenziali dei provider memorizzate localmente da {Name}.",
+        "ja": "{Name}がローカルに保存したプロバイダー認証情報を管理します。",
+        "ko": "{Name}에 로컬로 저장된 제공업체 자격 증명을 관리합니다.",
+        "ms": "Urus kelayakan pembekal yang disimpan secara setempat oleh {Name}.",
+        "pt": "Faça a gestão das credenciais de fornecedores armazenadas localmente pelo {Name}.",
+        "ru": "Управляйте учетными данными провайдеров, сохраненными локально в {Name}.",
+        "tr": "{Name} tarafından yerel olarak saklanan sağlayıcı kimlik bilgilerini yönetin.",
+        "vi": "Quản lý thông tin xác thực nhà cung cấp được {Name} lưu trữ cục bộ.",
+        "zh-CN": "管理 {Name} 在本地存储的提供商凭据。",
+        "zh-TW": "管理 {Name} 在本機儲存的供應商憑證。"
+      }
+    },
+    "chat.notification.taskComplete.body": {
+      "kind": "message",
+      "value": "Click here to bring {Name} back into focus.",
+      "description": "Displayed body text on Chat > background task notifications. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Chat > background task notifications"],
+      "sources": ["src/hooks/useChatSession.ts:51"],
+      "translations": {
+        "de": "Klicken Sie hier, um {Name} wieder in den Vordergrund zu holen.",
+        "es": "Haz clic aquí para volver a poner el foco en {Name}.",
+        "fr": "Cliquez ici pour remettre {Name} au premier plan.",
+        "hi": "{Name} को फोकस में वापस लाने के लिए यहां क्लिक करें।",
+        "id": "Klik di sini untuk membawa {Name} kembali ke fokus.",
+        "it": "Fai clic qui per riportare {Name} in primo piano.",
+        "ja": "クリックして{Name}にフォーカスを戻します。",
+        "ko": "{Name}에 다시 포커스를 맞추려면 여기를 클릭하세요.",
+        "ms": "Klik di sini untuk membawa {Name} kembali ke fokus.",
+        "pt": "Clique aqui para colocar o {Name} novamente em foco.",
+        "ru": "Нажмите здесь, чтобы сфокусироваться на {Name}.",
+        "tr": "{Name}'yi tekrar odağa almak için buraya tıklayın.",
+        "vi": "Nhấp vào đây để đưa {Name} trở lại tiêu điểm.",
+        "zh-CN": "点击这里让 {Name} 窗口回到前台。",
+        "zh-TW": "按一下這裡讓 {Name} 重新回到焦點。"
+      }
+    },
+    "chat.notification.taskComplete.title": {
+      "kind": "message",
+      "value": "{Name} finished the task.",
+      "description": "Displayed title text on Chat > background task notifications. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Chat > background task notifications"],
+      "sources": ["src/hooks/useChatSession.ts:47"],
+      "translations": {
+        "de": "{Name} hat die Aufgabe abgeschlossen.",
+        "es": "{Name} terminó la tarea.",
+        "fr": "{Name} a terminé la tâche.",
+        "hi": "{Name} ने कार्य पूरा किया।",
+        "id": "{Name} telah menyelesaikan tugas.",
+        "it": "{Name} ha completato l'attività.",
+        "ja": "{Name}がタスクを完了しました。",
+        "ko": "{Name}가 작업을 완료했습니다.",
+        "ms": "{Name} telah menyelesaikan tugasan.",
+        "pt": "O {Name} concluiu a tarefa.",
+        "ru": "{Name} завершил задачу.",
+        "tr": "{Name} görevi tamamladı.",
+        "vi": "{Name} đã hoàn thành tác vụ.",
+        "zh-CN": "{Name} 完成任务了。",
+        "zh-TW": "{Name} 已完成工作。"
+      }
+    },
+    "chatSettings.modeDescription": {
+      "kind": "message",
+      "value": "Choose the default mode {Name} uses for new sessions. Existing sessions keep their current mode.",
+      "description": "Displayed mode Description text on Settings > chat > ChatSettingsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > chat > ChatSettingsSection"],
+      "sources": ["src/components/settings/chat/ChatSettingsSection.tsx:16"],
+      "translations": {
+        "de": "Wählen Sie den Standardmodus, den {Name} für neue Sitzungen verwendet. Bestehende Sitzungen behalten ihren aktuellen Modus bei.",
+        "es": "Configura cómo interactúa {Name} con las herramientas y las extensiones",
+        "fr": "Choisissez le mode par défaut que {Name} utilise pour les nouvelles sessions. Les sessions existantes conservent leur mode actuel.",
+        "hi": "कॉन्फ़िगर करें कि {Name} टूल और एक्सटेंशन के साथ कैसे इंटरैक्ट करता है",
+        "id": "Pilih mode default yang digunakan {Name} untuk sesi baru. Sesi yang sudah ada tetap menggunakan mode saat ini.",
+        "it": "Scegli la modalità predefinita che {Name} usa per le nuove sessioni. Le sessioni esistenti mantengono la loro modalità corrente.",
+        "ja": "{Name}がツールや拡張機能とどのようにやり取りするかを設定します",
+        "ko": "새 세션에 {Name}가 사용할 기본 모드를 선택합니다. 기존 세션은 현재 모드를 유지합니다.",
+        "ms": "Pilih mod lalai yang {Name} gunakan untuk sesi baharu. Sesi sedia ada mengekalkan mod semasanya.",
+        "pt": "Escolha o modo predefinido que o {Name} utiliza para novas sessões. As sessões existentes mantêm o seu modo atual.",
+        "ru": "Настройте как {Name} взаимодействует с инструментами и расширениями",
+        "tr": "{Name}'nin araçlar ve uzantılarla nasıl etkileşimde bulunacağını yapılandırın",
+        "vi": "Chọn chế độ mặc định mà {Name} sử dụng cho các phiên mới. Các phiên hiện có vẫn giữ chế độ hiện tại của chúng.",
+        "zh-CN": "配置 {Name} 与工具和扩展的交互方式",
+        "zh-TW": "選擇 {Name} 用於新工作階段的預設模式。現有的工作階段會維持目前的模式。"
+      }
+    },
+    "chatSettings.responseStylesDescription": {
+      "kind": "message",
+      "value": "Choose how {Name} should format and style its responses",
+      "description": "Displayed response Styles Description text on Settings > chat > ChatSettingsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > chat > ChatSettingsSection"],
+      "sources": ["src/components/settings/chat/ChatSettingsSection.tsx:25"],
+      "translations": {
+        "de": "Wählen Sie, wie {Name} seine Antworten formatieren und gestalten soll",
+        "es": "Elige cómo debe formatear y dar estilo {Name} a sus respuestas",
+        "fr": "Choisissez la façon dont {Name} doit formater et styliser ses réponses",
+        "hi": "चुनें कि {Name} को अपनी प्रतिक्रियाओं को कैसे प्रारूपित और शैलीबद्ध करना चाहिए",
+        "id": "Pilih bagaimana {Name} memformat dan menata respons-nya",
+        "it": "Scegli come {Name} deve formattare e definire lo stile delle sue risposte",
+        "ja": "{Name}の回答の形式とスタイルを選択します",
+        "ko": "{Name}가 응답을 구성하고 표시하는 방식을 선택합니다.",
+        "ms": "Pilih cara {Name} memformat dan menggaya respons",
+        "pt": "Escolha como o {Name} deve formatar e estilizar as suas respostas",
+        "ru": "Выберите как {Name} должен форматировать и оформлять ответы",
+        "tr": "{Name}'nin yanıtlarını nasıl biçimlendireceğini ve stillendireceğini seçin",
+        "vi": "Chọn cách {Name} định dạng và tạo phong cách cho các phản hồi của mình",
+        "zh-CN": "选择 {Name} 格式化和呈现回复的方式",
+        "zh-TW": "選擇 {Name} 設定回應格式與樣式的方式"
+      }
+    },
+    "configSettings.description": {
+      "kind": "message",
+      "value": "Edit your {Name} configuration settings",
+      "description": "Displayed description text on Settings > config > ConfigSettings. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > config > ConfigSettings"],
+      "sources": ["src/components/settings/config/ConfigSettings.tsx:28"],
+      "translations": {
+        "de": "Bearbeiten Sie Ihre {Name}-Konfigurationseinstellungen",
+        "es": "Edita los ajustes de configuración de {Name}",
+        "fr": "Modifiez les paramètres de configuration de {Name}",
+        "hi": "अपनी {Name} कॉन्फ़िगरेशन सेटिंग संपादित करें",
+        "id": "Edit pengaturan konfigurasi {Name} Anda",
+        "it": "Modifica le impostazioni di configurazione di {Name}",
+        "ja": "{Name}の設定を編集します",
+        "ko": "{Name} 구성 설정을 편집합니다.",
+        "ms": "Edit tetapan konfigurasi {Name} anda",
+        "pt": "Edite as definições de configuração do seu {Name}",
+        "ru": "Измените настройки конфигурации {Name}",
+        "tr": "{Name} yapılandırma ayarlarınızı düzenleyin",
+        "vi": "Chỉnh sửa cài đặt cấu hình {Name} của bạn",
+        "zh-CN": "编辑你的 {Name} 配置项",
+        "zh-TW": "編輯您的 {Name} 設定"
+      }
+    },
+    "configSettings.descriptionWithProvider": {
+      "kind": "message",
+      "value": "Edit your {Name} configuration settings (current settings for {provider})",
+      "description": "Displayed description With Provider text on Settings > config > ConfigSettings. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > config > ConfigSettings"],
+      "sources": ["src/components/settings/config/ConfigSettings.tsx:32"],
+      "translations": {
+        "de": "Bearbeiten Sie Ihre {Name}-Konfigurationseinstellungen (aktuelle Einstellungen für {provider})",
+        "es": "Edita los ajustes de configuración de {Name} (ajustes actuales de {provider})",
+        "fr": "Modifiez les paramètres de configuration de {Name} (paramètres actuels pour {provider})",
+        "hi": "अपनी {Name} कॉन्फ़िगरेशन सेटिंग्स संपादित करें ({provider} के लिए वर्तमान सेटिंग्स)",
+        "id": "Edit pengaturan konfigurasi {Name} Anda (pengaturan saat ini untuk {provider})",
+        "it": "Modifica le impostazioni di configurazione di {Name} (impostazioni correnti per {provider})",
+        "ja": "{Name}の設定を編集します（{provider} の現在の設定）",
+        "ko": "{Name} 구성 설정을 편집합니다 ({provider}의 현재 설정)",
+        "ms": "Edit tetapan konfigurasi {Name} anda (tetapan semasa untuk {provider})",
+        "pt": "Edite as definições de configuração do seu {Name} (definições atuais de {provider})",
+        "ru": "Измените настройки конфигурации {Name} (текущие настройки для {provider})",
+        "tr": "{Name} yapılandırma ayarlarınızı düzenleyin ({provider} için geçerli ayarlar)",
+        "vi": "Chỉnh sửa cài đặt cấu hình {Name} của bạn (cài đặt hiện tại cho {provider})",
+        "zh-CN": "编辑你的 {Name} 配置项（当前为 {provider} 的配置）",
+        "zh-TW": "編輯您的 {Name} 設定（{provider} 的目前設定）"
+      }
+    },
+    "conversationLimitsDropdown.maxTurnsDescription": {
+      "kind": "message",
+      "value": "Maximum agent turns before {Name} asks for user input",
+      "description": "Displayed max Turns Description text on Settings > mode > ConversationLimitsDropdown. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > mode > ConversationLimitsDropdown"],
+      "sources": ["src/components/settings/mode/ConversationLimitsDropdown.tsx:15"],
+      "translations": {
+        "de": "Maximale Anzahl an Agentendurchgängen, bevor {Name} eine Benutzereingabe anfordert",
+        "es": "Turnos máximos del agente antes de que {Name} pida la intervención del usuario",
+        "fr": "Nombre maximal de tours de l'agent avant que {Name} ne demande une intervention de l'utilisateur",
+        "hi": "{Name} द्वारा उपयोगकर्ता इनपुट मांगने से पहले अधिकतम एजेंट मुड़ता है",
+        "id": "Giliran agen maksimum sebelum {Name} meminta masukan pengguna",
+        "it": "Numero massimo di turni dell'agente prima che {Name} richieda l'input dell'utente",
+        "ja": "{Name}がユーザー入力を求めるまでのエージェントの最大ターン数",
+        "ko": "{Name}가 사용자 입력을 요청하기 전 최대 에이전트 턴 수",
+        "ms": "Pusingan ejen maksimum sebelum {Name} meminta input pengguna",
+        "pt": "Número máximo de turnos do agente antes de o {Name} solicitar a intervenção do utilizador",
+        "ru": "Максимальное число ходов агента до запроса ввода от пользователя",
+        "tr": "{Name} kullanıcı girişi istemeden önce maksimum aracı dönüşü",
+        "vi": "Số lượt tác nhân tối đa trước khi {Name} yêu cầu người dùng nhập liệu",
+        "zh-CN": "{Name} 请求用户输入前的最大 agent 轮次",
+        "zh-TW": "{Name} 要求使用者輸入前的最大代理回合數"
+      }
+    },
+    "defaultCardButtons.getStarted": {
+      "kind": "message",
+      "value": "Get started with {Name}!",
+      "description": "Displayed get Started text on Settings > providers > subcomponents > buttons > DefaultCardButtons. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > providers > subcomponents > buttons > DefaultCardButtons"],
+      "sources": [
+        "src/components/settings/providers/subcomponents/buttons/DefaultCardButtons.tsx:18"
+      ],
+      "translations": {
+        "de": "Loslegen mit {Name}!",
+        "es": "¡Empieza con {Name}!",
+        "fr": "Commencez avec {Name} !",
+        "hi": "{Name} से आरंभ करें!",
+        "id": "Mulai dengan {Name}!",
+        "it": "Inizia con {Name}!",
+        "ja": "{Name}を始めましょう！",
+        "ko": "{Name} 시작하기!",
+        "ms": "Mulakan dengan {Name}!",
+        "pt": "Comece a usar o {Name}!",
+        "ru": "Начните работу с {Name}!",
+        "tr": "{Name}'yi kullanmaya başlayın!",
+        "vi": "Bắt đầu với {Name}!",
+        "zh-CN": "开始使用 {Name}！",
+        "zh-TW": "開始使用 {Name}！"
+      }
+    },
+    "elicitationRequest.defaultMessage": {
+      "kind": "message",
+      "value": "{Name} needs some information from you.",
+      "description": "Displayed default Message text on ElicitationRequest. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["ElicitationRequest"],
+      "sources": ["src/components/ElicitationRequest.tsx:21"],
+      "translations": {
+        "de": "{Name} benötigt einige Informationen von Ihnen.",
+        "es": "{Name} necesita algo de información de tu parte.",
+        "fr": "{Name} a besoin de certaines informations de votre part.",
+        "hi": "{Name} को आपसे कुछ जानकारी चाहिए।",
+        "id": "{Name} memerlukan beberapa informasi dari Anda.",
+        "it": "{Name} ha bisogno di alcune informazioni da te.",
+        "ja": "{Name}が情報を必要としています。",
+        "ko": "{Name}에 사용자의 정보가 필요합니다.",
+        "ms": "{Name} memerlukan beberapa maklumat daripada anda.",
+        "pt": "O {Name} precisa de algumas informações suas.",
+        "ru": "{Name} нужна от вас дополнительная информация.",
+        "tr": "{Name}'nin sizden bazı bilgilere ihtiyacı var.",
+        "vi": "{Name} cần một số thông tin từ bạn.",
+        "zh-CN": "{Name} 需要你提供一些信息。",
+        "zh-TW": "{Name} 需要您提供一些資訊。"
+      }
+    },
+    "errorBoundary.errorWithVersion": {
+      "kind": "message",
+      "value": "An error occurred in {Name} v{version}.",
+      "description": "Displayed error With Version text on ErrorBoundary. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["ErrorBoundary"],
+      "sources": ["src/components/ErrorBoundary.tsx:13"],
+      "translations": {
+        "de": "In {Name} v{version} ist ein Fehler aufgetreten.",
+        "es": "Ocurrió un error en {Name} v{version}.",
+        "fr": "Une erreur s'est produite dans {Name} v{version}.",
+        "hi": "{Name} v{version} में एक त्रुटि उत्पन्न हुई।",
+        "id": "Terjadi kesalahan di {Name} v{version}.",
+        "it": "Si è verificato un errore in {Name} v{version}.",
+        "ja": "{Name} v{version}でエラーが発生しました。",
+        "ko": "{Name} v{version}에서 오류가 발생했습니다.",
+        "ms": "Satu ralat telah berlaku dalam {Name} v{version}.",
+        "pt": "Ocorreu um erro no {Name} v{version}.",
+        "ru": "Произошла ошибка в {Name} v{version}.",
+        "tr": "{Name} v{version}'de bir hata oluştu.",
+        "vi": "Đã xảy ra lỗi trong {Name} v{version}.",
+        "zh-CN": "{Name} v{version} 发生了错误。",
+        "zh-TW": "{Name} v{version} 發生錯誤。"
+      }
+    },
+    "extensionsView.description": {
+      "kind": "message",
+      "value": "These extensions use the Model Context Protocol (MCP). They can expand {Name}'s capabilities using three main components: Prompts, Resources, and Tools. {searchShortcut} to search.",
+      "description": "Displayed description text on extensions > ExtensionsView. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["extensions > ExtensionsView"],
+      "sources": ["src/components/extensions/ExtensionsView.tsx:27"],
+      "translations": {
+        "de": "Diese Erweiterungen nutzen das Model Context Protocol (MCP). Sie können die Fähigkeiten von {Name} mit drei Hauptkomponenten erweitern: Prompts, Ressourcen und Tools. {searchShortcut} zum Suchen.",
+        "es": "Estas extensiones usan el Model Context Protocol (MCP). Pueden ampliar las capacidades de {Name} mediante tres componentes principales: Prompts, Recursos y Herramientas. {searchShortcut} para buscar.",
+        "fr": "Ces extensions utilisent le protocole Model Context Protocol (MCP). Elles peuvent étendre les capacités de {Name} à l'aide de trois composants principaux : Invites, Ressources et Outils. {searchShortcut} pour rechercher.",
+        "hi": "ये एक्सटेंशन मॉडल कॉन्टेक्स्ट प्रोटोकॉल (MCP) का उपयोग करते हैं। वे तीन मुख्य घटकों का उपयोग करके {Name} की क्षमताओं का विस्तार कर सकते हैं: संकेत, संसाधन और उपकरण। {searchShortcut} खोजने के लिए.",
+        "id": "Ekstensi ini menggunakan Model Context Protocol (MCP). Mereka dapat memperluas kemampuan {Name} menggunakan tiga komponen utama: Prompt, Sumber Daya, dan Alat. {searchShortcut} untuk mencari.",
+        "it": "Queste estensioni usano il Model Context Protocol (MCP). Possono ampliare le capacità di {Name} tramite tre componenti principali: Prompt, Risorse e Strumenti. {searchShortcut} per cercare.",
+        "ja": "これらの拡張機能は Model Context Protocol（MCP）を使用します。Prompts、Resources、Tools の3つの主要コンポーネントで {Name} の機能を拡張できます。検索するには {searchShortcut}。",
+        "ko": "이 익스텐션은 Model Context Protocol(MCP)을 사용합니다. 프롬프트, 리소스, 도구의 세 가지 주요 구성 요소로 {Name}의 기능을 확장합니다. {searchShortcut}로 검색할 수 있습니다.",
+        "ms": "Sambungan ini menggunakan Model Context Protocol (MCP). Ia boleh mengembangkan keupayaan {Name} menggunakan tiga komponen utama: Prompts, Resources, dan Tools. {searchShortcut} untuk mencari.",
+        "pt": "Essas extensões usam o Model Context Protocol (MCP). Elas podem expandir as capacidades do {Name} usando três componentes principais: Prompts, Recursos e Ferramentas. {searchShortcut} para pesquisar.",
+        "ru": "Эти расширения используют Model Context Protocol (MCP). Они расширяют возможности {Name} с помощью трех основных компонентов: промптов, ресурсов и инструментов. {searchShortcut} для поиска.",
+        "tr": "Bu uzantılar Model Bağlam Protokolünü (MCP) kullanır. Üç ana bileşeni kullanarak {Name}'nin yeteneklerini genişletebilirler: İstemler, Kaynaklar ve Araçlar. Aramak için {searchShortcut}.",
+        "vi": "Các tiện ích mở rộng này sử dụng Model Context Protocol (MCP). Chúng có thể mở rộng khả năng của {Name} bằng ba thành phần chính: Lời nhắc, Tài nguyên và Công cụ. {searchShortcut} để tìm kiếm.",
+        "zh-CN": "这些扩展使用模型上下文协议（MCP）。它们可以通过三大组件扩展 {Name} 的能力：Prompts、Resources 和 Tools。按 {searchShortcut} 搜索。",
+        "zh-TW": "這些擴充功能使用模型內容協定 (MCP)。它們可透過三個主要元件擴充 {Name} 的能力：提示、資源與工具。{searchShortcut} 即可搜尋。"
+      }
+    },
+    "externalBackendSection.description": {
+      "kind": "message",
+      "value": "By default {Name} starts a local backend. Use this to connect to an external ACP-compatible backend.",
+      "description": "Displayed description text on Settings > app > ExternalBackendSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > ExternalBackendSection"],
+      "sources": ["src/components/settings/app/ExternalBackendSection.tsx:15"],
+      "translations": {
+        "de": "Standardmäßig startet {Name} einen Server für Sie. Verwenden Sie dies, um eine Verbindung zu einem externen {Name}-Server herzustellen",
+        "es": "Por defecto {Name} lanza un servidor por ti; usa esto para conectarte a un servidor {Name} externo",
+        "fr": "Par défaut, {Name} lance un serveur pour vous ; utilisez ceci pour vous connecter à un serveur {Name} externe",
+        "hi": "डिफ़ॉल्ट रूप से {Name} आपके लिए एक सर्वर लॉन्च करता है, बाहरी {Name} सर्वर से कनेक्ट करने के लिए इसका उपयोग करें",
+        "id": "Secara bawaan {Name} menjalankan server untuk Anda, gunakan ini untuk terhubung ke server {Name} eksternal",
+        "it": "Per impostazione predefinita {Name} avvia un server per te; usa questa opzione per connetterti a un server {Name} esterno",
+        "ja": "デフォルトでは {Name} がサーバーを起動します。外部の {Name} サーバーに接続する場合に使用してください。",
+        "ko": "기본적으로 {Name}가 로컬 백엔드를 시작합니다. 외부 ACP 호환 백엔드에 연결하려면 이 옵션을 사용하세요.",
+        "ms": "Secara lalai {Name} melancarkan pelayan untuk anda, gunakan ini untuk menyambung ke pelayan {Name} luaran",
+        "pt": "Por padrão, o {Name} inicia um servidor para você; use isto para conectar-se a um servidor {Name} externo",
+        "ru": "По умолчанию {Name} запускает сервер за вас; используйте это для подключения к внешнему серверу {Name}",
+        "tr": "Varsayılan olarak {Name} sizin için bir sunucu başlatır; harici bir {Name} sunucusuna bağlanmak için bunu kullanın",
+        "vi": "Theo mặc định {Name} khởi chạy một máy chủ cho bạn, hãy dùng tùy chọn này để kết nối tới một máy chủ {Name} bên ngoài",
+        "zh-CN": "默认情况下 {Name} 会为你启动一个服务器，此选项用于连接到外部的 {Name} 服务器",
+        "zh-TW": "{Name} 預設會為您啟動伺服器，使用此選項以連線至外部 {Name} 伺服器"
+      }
+    },
+    "externalBackendSection.restartNote": {
+      "kind": "message",
+      "value": "Changes apply to new chat windows. Restart {Name} to update existing windows.",
+      "description": "Displayed restart Note text on Settings > app > ExternalBackendSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > ExternalBackendSection"],
+      "sources": ["src/components/settings/app/ExternalBackendSection.tsx:75"],
+      "translations": {
+        "de": "Änderungen werden erst nach einem Neustart von {Name} wirksam. Neue Chat-Fenster verbinden sich mit dem externen Server.",
+        "es": "Los cambios requieren reiniciar {Name} para que surtan efecto. Las nuevas ventanas de chat se conectarán al servidor externo.",
+        "fr": "Les modifications nécessitent le redémarrage de {Name} pour prendre effet. Les nouvelles fenêtres de discussion se connecteront au serveur externe.",
+        "hi": "परिवर्तनों को प्रभावी होने के लिए {Name} को पुनः आरंभ करने की आवश्यकता है। नई चैट विंडो बाहरी सर्वर से कनेक्ट होंगी.",
+        "id": "Perubahan memerlukan mulai ulang {Name} agar berlaku. Jendela obrolan baru akan terhubung ke server eksternal.",
+        "it": "Le modifiche richiedono il riavvio di {Name} per avere effetto. Le nuove finestre di chat si connetteranno al server esterno.",
+        "ja": "変更を有効にするには {Name} の再起動が必要です。新しいチャットウィンドウは外部サーバーに接続します。",
+        "ko": "변경 사항은 새 채팅 창에 적용됩니다. 기존 창을 업데이트하려면 {Name}를 다시 시작하세요.",
+        "ms": "Perubahan memerlukan memulakan semula {Name} untuk berkuat kuasa. Tetingkap sembang baharu akan menyambung ke pelayan luaran.",
+        "pt": "As alterações exigem reiniciar o {Name} para entrar em vigor. As novas janelas de chat se conectarão ao servidor externo.",
+        "ru": "Чтобы изменения вступили в силу, требуется перезапуск {Name}. Новые окна чата будут подключаться к внешнему серверу.",
+        "tr": "Değişikliklerin etkili olması için {Name}'nin yeniden başlatılması gerekir. Yeni sohbet pencereleri harici sunucuya bağlanacaktır.",
+        "vi": "Các thay đổi cần khởi động lại {Name} để có hiệu lực. Các cửa sổ trò chuyện mới sẽ kết nối tới máy chủ bên ngoài.",
+        "zh-CN": "更改需要重启 {Name} 才能生效。新的聊天窗口将连接到外部服务器。",
+        "zh-TW": "變更需要重新啟動 {Name} 才會生效。新的聊天視窗將連線至外部伺服器。"
+      }
+    },
+    "externalBackendSection.secretKeyHelp": {
+      "kind": "message",
+      "value": "The secret key configured on the external backend (GOOSE_SERVER__SECRET_KEY).",
+      "description": "Displayed secret Key Help text on Settings > app > ExternalBackendSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > ExternalBackendSection"],
+      "sources": ["src/components/settings/app/ExternalBackendSection.tsx:58"],
+      "translations": {
+        "de": "Der auf dem {Name}-Server konfigurierte geheime Schlüssel (GOOSE_SERVER__SECRET_KEY)",
+        "es": "La clave secreta configurada en el servidor {Name} (GOOSE_SERVER__SECRET_KEY)",
+        "fr": "La clé secrète configurée sur le serveur {Name} (GOOSE_SERVER__SECRET_KEY)",
+        "hi": "गुप्त सर्वर पर कॉन्फ़िगर की गई गुप्त कुंजी (GOOSE_SERVER__SECRET_KEY)",
+        "id": "Kunci rahasia yang dikonfigurasi pada server {Name} (GOOSE_SERVER__SECRET_KEY)",
+        "it": "La chiave segreta configurata sul server {Name} (GOOSE_SERVER__SECRET_KEY)",
+        "ja": "{Name} サーバーに設定されたシークレットキー（GOOSE_SERVER__SECRET_KEY）",
+        "ko": "외부 백엔드에 설정된 비밀 키 (GOOSE_SERVER__SECRET_KEY).",
+        "ms": "Kunci rahsia yang dikonfigurasikan pada pelayan {Name} (GOOSE_SERVER__SECRET_KEY)",
+        "pt": "A chave secreta configurada no servidor {Name} (GOOSE_SERVER__SECRET_KEY)",
+        "ru": "Секретный ключ, настроенный на сервере {Name} (GOOSE_SERVER__SECRET_KEY)",
+        "tr": "{Name} sunucusunda yapılandırılan gizli anahtar (GOOSE_SERVER__SECRET_KEY)",
+        "vi": "Khóa bí mật được cấu hình trên máy chủ {Name} (GOOSE_SERVER__SECRET_KEY)",
+        "zh-CN": "在 {Name} 服务器上配置的密钥（GOOSE_SERVER__SECRET_KEY）",
+        "zh-TW": "在 {Name} 伺服器上設定的密鑰 (GOOSE_SERVER__SECRET_KEY)"
+      }
+    },
+    "externalBackendSection.serverUrlHelp": {
+      "kind": "message",
+      "value": "Enter the HTTP(S) base URL. {Name} checks /status and connects to /acp under this base.",
+      "description": "Displayed server Url Help text on Settings > app > ExternalBackendSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > ExternalBackendSection"],
+      "sources": ["src/components/settings/app/ExternalBackendSection.tsx:32"],
+      "translations": {
+        "de": "Enter the HTTP(S) base URL. {Name} checks /status and connects to /acp under this base.",
+        "es": "Enter the HTTP(S) base URL. {Name} checks /status and connects to /acp under this base.",
+        "fr": "Enter the HTTP(S) base URL. {Name} checks /status and connects to /acp under this base.",
+        "hi": "Enter the HTTP(S) base URL. {Name} checks /status and connects to /acp under this base.",
+        "id": "Enter the HTTP(S) base URL. {Name} checks /status and connects to /acp under this base.",
+        "it": "Enter the HTTP(S) base URL. {Name} checks /status and connects to /acp under this base.",
+        "ja": "Enter the HTTP(S) base URL. {Name} checks /status and connects to /acp under this base.",
+        "ko": "HTTP(S) 기본 URL을 입력하세요. {Name}는 /status를 확인하고 이 기본 주소 아래의 /acp에 연결합니다.",
+        "ms": "Enter the HTTP(S) base URL. {Name} checks /status and connects to /acp under this base.",
+        "pt": "Enter the HTTP(S) base URL. {Name} checks /status and connects to /acp under this base.",
+        "ru": "Enter the HTTP(S) base URL. {Name} checks /status and connects to /acp under this base.",
+        "tr": "Enter the HTTP(S) base URL. {Name} checks /status and connects to /acp under this base.",
+        "vi": "Enter the HTTP(S) base URL. {Name} checks /status and connects to /acp under this base.",
+        "zh-CN": "Enter the HTTP(S) base URL. {Name} checks /status and connects to /acp under this base.",
+        "zh-TW": "Enter the HTTP(S) base URL. {Name} checks /status and connects to /acp under this base."
+      }
+    },
+    "externalBackendSection.title": {
+      "kind": "message",
+      "value": "External Backend (ACP)",
+      "description": "Displayed title text on Settings > app > ExternalBackendSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > ExternalBackendSection"],
+      "sources": ["src/components/settings/app/ExternalBackendSection.tsx:11"],
+      "translations": {
+        "de": "{Name}-Server",
+        "es": "{Name} Server",
+        "fr": "Serveur {Name}",
+        "hi": "{Name} सर्वर",
+        "id": "Server {Name}",
+        "it": "Server {Name}",
+        "ja": "{Name} Server",
+        "ko": "외부 백엔드 (ACP)",
+        "ms": "Pelayan {Name}",
+        "pt": "Servidor {Name}",
+        "ru": "Сервер {Name}",
+        "tr": "{Name} Sunucu",
+        "vi": "Máy chủ {Name}",
+        "zh-CN": "{Name} 服务器",
+        "zh-TW": "{Name} 伺服器"
+      }
+    },
+    "externalBackendSection.useExternalServerDescription": {
+      "kind": "message",
+      "value": "Connect to an ACP-compatible backend running elsewhere.",
+      "description": "Displayed use External Server Description text on Settings > app > ExternalBackendSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > ExternalBackendSection"],
+      "sources": ["src/components/settings/app/ExternalBackendSection.tsx:24"],
+      "translations": {
+        "de": "Verbindung zu einem anderswo laufenden {Name}-Server herstellen (erfordert Neustart der App)",
+        "es": "Conéctate a un servidor {Name} que se ejecuta en otro lugar (requiere reiniciar la app)",
+        "fr": "Se connecter à un serveur {Name} exécuté ailleurs (nécessite le redémarrage de l'application)",
+        "hi": "कहीं और चल रहे {Name} सर्वर से कनेक्ट करें (ऐप पुनरारंभ की आवश्यकता है)",
+        "id": "Terhubung ke server {Name} yang berjalan di tempat lain (memerlukan mulai ulang aplikasi)",
+        "it": "Connettiti a un server {Name} in esecuzione altrove (richiede il riavvio dell'app)",
+        "ja": "別の場所で実行中の {Name} サーバーに接続します（アプリの再起動が必要）",
+        "ko": "다른 곳에서 실행 중인 ACP 호환 백엔드에 연결합니다.",
+        "ms": "Sambung ke pelayan {Name} yang berjalan di tempat lain (memerlukan memulakan semula aplikasi)",
+        "pt": "Conecte-se a um servidor {Name} em execução em outro lugar (requer reinicialização do app)",
+        "ru": "Подключиться к серверу {Name}, запущенному в другом месте (требуется перезапуск приложения)",
+        "tr": "Başka bir yerde çalışan bir {Name} sunucusuna bağlanın (uygulamanın yeniden başlatılmasını gerektirir)",
+        "vi": "Kết nối tới một máy chủ {Name} đang chạy ở nơi khác (cần khởi động lại ứng dụng)",
+        "zh-CN": "连接到运行在其他位置的 {Name} 服务器（需要重启应用）",
+        "zh-TW": "連線至在其他位置執行的 {Name} 伺服器（需要重新啟動應用程式）"
+      }
+    },
+    "goosehintsModal.dialogDescription": {
+      "kind": "message",
+      "value": "Provide additional context about your project to improve communication with {Name}",
+      "description": "Displayed dialog Description text on Settings > chat > GoosehintsModal. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > chat > GoosehintsModal"],
+      "sources": ["src/components/settings/chat/GoosehintsModal.tsx:20"],
+      "translations": {
+        "de": "Stellen Sie zusätzlichen Kontext zu Ihrem Projekt bereit, um die Kommunikation mit {Name} zu verbessern",
+        "es": "Proporciona contexto adicional sobre tu proyecto para mejorar la comunicación con {Name}",
+        "fr": "Fournissez un contexte supplémentaire sur votre projet pour améliorer la communication avec {Name}",
+        "hi": "{Name} के साथ संचार को बेहतर बनाने के लिए अपने प्रोजेक्ट के बारे में अतिरिक्त संदर्भ प्रदान करें",
+        "id": "Berikan konteks tambahan tentang proyek Anda untuk meningkatkan komunikasi dengan {Name}",
+        "it": "Fornisci ulteriore contesto sul tuo progetto per migliorare la comunicazione con {Name}",
+        "ja": "{Name} とのコミュニケーションを改善するために、プロジェクトに関する追加コンテキストを提供します",
+        "ko": "{Name}와의 커뮤니케이션을 개선할 수 있도록 프로젝트에 대한 추가 컨텍스트를 제공하세요.",
+        "ms": "Berikan konteks tambahan tentang projek anda untuk meningkatkan komunikasi dengan {Name}",
+        "pt": "Forneça contexto adicional sobre seu projeto para melhorar a comunicação com o {Name}",
+        "ru": "Предоставьте дополнительный контекст о проекте, чтобы улучшить взаимодействие с {Name}",
+        "tr": "{Name} ile iletişimi geliştirmek için projeniz hakkında ek bağlam sağlayın",
+        "vi": "Cung cấp thêm ngữ cảnh về dự án của bạn để cải thiện giao tiếp với {Name}",
+        "zh-CN": "为你的项目提供额外上下文，改善与 {Name} 的沟通",
+        "zh-TW": "提供有關您專案的額外內容，以改善與 {Name} 的溝通"
+      }
+    },
+    "goosehintsModal.helpText1": {
+      "kind": "message",
+      "value": ".goosehints is a text file used to provide additional context about your project and improve the communication with {Name}.",
+      "description": "Displayed help Text1 text on Settings > chat > GoosehintsModal. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > chat > GoosehintsModal"],
+      "sources": ["src/components/settings/chat/GoosehintsModal.tsx:25"],
+      "translations": {
+        "de": ".goosehints ist eine Textdatei, mit der zusätzlicher Kontext zu Ihrem Projekt bereitgestellt und die Kommunikation mit {Name} verbessert wird.",
+        "es": ".goosehints es un archivo de texto usado para proporcionar contexto adicional sobre tu proyecto y mejorar la comunicación con {Name}.",
+        "fr": ".goosehints est un fichier texte utilisé pour fournir un contexte supplémentaire sur votre projet et améliorer la communication avec {Name}.",
+        "hi": ".goosehints एक टेक्स्ट फ़ाइल है जिसका उपयोग आपके प्रोजेक्ट के बारे में अतिरिक्त संदर्भ प्रदान करने और {Name} के साथ संचार को बेहतर बनाने के लिए किया जाता है।",
+        "id": ".goosehints adalah file teks yang digunakan untuk memberikan konteks tambahan tentang proyek Anda dan meningkatkan komunikasi dengan {Name}.",
+        "it": ".goosehints è un file di testo usato per fornire ulteriore contesto sul tuo progetto e migliorare la comunicazione con {Name}.",
+        "ja": ".goosehints は、プロジェクトに関する追加コンテキストを提供し、{Name} とのコミュニケーションを改善するためのテキストファイルです。",
+        "ko": ".goosehints는 프로젝트에 대한 추가 컨텍스트를 제공하고 {Name}와의 커뮤니케이션을 개선하는 데 사용되는 텍스트 파일입니다.",
+        "ms": ".goosehints ialah fail teks yang digunakan untuk memberikan konteks tambahan tentang projek anda dan meningkatkan komunikasi dengan {Name}.",
+        "pt": ".goosehints é um arquivo de texto usado para fornecer contexto adicional sobre seu projeto e melhorar a comunicação com o {Name}.",
+        "ru": ".goosehints — это текстовый файл для дополнительного контекста о проекте и улучшения взаимодействия с {Name}.",
+        "tr": ".goosehints, projeniz hakkında ek bağlam sağlamak ve {Name} ile iletişimi geliştirmek için kullanılan bir metin dosyasıdır.",
+        "vi": ".goosehints là một tệp văn bản dùng để cung cấp thêm ngữ cảnh về dự án của bạn và cải thiện giao tiếp với {Name}.",
+        "zh-CN": ".goosehints 是一个文本文件，用于为你的项目提供额外上下文，改善与 {Name} 的沟通。",
+        "zh-TW": ".goosehints 是一個文字檔，用於提供有關您專案的額外內容，並改善與 {Name} 的溝通。"
+      }
+    },
+    "goosehintsSection.description": {
+      "kind": "message",
+      "value": "Configure your project's .goosehints file to provide additional context to {Name}",
+      "description": "Displayed description text on Settings > chat > GoosehintsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > chat > GoosehintsSection"],
+      "sources": ["src/components/settings/chat/GoosehintsSection.tsx:12"],
+      "translations": {
+        "de": "Konfigurieren Sie die .goosehints-Datei Ihres Projekts, um {Name} zusätzlichen Kontext bereitzustellen",
+        "es": "Configura el archivo .goosehints de tu proyecto para proporcionar contexto adicional a {Name}",
+        "fr": "Configurez le fichier .goosehints de votre projet pour fournir un contexte supplémentaire à {Name}",
+        "hi": "{Name} को अतिरिक्त संदर्भ प्रदान करने के लिए अपने प्रोजेक्ट की .goosehints फ़ाइल को कॉन्फ़िगर करें",
+        "id": "Konfigurasikan file .goosehints proyek Anda untuk memberikan konteks tambahan ke {Name}",
+        "it": "Configura il file .goosehints del tuo progetto per fornire ulteriore contesto a {Name}",
+        "ja": "{Name} に追加コンテキストを提供するために、プロジェクトの .goosehints ファイルを設定します",
+        "ko": "프로젝트의 .goosehints 파일을 설정하여 {Name}에 추가 컨텍스트를 제공합니다.",
+        "ms": "Konfigurasikan fail .goosehints projek anda untuk memberikan konteks tambahan kepada {Name}",
+        "pt": "Configure o arquivo .goosehints do seu projeto para fornecer contexto adicional ao {Name}",
+        "ru": "Настройте файл .goosehints вашего проекта, чтобы предоставить {Name} дополнительный контекст",
+        "tr": "{Name}'a ek bağlam sağlamak için projenizin.goosehints dosyasını yapılandırın",
+        "vi": "Cấu hình tệp .goosehints của dự án để cung cấp thêm ngữ cảnh cho {Name}",
+        "zh-CN": "配置项目的 .goosehints 文件，为 {Name} 提供额外上下文",
+        "zh-TW": "設定您專案的 .goosehints 檔案，為 {Name} 提供額外內容"
+      }
+    },
+    "groupedExtensionLoadingToast.askGoose": {
+      "kind": "message",
+      "value": "Ask {Name}",
+      "description": "Displayed ask Goose text on GroupedExtensionLoadingToast. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["GroupedExtensionLoadingToast"],
+      "sources": ["src/components/GroupedExtensionLoadingToast.tsx:33"],
+      "translations": {
+        "de": "{Name} fragen",
+        "es": "Pregunta a {Name}",
+        "fr": "Demander à {Name}",
+        "hi": "पूछें {Name}",
+        "id": "Tanya {Name}",
+        "it": "Chiedi a {Name}",
+        "ja": "{Name}に聞く",
+        "ko": "{Name}에게 묻기",
+        "ms": "Tanya {Name}",
+        "pt": "Pergunte ao {Name}",
+        "ru": "Спросить {Name}",
+        "tr": "{Name}'a sorun",
+        "vi": "Hỏi {Name}",
+        "zh-CN": "问问 {Name}",
+        "zh-TW": "詢問 {Name}"
+      }
+    },
+    "imagePreview.altText": {
+      "kind": "message",
+      "value": "{Name} image",
+      "description": "Displayed alt Text text on ImagePreview. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["ImagePreview"],
+      "sources": ["src/components/ImagePreview.tsx:9"],
+      "translations": {
+        "de": "{Name}-Bild",
+        "es": "imagen de {Name}",
+        "fr": "image {Name}",
+        "hi": "{Name} छवि",
+        "id": "gambar {Name}",
+        "it": "immagine {Name}",
+        "ja": "{Name}画像",
+        "ko": "{Name} 이미지",
+        "ms": "imej {Name}",
+        "pt": "imagem do {Name}",
+        "ru": "изображение {Name}",
+        "tr": "{Name} resmi",
+        "vi": "hình ảnh {Name}",
+        "zh-CN": "{Name} 图片",
+        "zh-TW": "{Name} 圖片"
+      }
+    },
+    "importRecipeForm.reviewWarning": {
+      "kind": "message",
+      "value": "Ensure you review contents of recipe files before adding them to your {Name} interface.",
+      "description": "Displayed review Warning text on recipes > ImportRecipeForm. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["recipes > ImportRecipeForm"],
+      "sources": ["src/components/recipes/ImportRecipeForm.tsx:48"],
+      "translations": {
+        "de": "Stellen Sie sicher, dass Sie den Inhalt von Recipe-Dateien überprüfen, bevor Sie sie zu Ihrer {Name}-Oberfläche hinzufügen.",
+        "es": "Asegúrate de revisar el contenido de los archivos de receta antes de añadirlos a tu interfaz de {Name}.",
+        "fr": "Assurez-vous de vérifier le contenu des fichiers de recette avant de les ajouter à votre interface {Name}.",
+        "hi": "सुनिश्चित करें कि आप रेसिपी फ़ाइलों को अपने {Name} इंटरफ़ेस में जोड़ने से पहले उनकी सामग्री की समीक्षा कर लें।",
+        "id": "Pastikan Anda meninjau konten file resep sebelum menambahkannya ke antarmuka {Name} Anda.",
+        "it": "Assicurati di esaminare il contenuto dei file delle ricette prima di aggiungerli alla tua interfaccia {Name}.",
+        "ja": "レシピファイルを {Name} インターフェースに追加する前に、必ず内容を確認してください。",
+        "ko": "{Name} 인터페이스에 레시피 파일을 추가하기 전에 레시피 파일의 내용을 검토하세요.",
+        "ms": "Pastikan anda menyemak kandungan fail resipi sebelum menambahnya ke antara muka {Name} anda.",
+        "pt": "Certifique-se de revisar o conteúdo dos arquivos de receita antes de adicioná-los à sua interface do {Name}.",
+        "ru": "Проверяйте содержимое файлов рецептов перед добавлением в интерфейс {Name}.",
+        "tr": "Tarif dosyalarının içeriğini {Name} arayüzünüze eklemeden önce incelediğinizden emin olun.",
+        "vi": "Hãy đảm bảo bạn xem lại nội dung của các tệp công thức trước khi thêm chúng vào giao diện {Name} của bạn.",
+        "zh-CN": "在将配方文件添加到 {Name} 之前，请务必先审查其内容。",
+        "zh-TW": "在將食譜檔案加入您的 {Name} 介面之前，請務必檢閱其內容。"
+      }
+    },
+    "keyboardShortcuts.categoryApplicationDescription": {
+      "kind": "message",
+      "value": "These shortcuts work when {Name} is the active application",
+      "description": "Displayed category Application Description text on Settings > keyboard > KeyboardShortcutsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > keyboard > KeyboardShortcutsSection"],
+      "sources": ["src/components/settings/keyboard/KeyboardShortcutsSection.tsx:115"],
+      "translations": {
+        "de": "Diese Tastenkürzel funktionieren, wenn {Name} die aktive Anwendung ist",
+        "es": "Estos atajos funcionan cuando {Name} es la aplicación activa",
+        "fr": "Ces raccourcis fonctionnent lorsque {Name} est l'application active",
+        "hi": "ये शॉर्टकट तब काम करते हैं जब {Name} सक्रिय एप्लिकेशन होता है",
+        "id": "Pintasan ini berfungsi saat {Name} menjadi aplikasi aktif",
+        "it": "Queste scorciatoie funzionano quando {Name} è l'applicazione attiva",
+        "ja": "{Name}がアクティブなときに有効なショートカット",
+        "ko": "{Name}가 활성 앱일 때 작동하는 단축키입니다.",
+        "ms": "Pintasan ini berfungsi apabila {Name} ialah aplikasi aktif",
+        "pt": "Estes atalhos funcionam quando o {Name} é o aplicativo ativo",
+        "ru": "Эти сочетания работают, когда {Name} является активным приложением",
+        "tr": "Bu kısayollar {Name} etkin uygulama olduğunda çalışır",
+        "vi": "Các phím tắt này hoạt động khi {Name} là ứng dụng đang hoạt động",
+        "zh-CN": "当 {Name} 为活动应用时，这些快捷键生效",
+        "zh-TW": "這些快速鍵在 {Name} 為使用中的應用程式時生效"
+      }
+    },
+    "keyboardShortcuts.categoryGlobalDescription": {
+      "kind": "message",
+      "value": "These shortcuts work system-wide, even when {Name} is not focused",
+      "description": "Displayed category Global Description text on Settings > keyboard > KeyboardShortcutsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > keyboard > KeyboardShortcutsSection"],
+      "sources": ["src/components/settings/keyboard/KeyboardShortcutsSection.tsx:107"],
+      "translations": {
+        "de": "Diese Tastenkürzel funktionieren systemweit, auch wenn {Name} nicht im Fokus ist",
+        "es": "Estos atajos funcionan en todo el sistema, incluso cuando {Name} no está enfocado",
+        "fr": "Ces raccourcis fonctionnent à l'échelle du système, même lorsque {Name} n'est pas au premier plan",
+        "hi": "ये शॉर्टकट पूरे सिस्टम में काम करते हैं, तब भी जब {Name} फोकस न हो",
+        "id": "Pintasan ini berfungsi di seluruh sistem, bahkan saat {Name} tidak difokuskan",
+        "it": "Queste scorciatoie funzionano a livello di sistema, anche quando {Name} non è in primo piano",
+        "ja": "{Name}にフォーカスがなくても、システム全体で有効なショートカット",
+        "ko": "{Name}에 포커스가 맞춰져 있지 않아도 시스템 전체에서 작동하는 단축키입니다.",
+        "ms": "Pintasan ini berfungsi di seluruh sistem, walaupun {Name} tidak difokuskan",
+        "pt": "Estes atalhos funcionam em todo o sistema, mesmo quando o {Name} não está em foco",
+        "ru": "Эти сочетания работают во всей системе, даже когда {Name} не в фокусе",
+        "tr": "Bu kısayollar, {Name} odaklanmadığında bile sistem genelinde çalışır",
+        "vi": "Các phím tắt này hoạt động trên toàn hệ thống, ngay cả khi {Name} không được lấy nét",
+        "zh-CN": "这些快捷键系统范围内有效，即使 {Name} 未聚焦",
+        "zh-TW": "這些快速鍵在整個系統都可使用，即使 {Name} 並非焦點視窗"
+      }
+    },
+    "keyboardShortcuts.focusWindowDescription": {
+      "kind": "message",
+      "value": "Bring {Name} window to front from anywhere",
+      "description": "Displayed focus Window Description text on Settings > keyboard > KeyboardShortcutsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > keyboard > KeyboardShortcutsSection"],
+      "sources": ["src/components/settings/keyboard/KeyboardShortcutsSection.tsx:17"],
+      "translations": {
+        "de": "{Name}-Fenster von überall in den Vordergrund holen",
+        "es": "Traer al frente la ventana de {Name} desde cualquier lugar",
+        "fr": "Mettre la fenêtre {Name} au premier plan depuis n'importe où",
+        "hi": "कहीं से भी {Name} विंडो को सामने लाएँ",
+        "id": "Bawa jendela {Name} ke depan dari mana saja",
+        "it": "Porta la finestra di {Name} in primo piano da qualsiasi punto",
+        "ja": "どこからでも{Name}ウィンドウを前面に表示",
+        "ko": "어디서든 {Name} 창을 앞으로 가져옵니다.",
+        "ms": "Bawa tetingkap {Name} ke hadapan dari mana-mana sahaja",
+        "pt": "Trazer a janela do {Name} para frente de qualquer lugar",
+        "ru": "Вывести окно {Name} на передний план из любого места",
+        "tr": "{Name} penceresini istediğiniz yerden öne getirin",
+        "vi": "Đưa cửa sổ {Name} lên phía trước từ bất kỳ đâu",
+        "zh-CN": "从任何位置将 {Name} 窗口置于前台",
+        "zh-TW": "從任何位置將 {Name} 視窗帶到前景"
+      }
+    },
+    "keyboardShortcuts.focusWindowLabel": {
+      "kind": "message",
+      "value": "Focus {Name} Window",
+      "description": "Displayed focus Window Label text on Settings > keyboard > KeyboardShortcutsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > keyboard > KeyboardShortcutsSection"],
+      "sources": ["src/components/settings/keyboard/KeyboardShortcutsSection.tsx:13"],
+      "translations": {
+        "de": "{Name}-Fenster fokussieren",
+        "es": "Enfocar la ventana de {Name}",
+        "fr": "Mettre la fenêtre {Name} au premier plan",
+        "hi": "फोकस {Name} विंडो",
+        "id": "Fokuskan Jendela {Name}",
+        "it": "Metti a fuoco la finestra di {Name}",
+        "ja": "{Name}ウィンドウにフォーカス",
+        "ko": "{Name} 창 포커스",
+        "ms": "Fokus Tetingkap {Name}",
+        "pt": "Focar a Janela do {Name}",
+        "ru": "Сфокусировать окно {Name}",
+        "tr": "Odak {Name} Penceresi",
+        "vi": "Lấy nét cửa sổ {Name}",
+        "zh-CN": "聚焦 {Name} 窗口",
+        "zh-TW": "聚焦 {Name} 視窗"
+      }
+    },
+    "keyboardShortcuts.newChatWindowDescription": {
+      "kind": "message",
+      "value": "Open a new {Name} window",
+      "description": "Displayed new Chat Window Description text on Settings > keyboard > KeyboardShortcutsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > keyboard > KeyboardShortcutsSection"],
+      "sources": ["src/components/settings/keyboard/KeyboardShortcutsSection.tsx:41"],
+      "translations": {
+        "de": "Ein neues {Name}-Fenster öffnen",
+        "es": "Abrir una nueva ventana de {Name}",
+        "fr": "Ouvrir une nouvelle fenêtre {Name}",
+        "hi": "एक नई {Name} विंडो खोलें",
+        "id": "Buka jendela {Name} baru",
+        "it": "Apri una nuova finestra di {Name}",
+        "ja": "新しい{Name}ウィンドウを開く",
+        "ko": "새 {Name} 창을 엽니다.",
+        "ms": "Buka tetingkap {Name} baharu",
+        "pt": "Abrir uma nova janela do {Name}",
+        "ru": "Открыть новое окно {Name}",
+        "tr": "Yeni bir {Name} penceresi aç",
+        "vi": "Mở một cửa sổ {Name} mới",
+        "zh-CN": "打开一个新的 {Name} 窗口",
+        "zh-TW": "開啟新的 {Name} 視窗"
+      }
+    },
+    "keyboardShortcuts.restartDescription": {
+      "kind": "message",
+      "value": "Changes to application shortcuts (like New Chat, Settings, etc.) require restarting {Name} to take effect. Global shortcuts (Focus Window, Quick Launcher) work immediately.",
+      "description": "Displayed restart Description text on Settings > keyboard > KeyboardShortcutsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > keyboard > KeyboardShortcutsSection"],
+      "sources": ["src/components/settings/keyboard/KeyboardShortcutsSection.tsx:145"],
+      "translations": {
+        "de": "Änderungen an Anwendungstastenkürzeln (wie Neuer Chat, Einstellungen usw.) erfordern einen Neustart von {Name}, um wirksam zu werden. Globale Tastenkürzel (Fenster fokussieren, Schnellstart) funktionieren sofort.",
+        "es": "Los cambios en los atajos de la aplicación (como Nuevo chat, Ajustes, etc.) requieren reiniciar {Name} para que surtan efecto. Los atajos globales (Enfocar ventana, Lanzador rápido) funcionan de inmediato.",
+        "fr": "Les modifications des raccourcis de l'application (comme Nouvelle discussion, Paramètres, etc.) nécessitent le redémarrage de {Name} pour prendre effet. Les raccourcis globaux (Mettre la fenêtre au premier plan, Lanceur rapide) fonctionnent immédiatement.",
+        "hi": "एप्लिकेशन शॉर्टकट में परिवर्तन (जैसे नई चैट, Settings, आदि) को प्रभावी होने के लिए {Name} को पुनरारंभ करने की आवश्यकता होती है। वैश्विक शॉर्टकट (फोकस विंडो, क्विक लॉन्चर) तुरंत काम करते हैं।",
+        "id": "Perubahan pada pintasan aplikasi (seperti Obrolan Baru, Pengaturan, dll.) memerlukan memulai ulang {Name} agar berlaku. Pintasan global (Fokuskan Jendela, Peluncur Cepat) berfungsi segera.",
+        "it": "Le modifiche alle scorciatoie dell'applicazione (come Nuova chat, Impostazioni, ecc.) richiedono il riavvio di {Name} per avere effetto. Le scorciatoie globali (Metti a fuoco la finestra, Avvio rapido) funzionano immediatamente.",
+        "ja": "アプリケーションショートカット（新規チャット、設定など）の変更を反映するには、{Name}の再起動が必要です。グローバルショートカット（ウィンドウにフォーカス、クイックランチャー）はすぐに有効になります。",
+        "ko": "애플리케이션 단축키(예: 새 채팅, 설정 등)의 변경 사항을 적용하려면 {Name}를 다시 시작해야 합니다. 전역 단축키(창 포커스, 빠른 실행기)는 즉시 적용됩니다.",
+        "ms": "Perubahan pada pintasan aplikasi (seperti Sembang Baharu, Tetapan, dll.) memerlukan {Name} dimulakan semula untuk berkuat kuasa. Pintasan global (Fokus Tetingkap, Pelancar Pantas) berfungsi serta-merta.",
+        "pt": "Alterações nos atalhos do aplicativo (como Nova Conversa, Configurações, etc.) exigem reiniciar o {Name} para entrar em vigor. Os atalhos globais (Focar a Janela, Iniciador Rápido) funcionam imediatamente.",
+        "ru": "Чтобы изменения сочетаний приложения (например, Новый чат, Настройки и т. д.) вступили в силу, требуется перезапуск {Name}. Глобальные сочетания (Фокус окна, Быстрый запуск) работают сразу.",
+        "tr": "Uygulama kısayollarında yapılan değişikliklerin (Yeni Sohbet, Ayarlar vb.) etkili olması için {Name}'nin yeniden başlatılması gerekir. Genel kısayollar (Odak Penceresi, Hızlı Başlatıcı) hemen çalışır.",
+        "vi": "Các thay đổi đối với phím tắt ứng dụng (như Trò chuyện mới, Cài đặt, v.v.) yêu cầu khởi động lại {Name} để có hiệu lực. Phím tắt toàn cục (Lấy nét cửa sổ, Trình khởi chạy nhanh) hoạt động ngay lập tức.",
+        "zh-CN": "应用快捷键（如新建聊天、设置等）的更改需要重启 {Name} 才能生效。全局快捷键（聚焦窗口、快速启动器）立即生效。",
+        "zh-TW": "變更應用程式快速鍵（例如「新對話」、「設定」等）需要重新啟動 {Name} 才會生效。全域快速鍵（聚焦視窗、快速啟動器）則會立即生效。"
+      }
+    },
+    "launcher.placeholder": {
+      "kind": "message",
+      "value": "Ask {Name} anything...",
+      "description": "Displayed placeholder text on LauncherView. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["LauncherView"],
+      "sources": ["src/components/LauncherView.tsx:6"],
+      "translations": {
+        "de": "Frag {Name} irgendetwas...",
+        "es": "Pregúntale lo que sea a {Name}...",
+        "fr": "Demandez n'importe quoi à {Name}...",
+        "hi": "{Name} से कुछ भी पूछें...",
+        "id": "Tanyakan apa saja kepada {Name}...",
+        "it": "Chiedi qualsiasi cosa a {Name}...",
+        "ja": "{Name}に何でも聞いて...",
+        "ko": "{Name}에게 무엇이든 물어보세요...",
+        "ms": "Tanya {Name} apa sahaja...",
+        "pt": "Pergunte qualquer coisa ao {Name}...",
+        "ru": "Спросите {Name} о чем угодно...",
+        "tr": "{Name}'a herhangi bir şey sorun...",
+        "vi": "Hỏi {Name} bất cứ điều gì...",
+        "zh-CN": "问 {Name} 任何问题…",
+        "zh-TW": "向 {Name} 詢問任何問題…"
+      }
+    },
+    "liveVoiceSettings.description": {
+      "kind": "message",
+      "value": "Have a real-time voice conversation with {Name}",
+      "description": "Displayed description text on Settings > chat > LiveVoiceSettings. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > chat > LiveVoiceSettings"],
+      "sources": ["src/components/settings/chat/LiveVoiceSettings.tsx:13"],
+      "translations": {
+        "de": "Führe ein Echtzeit-Sprachgespräch mit {Name}",
+        "es": "Mantén una conversación de voz en tiempo real con {Name}",
+        "fr": "Discutez avec {Name} en temps réel par la voix",
+        "hi": "{Name} के साथ रीयल-टाइम वॉइस बातचीत करें",
+        "id": "Lakukan percakapan suara real-time dengan {Name}",
+        "it": "Parla con {Name} in tempo reale",
+        "ja": "{Name} とリアルタイムで音声会話します",
+        "ko": "{Name}와 실시간으로 음성 대화",
+        "ms": "Adakan perbualan suara masa nyata dengan {Name}",
+        "pt": "Tenha uma conversa por voz em tempo real com o {Name}",
+        "ru": "Общайтесь с {Name} голосом в реальном времени",
+        "tr": "{Name} ile gerçek zamanlı sesli sohbet edin",
+        "vi": "Trò chuyện bằng giọng nói theo thời gian thực với {Name}",
+        "zh-CN": "与 {Name} 进行实时语音对话",
+        "zh-TW": "與 {Name} 進行即時語音對話"
+      }
+    },
+    "loadingGoose.compacting": {
+      "kind": "message",
+      "value": "{Name} is compacting the conversation...",
+      "description": "Displayed compacting text on LoadingGoose. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["LoadingGoose"],
+      "sources": ["src/components/LoadingGoose.tsx:29"],
+      "translations": {
+        "de": "{Name} komprimiert die Unterhaltung...",
+        "es": "{Name} está compactando la conversación...",
+        "fr": "{Name} compacte la conversation...",
+        "hi": "{Name} बातचीत को संक्षिप्त कर रहा है...",
+        "id": "{Name} sedang meringkas percakapan...",
+        "it": "{Name} sta compattando la conversazione...",
+        "ja": "{Name}が会話を圧縮しています...",
+        "ko": "{Name}가 대화를 압축하고 있어요...",
+        "ms": "{Name} sedang memadatkan perbualan...",
+        "pt": "o {Name} está compactando a conversa...",
+        "ru": "{Name} сжимает разговор...",
+        "tr": "{Name} konuşmayı sıkıştırıyor...",
+        "vi": "{Name} đang nén cuộc trò chuyện...",
+        "zh-CN": "{Name} 正在压缩对话…",
+        "zh-TW": "{Name} 正在壓縮對話…"
+      }
+    },
+    "loadingGoose.idle": {
+      "kind": "message",
+      "value": "{Name} is working on it…",
+      "description": "Displayed idle text on LoadingGoose. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["LoadingGoose"],
+      "sources": ["src/components/LoadingGoose.tsx:33"],
+      "translations": {
+        "de": "{Name} arbeitet daran…",
+        "es": "{Name} está trabajando en ello…",
+        "fr": "{Name} y travaille…",
+        "hi": "{Name} इस पर काम कर रहा है...",
+        "id": "{Name} sedang mengerjakannya…",
+        "it": "{Name} ci sta lavorando…",
+        "ja": "{Name}が処理中です…",
+        "ko": "{Name}가 작업 중이에요…",
+        "ms": "{Name} sedang mengusahakannya…",
+        "pt": "o {Name} está trabalhando nisso…",
+        "ru": "{Name} работает над этим…",
+        "tr": "{Name} bunun üzerinde çalışıyor…",
+        "vi": "{Name} đang xử lý…",
+        "zh-CN": "{Name} 正在处理…",
+        "zh-TW": "{Name} 正在處理…"
+      }
+    },
+    "loadingGoose.streaming": {
+      "kind": "message",
+      "value": "{Name} is working on it…",
+      "description": "Displayed streaming text on LoadingGoose. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["LoadingGoose"],
+      "sources": ["src/components/LoadingGoose.tsx:21"],
+      "translations": {
+        "de": "{Name} arbeitet daran…",
+        "es": "{Name} está trabajando en ello…",
+        "fr": "{Name} y travaille…",
+        "hi": "{Name} इस पर काम कर रहा है...",
+        "id": "{Name} sedang mengerjakannya…",
+        "it": "{Name} ci sta lavorando…",
+        "ja": "{Name}が処理中です…",
+        "ko": "{Name}가 작업 중이에요…",
+        "ms": "{Name} sedang mengusahakannya…",
+        "pt": "o {Name} está trabalhando nisso…",
+        "ru": "{Name} работает над этим…",
+        "tr": "{Name} bunun üzerinde çalışıyor…",
+        "vi": "{Name} đang xử lý…",
+        "zh-CN": "{Name} 正在处理…",
+        "zh-TW": "{Name} 正在處理…"
+      }
+    },
+    "loadingGoose.thinking": {
+      "kind": "message",
+      "value": "{Name} is thinking…",
+      "description": "Displayed thinking text on LoadingGoose. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["LoadingGoose"],
+      "sources": ["src/components/LoadingGoose.tsx:17"],
+      "translations": {
+        "de": "{Name} denkt nach…",
+        "es": "{Name} está pensando…",
+        "fr": "{Name} réfléchit…",
+        "hi": "{Name} सोच रहा है...",
+        "id": "{Name} sedang berpikir…",
+        "it": "{Name} sta pensando…",
+        "ja": "{Name}が考えています…",
+        "ko": "{Name}가 생각하고 있어요…",
+        "ms": "{Name} sedang berfikir…",
+        "pt": "o {Name} está pensando…",
+        "ru": "{Name} думает…",
+        "tr": "{Name} düşünüyor…",
+        "vi": "{Name} đang suy nghĩ…",
+        "zh-CN": "{Name} 正在思考…",
+        "zh-TW": "{Name} 正在思考…"
+      }
+    },
+    "loadingGoose.waiting": {
+      "kind": "message",
+      "value": "{Name} is waiting…",
+      "description": "Displayed waiting text on LoadingGoose. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["LoadingGoose"],
+      "sources": ["src/components/LoadingGoose.tsx:25"],
+      "translations": {
+        "de": "{Name} wartet…",
+        "es": "{Name} está esperando…",
+        "fr": "{Name} patiente…",
+        "hi": "{Name} इंतज़ार कर रहा है...",
+        "id": "{Name} sedang menunggu…",
+        "it": "{Name} è in attesa…",
+        "ja": "{Name}が待機中です…",
+        "ko": "{Name}가 기다리고 있어요…",
+        "ms": "{Name} sedang menunggu…",
+        "pt": "o {Name} está aguardando…",
+        "ru": "{Name} ждет…",
+        "tr": "{Name} bekliyor…",
+        "vi": "{Name} đang chờ…",
+        "zh-CN": "{Name} 正在等待…",
+        "zh-TW": "{Name} 正在等待…"
+      }
+    },
+    "onboardingGuard.checkProviderErrorTitle": {
+      "kind": "message",
+      "value": "Unable to connect to {Name} server",
+      "description": "Displayed check Provider Error Title text on onboarding > OnboardingGuard. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["onboarding > OnboardingGuard"],
+      "sources": ["src/components/onboarding/OnboardingGuard.tsx:28"],
+      "translations": {
+        "de": "Verbindung zum {Name}-Server nicht möglich",
+        "es": "No se pudo conectar con el servidor de {Name}",
+        "fr": "Impossible de se connecter au serveur {Name}",
+        "hi": "{Name} सर्वर से कनेक्ट करने में असमर्थ",
+        "id": "Tidak dapat terhubung ke server {Name}",
+        "it": "Impossibile connettersi al server {Name}",
+        "ja": "{Name}サーバーに接続できません",
+        "ko": "{Name} 서버에 접속할 수 없습니다",
+        "ms": "Tidak dapat menyambung ke pelayan {Name}",
+        "pt": "Não foi possível ligar ao servidor {Name}",
+        "ru": "Не удалось подключиться к серверу {Name}",
+        "tr": "{Name} sunucusuna bağlanılamıyor",
+        "vi": "Không thể kết nối với máy chủ {Name}",
+        "zh-CN": "无法连接到 {Name} 服务器",
+        "zh-TW": "無法連線到 {Name} 伺服器"
+      }
+    },
+    "onboardingGuard.welcomeTitle": {
+      "kind": "message",
+      "value": "Welcome to {Name}",
+      "description": "Displayed welcome Title text on onboarding > OnboardingGuard. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["onboarding > OnboardingGuard"],
+      "sources": ["src/components/onboarding/OnboardingGuard.tsx:20"],
+      "translations": {
+        "de": "Willkommen bei {Name}",
+        "es": "Te damos la bienvenida a {Name}",
+        "fr": "Bienvenue dans {Name}",
+        "hi": "{Name} में आपका स्वागत है",
+        "id": "Selamat datang di {Name}",
+        "it": "Benvenuto in {Name}",
+        "ja": "{Name}へようこそ",
+        "ko": "{Name}에 오신 것을 환영합니다",
+        "ms": "Selamat datang ke {Name}",
+        "pt": "Bem-vindo ao {Name}",
+        "ru": "Добро пожаловать в {Name}",
+        "tr": "{Name}'a hoş geldiniz",
+        "vi": "Chào mừng đến với {Name}",
+        "zh-CN": "欢迎使用 {Name}",
+        "zh-TW": "歡迎使用 {Name}"
+      }
+    },
+    "onboardingSuccess.allSet": {
+      "kind": "message",
+      "value": "You're all set to start using {Name}.",
+      "description": "Displayed all Set text on onboarding > OnboardingSuccess. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["onboarding > OnboardingSuccess"],
+      "sources": ["src/components/onboarding/OnboardingSuccess.tsx:17"],
+      "translations": {
+        "de": "Sie können jetzt mit {Name} loslegen.",
+        "es": "Todo está listo para que empieces a usar {Name}.",
+        "fr": "Vous êtes prêt à commencer à utiliser {Name}.",
+        "hi": "आप {Name} का उपयोग शुरू करने के लिए पूरी तरह तैयार हैं।",
+        "id": "Anda siap untuk mulai menggunakan {Name}.",
+        "it": "Tutto è pronto per iniziare a usare {Name}.",
+        "ja": "{Name}を使い始める準備ができました。",
+        "ko": "{Name}를 사용할 준비가 모두 완료되었습니다.",
+        "ms": "Anda sudah bersedia untuk mula menggunakan {Name}.",
+        "pt": "Está tudo pronto para começar a usar o {Name}.",
+        "ru": "Все готово для начала работы с {Name}.",
+        "tr": "{Name}'yi kullanmaya başlamaya hazırsınız.",
+        "vi": "Bạn đã sẵn sàng bắt đầu sử dụng {Name}.",
+        "zh-CN": "一切就绪，可以开始使用 {Name} 了。",
+        "zh-TW": "一切就緒，您可以開始使用 {Name} 了。"
+      }
+    },
+    "onboardingSuccess.privacyDescription": {
+      "kind": "message",
+      "value": "Anonymous usage data helps improve {Name}. We never collect your conversations, code, or personal data.",
+      "description": "Displayed privacy Description text on onboarding > OnboardingSuccess. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["onboarding > OnboardingSuccess"],
+      "sources": ["src/components/onboarding/OnboardingSuccess.tsx:25"],
+      "translations": {
+        "de": "Anonyme Nutzungsdaten helfen, {Name} zu verbessern. Wir erfassen niemals Ihre Konversationen, Ihren Code oder Ihre persönlichen Daten.",
+        "es": "Los datos de uso anónimos ayudan a mejorar {Name}. Nunca recopilamos tus conversaciones, código ni datos personales.",
+        "fr": "Les données d'utilisation anonymes contribuent à améliorer {Name}. Nous ne collectons jamais vos conversations, votre code ni vos données personnelles.",
+        "hi": "अनाम उपयोग डेटा {Name} को बेहतर बनाने में मदद करता है। हम कभी भी आपकी बातचीत, कोड या व्यक्तिगत डेटा एकत्र नहीं करते हैं।",
+        "id": "Data penggunaan anonim membantu meningkatkan {Name}. Kami tidak pernah mengumpulkan percakapan, kode, atau data pribadi Anda.",
+        "it": "I dati di utilizzo anonimi aiutano a migliorare {Name}. Non raccogliamo mai le tue conversazioni, il tuo codice o i tuoi dati personali.",
+        "ja": "匿名の使用データは{Name}の改善に役立ちます。会話、コード、個人データは収集しません。",
+        "ko": "익명의 사용 데이터는 {Name} 개선에 도움이 됩니다. 대화, 코드 또는 개인 데이터는 수집하지 않습니다.",
+        "ms": "Data penggunaan tanpa nama membantu menambah baik {Name}. Kami tidak sekali-kali mengumpul perbualan, kod atau data peribadi anda.",
+        "pt": "Os dados de utilização anónimos ajudam a melhorar o {Name}. Nunca recolhemos as suas conversas, código ou dados pessoais.",
+        "ru": "Анонимные данные об использовании помогают улучшать {Name}. Мы никогда не собираем ваши разговоры, код или персональные данные.",
+        "tr": "Anonim kullanım verileri {Name}'nin iyileştirilmesine yardımcı olur. Konuşmalarınızı, kodlarınızı veya kişisel verilerinizi asla toplamıyoruz.",
+        "vi": "Dữ liệu sử dụng ẩn danh giúp cải thiện {Name}. Chúng tôi không bao giờ thu thập cuộc trò chuyện, mã nguồn hoặc dữ liệu cá nhân của bạn.",
+        "zh-CN": "匿名使用数据有助于改善 {Name}。我们绝不采集你的对话、代码或个人数据。",
+        "zh-TW": "匿名使用資料有助於改善 {Name}。我們絕不會收集您的對話、程式碼或個人資料。"
+      }
+    },
+    "privacyInfoModal.collectVersion": {
+      "kind": "message",
+      "value": "{Name} version and install method",
+      "description": "Displayed collect Version text on onboarding > PrivacyInfoModal. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["onboarding > PrivacyInfoModal"],
+      "sources": ["src/components/onboarding/PrivacyInfoModal.tsx:21"],
+      "translations": {
+        "de": "{Name}-Version und Installationsmethode",
+        "es": "Versión de {Name} y método de instalación",
+        "fr": "Version de {Name} et méthode d'installation",
+        "hi": "{Name} संस्करण और इंस्टाल विधि",
+        "id": "Versi {Name} dan metode instalasi",
+        "it": "Versione di {Name} e metodo di installazione",
+        "ja": "{Name}のバージョンとインストール方法",
+        "ko": "{Name} 버전 및 설치 방법",
+        "ms": "Versi {Name} dan kaedah pemasangan",
+        "pt": "Versão do {Name} e método de instalação",
+        "ru": "Версия {Name} и способ установки",
+        "tr": "{Name} sürümü ve yükleme yöntemi",
+        "vi": "Phiên bản {Name} và phương thức cài đặt",
+        "zh-CN": "{Name} 版本和安装方式",
+        "zh-TW": "{Name} 版本與安裝方式"
+      }
+    },
+    "privacyInfoModal.description": {
+      "kind": "message",
+      "value": "Anonymous usage data helps us understand how {Name} is used and identify areas for improvement.",
+      "description": "Displayed description text on onboarding > PrivacyInfoModal. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["onboarding > PrivacyInfoModal"],
+      "sources": ["src/components/onboarding/PrivacyInfoModal.tsx:9"],
+      "translations": {
+        "de": "Anonyme Nutzungsdaten helfen uns zu verstehen, wie {Name} genutzt wird, und Verbesserungsbereiche zu identifizieren.",
+        "es": "Los datos de uso anónimos nos ayudan a entender cómo se usa {Name} e identificar áreas de mejora.",
+        "fr": "Les données d'utilisation anonymes nous aident à comprendre comment {Name} est utilisé et à identifier les points à améliorer.",
+        "hi": "अनाम उपयोग डेटा हमें यह समझने में मदद करता है कि {Name} का उपयोग कैसे किया जाता है और सुधार के क्षेत्रों की पहचान की जाती है।",
+        "id": "Data penggunaan anonim membantu kami memahami cara {Name} digunakan dan mengidentifikasi area yang dapat ditingkatkan.",
+        "it": "I dati di utilizzo anonimi ci aiutano a capire come viene usato {Name} e a individuare le aree di miglioramento.",
+        "ja": "匿名の使用データは、{Name}の利用状況を把握し、改善点を見つけるのに役立ちます。",
+        "ko": "익명의 사용 데이터는 {Name}가 어떻게 사용되는지 이해하고 개선이 필요한 부분을 파악하는 데 도움이 됩니다.",
+        "ms": "Data penggunaan tanpa nama membantu kami memahami cara {Name} digunakan dan mengenal pasti bidang untuk penambahbaikan.",
+        "pt": "Os dados de utilização anónimos ajudam-nos a compreender como o {Name} é utilizado e a identificar áreas a melhorar.",
+        "ru": "Анонимные данные об использовании помогают понять как используется {Name} и найти области для улучшения.",
+        "tr": "Anonim kullanım verileri, {Name}'nin nasıl kullanıldığını anlamamıza ve iyileştirilecek alanları belirlememize yardımcı olur.",
+        "vi": "Dữ liệu sử dụng ẩn danh giúp chúng tôi hiểu cách {Name} được sử dụng và xác định các lĩnh vực cần cải thiện.",
+        "zh-CN": "匿名使用数据帮助我们理解 {Name} 的使用情况并找出改进方向。",
+        "zh-TW": "匿名使用資料有助於我們瞭解 {Name} 的使用情況並找出可改善的方面。"
+      }
+    },
+    "promptsSettings.promptEditingDescription": {
+      "kind": "message",
+      "value": "Customize the prompts that define {Name}'s behavior in different contexts. These prompts use Jinja2 templating syntax. Be careful when modifying template variables, as incorrect changes can break functionality. Please share any improvements with the community.",
+      "description": "Displayed prompt Editing Description text on Settings > PromptsSettingsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > PromptsSettingsSection"],
+      "sources": ["src/components/settings/PromptsSettingsSection.tsx:112"],
+      "translations": {
+        "de": "Passen Sie die Prompts an, die das Verhalten von {Name} in verschiedenen Kontexten definieren. Diese Prompts verwenden die Jinja2-Templating-Syntax. Seien Sie vorsichtig beim Ändern von Template-Variablen, da fehlerhafte Änderungen die Funktionalität beeinträchtigen können. Bitte teilen Sie etwaige Verbesserungen mit der Community.",
+        "es": "Personaliza los prompts que definen el comportamiento de {Name} en distintos contextos. Estos prompts usan la sintaxis de plantillas Jinja2. Ten cuidado al modificar las variables de plantilla, ya que los cambios incorrectos pueden romper la funcionalidad. Comparte cualquier mejora con la comunidad.",
+        "fr": "Personnalisez les invites qui définissent le comportement de {Name} dans différents contextes. Ces invites utilisent la syntaxe de gabarit Jinja2. Soyez prudent lorsque vous modifiez les variables de gabarit, car des modifications incorrectes peuvent altérer les fonctionnalités. N'hésitez pas à partager vos améliorations avec la communauté.",
+        "hi": "विभिन्न संदर्भों में {Name} के व्यवहार को परिभाषित करने वाले संकेतों को अनुकूलित करें। ये संकेत Jinja2 टेम्प्लेटिंग सिंटैक्स का उपयोग करते हैं। टेम्प्लेट वेरिएबल्स को संशोधित करते समय सावधान रहें, क्योंकि गलत परिवर्तन कार्यक्षमता को तोड़ सकते हैं। कृपया कोई भी सुधार समुदाय के साथ साझा करें।",
+        "id": "Sesuaikan prompt yang menentukan perilaku {Name} dalam berbagai konteks. Prompt ini menggunakan sintaks templat Jinja2. Berhati-hatilah saat memodifikasi variabel templat, karena perubahan yang salah dapat merusak fungsionalitas. Mohon bagikan setiap peningkatan dengan komunitas.",
+        "it": "Personalizza i prompt che definiscono il comportamento di {Name} in diversi contesti. Questi prompt usano la sintassi dei template Jinja2. Fai attenzione quando modifichi le variabili dei template, poiché modifiche errate possono compromettere le funzionalità. Condividi eventuali miglioramenti con la community.",
+        "ja": "さまざまなコンテキストでの{Name}の動作を定義するプロンプトをカスタマイズできます。これらのプロンプトはJinja2テンプレート構文を使用します。テンプレート変数を変更する際は、誤った変更により機能が壊れる可能性があるため注意してください。改善案はコミュニティで共有してください。",
+        "ko": "다양한 상황에서 {Name}의 동작을 정의하는 프롬프트를 사용자 지정하세요. 이 프롬프트는 Jinja2 템플릿 구문을 사용합니다. 잘못된 변경으로 인해 기능이 중단될 수 있으므로 템플릿 변수를 수정할 때는 주의하세요. 개선 사항을 커뮤니티와 공유해 주세요.",
+        "ms": "Sesuaikan gesaan yang mentakrifkan tingkah laku {Name} dalam konteks yang berbeza. Gesaan ini menggunakan sintaks templat Jinja2. Berhati-hati semasa mengubah suai pemboleh ubah templat, kerana perubahan yang salah boleh merosakkan fungsi. Sila kongsikan sebarang penambahbaikan dengan komuniti.",
+        "pt": "Personalize os prompts que definem o comportamento do {Name} em diferentes contextos. Estes prompts usam a sintaxe de templating Jinja2. Tenha cuidado ao modificar as variáveis de template, pois alterações incorretas podem quebrar a funcionalidade. Partilhe quaisquer melhorias com a comunidade.",
+        "ru": "Настраивайте промпты, определяющие поведение {Name} в разных контекстах. Эти промпты используют синтаксис шаблонов Jinja2. Будьте осторожны при изменении переменных шаблона: неверные изменения могут нарушить работу. Делитесь улучшениями с сообществом.",
+        "tr": "{Name}'nin farklı bağlamlardaki davranışını tanımlayan istemleri özelleştirin. Bu istemler Jinja2 şablon oluşturma sözdizimini kullanır. Yanlış değişiklikler işlevselliği bozabileceğinden şablon değişkenlerini değiştirirken dikkatli olun. Lütfen iyileştirmeleri toplulukla paylaşın.",
+        "vi": "Tùy chỉnh các lời nhắc xác định hành vi của {Name} trong các ngữ cảnh khác nhau. Các lời nhắc này sử dụng cú pháp mẫu Jinja2. Hãy cẩn thận khi sửa đổi các biến mẫu, vì thay đổi không đúng có thể làm hỏng chức năng. Vui lòng chia sẻ mọi cải tiến với cộng đồng.",
+        "zh-CN": "自定义在不同上下文中定义 {Name} 行为的提示词。这些提示词使用 Jinja2 模板语法。修改模板变量时请小心，错误的更改可能导致功能失效。欢迎把改进分享给社区。",
+        "zh-TW": "自訂在不同情境中定義 {Name} 行為的提示。這些提示使用 Jinja2 範本語法。修改範本變數時請務必小心，因為不正確的變更可能會破壞功能。請與社群分享任何改善內容。"
+      }
+    },
+    "providerConfigurationModal.addApiKeyDescription": {
+      "kind": "message",
+      "value": "Add your API key(s) for this provider to integrate into {Name}",
+      "description": "Displayed add Api Key Description text on Settings > providers > modal > ProviderConfigurationModal. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > providers > modal > ProviderConfigurationModal"],
+      "sources": ["src/components/settings/providers/modal/ProviderConfigurationModal.tsx:55"],
+      "translations": {
+        "de": "Fügen Sie Ihre API-Schlüssel für diesen Anbieter hinzu, um ihn in {Name} zu integrieren",
+        "es": "Añade tu(s) clave(s) de API de este proveedor para integrarlo en {Name}",
+        "fr": "Ajoutez votre ou vos clés API pour ce fournisseur afin de l'intégrer à {Name}",
+        "hi": "इस प्रदाता को {Name} में एकीकृत करने के लिए अपनी API कुंजी जोड़ें",
+        "id": "Tambahkan kunci API Anda untuk penyedia ini agar terintegrasi ke dalam {Name}",
+        "it": "Aggiungi la tua chiave o le tue chiavi API per questo provider da integrare in {Name}",
+        "ja": "{Name}と連携するには、このプロバイダーのAPIキーを追加してください",
+        "ko": "이 제공업체를 {Name}에 연동하려면 API 키를 추가하세요.",
+        "ms": "Tambah kunci API anda untuk penyedia ini bagi disepadukan ke dalam {Name}",
+        "pt": "Adicione a(s) sua(s) chave(s) de API deste fornecedor para integrar no {Name}",
+        "ru": "Добавьте API-ключи для этого провайдера, чтобы интегрировать его в {Name}",
+        "tr": "Bu sağlayıcının {Name}'a entegre olması için API anahtarlarınızı ekleyin",
+        "vi": "Thêm khóa API của bạn cho nhà cung cấp này để tích hợp vào {Name}",
+        "zh-CN": "添加此提供商的 API 密钥以接入 {Name}",
+        "zh-TW": "新增此提供者的 API 金鑰以整合至 {Name}"
+      }
+    },
+    "providerConfigurationModal.externalSetupIntro": {
+      "kind": "message",
+      "value": "This provider is configured outside of {Name}. Follow these steps:",
+      "description": "Displayed external Setup Intro text on Settings > providers > modal > ProviderConfigurationModal. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > providers > modal > ProviderConfigurationModal"],
+      "sources": ["src/components/settings/providers/modal/ProviderConfigurationModal.tsx:100"],
+      "translations": {
+        "de": "Dieser Anbieter wird außerhalb von {Name} konfiguriert. Befolgen Sie diese Schritte:",
+        "es": "Este proveedor se configura fuera de {Name}. Sigue estos pasos:",
+        "fr": "Ce fournisseur est configuré en dehors de {Name}. Suivez ces étapes :",
+        "hi": "यह प्रदाता {Name} के बाहर कॉन्फ़िगर किया गया है। इन चरणों का पालन करें:",
+        "id": "Penyedia ini dikonfigurasi di luar {Name}. Ikuti langkah-langkah berikut:",
+        "it": "Questo provider è configurato al di fuori di {Name}. Segui questi passaggi:",
+        "ja": "このプロバイダーは{Name}の外部で設定します。次の手順に従ってください:",
+        "ko": "이 제공업체는 {Name} 외부에 구성되어 있습니다. 다음 단계를 따르세요:",
+        "ms": "Penyedia ini dikonfigurasikan di luar {Name}. Ikuti langkah-langkah ini:",
+        "pt": "Este fornecedor é configurado fora do {Name}. Siga estes passos:",
+        "ru": "Этот провайдер настраивается вне {Name}. Выполните следующие шаги:",
+        "tr": "Bu sağlayıcı {Name} dışında yapılandırılmıştır. Şu adımları izleyin:",
+        "vi": "Nhà cung cấp này được cấu hình bên ngoài {Name}. Hãy làm theo các bước sau:",
+        "zh-CN": "此提供商在 {Name} 之外配置。请按照以下步骤：",
+        "zh-TW": "此提供者是在 {Name} 之外設定的。請依照下列步驟操作："
+      }
+    },
+    "providerSettings.onboardingDescription": {
+      "kind": "message",
+      "value": "Select an AI model provider to get started with {Name}. You'll need to use API keys generated by each provider which will be encrypted and stored locally. You can change your provider at any time in settings.",
+      "description": "Displayed onboarding Description text on Settings > providers > ProviderSettingsPage. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > providers > ProviderSettingsPage"],
+      "sources": ["src/components/settings/providers/ProviderSettingsPage.tsx:23"],
+      "translations": {
+        "de": "Wählen Sie einen KI-Modellanbieter aus, um mit {Name} zu beginnen. Sie benötigen API-Schlüssel, die von jedem Anbieter generiert werden und die verschlüsselt und lokal gespeichert werden. Sie können Ihren Anbieter jederzeit in den Einstellungen ändern.",
+        "es": "Selecciona un proveedor de modelos de IA para empezar con {Name}. Necesitarás usar claves de API generadas por cada proveedor, que se cifrarán y se almacenarán localmente. Puedes cambiar de proveedor en cualquier momento en los ajustes.",
+        "fr": "Sélectionnez un fournisseur de modèle IA pour commencer à utiliser {Name}. Vous devrez utiliser des clés API générées par chaque fournisseur ; elles seront chiffrées et stockées localement. Vous pouvez changer de fournisseur à tout moment dans les paramètres.",
+        "hi": "{Name} के साथ आरंभ करने के लिए एक एआई मॉडल प्रदाता का चयन करें। आपको प्रत्येक प्रदाता द्वारा उत्पन्न API कुंजियों का उपयोग करने की आवश्यकता होगी जिन्हें एन्क्रिप्ट किया जाएगा और स्थानीय रूप से संग्रहीत किया जाएगा। आप सेटिंग्स में किसी भी समय अपना प्रदाता बदल सकते हैं।",
+        "id": "Pilih penyedia model AI untuk memulai dengan {Name}. Anda perlu menggunakan kunci API yang dihasilkan oleh setiap penyedia yang akan dienkripsi dan disimpan secara lokal. Anda dapat mengubah penyedia kapan saja di pengaturan.",
+        "it": "Seleziona un provider di modelli IA per iniziare con {Name}. Dovrai usare le chiavi API generate da ciascun provider, che verranno crittografate e archiviate localmente. Puoi cambiare provider in qualsiasi momento nelle impostazioni.",
+        "ja": "{Name}を始めるにはAIモデルプロバイダーを選択してください。各プロバイダーで生成したAPIキーが必要です。APIキーは暗号化され、ローカルに保存されます。プロバイダーは設定からいつでも変更できます。",
+        "ko": "{Name}를 시작하려면 AI 모델 제공업체를 선택하세요. 각 제공업체가 생성한 API 키를 사용해야 하며 암호화되어 로컬에 저장됩니다. 설정에서 언제든지 제공업체를 변경할 수 있습니다.",
+        "ms": "Pilih penyedia model AI untuk bermula dengan {Name}. Anda perlu menggunakan kunci API yang dijana oleh setiap penyedia yang akan disulitkan dan disimpan secara setempat. Anda boleh menukar penyedia anda pada bila-bila masa dalam tetapan.",
+        "pt": "Selecione um fornecedor de modelos de IA para começar a usar o {Name}. Terá de usar chaves de API geradas por cada fornecedor, que serão encriptadas e armazenadas localmente. Pode alterar o seu fornecedor a qualquer momento nas definições.",
+        "ru": "Выберите провайдера ИИ-модели, чтобы начать работу с {Name}. Понадобятся API-ключи, созданные каждым провайдером; они будут зашифрованы и сохранены локально. Провайдера можно изменить в настройках в любое время.",
+        "tr": "{Name}'yi kullanmaya başlamak için bir yapay zeka modeli sağlayıcısı seçin. Her sağlayıcı tarafından oluşturulan ve yerel olarak şifrelenecek ve saklanacak API anahtarlarını kullanmanız gerekecektir. Sağlayıcınızı istediğiniz zaman ayarlardan değiştirebilirsiniz.",
+        "vi": "Chọn một nhà cung cấp mô hình AI để bắt đầu với {Name}. Bạn sẽ cần sử dụng khóa API do mỗi nhà cung cấp tạo ra, khóa này sẽ được mã hóa và lưu trữ cục bộ. Bạn có thể thay đổi nhà cung cấp bất cứ lúc nào trong cài đặt.",
+        "zh-CN": "选择一个 AI 模型提供商来开始使用 {Name}。你需要用各提供商生成的 API 密钥，密钥将加密后本地存储。你随时可以在设置中更改提供商。",
+        "zh-TW": "選取一個 AI 模型提供者以開始使用 {Name}。您需要使用各提供者產生的 API 金鑰，這些金鑰將會加密並儲存在本機。您隨時可以在設定中變更提供者。"
+      }
+    },
+    "sessions.chatHistoryDesc": {
+      "kind": "message",
+      "value": "View and search your past conversations with {Name}. {shortcut} to search.",
+      "description": "Displayed chat History Desc text on sessions > SessionListView. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["sessions > SessionListView"],
+      "sources": ["src/components/sessions/SessionListView.tsx:71"],
+      "translations": {
+        "de": "Sehen und durchsuchen Sie Ihre vergangenen Unterhaltungen mit {Name}. {shortcut} zum Suchen.",
+        "es": "Consulta y busca tus conversaciones anteriores con {Name}. {shortcut} para buscar.",
+        "fr": "Affichez et recherchez vos conversations passées avec {Name}. {shortcut} pour rechercher.",
+        "hi": "{Name} के साथ अपनी पिछली बातचीत देखें और खोजें। {shortcut} खोजने के लिए.",
+        "id": "Lihat dan cari percakapan Anda sebelumnya dengan {Name}. {shortcut} untuk mencari.",
+        "it": "Visualizza e cerca le tue conversazioni passate con {Name}. {shortcut} per cercare.",
+        "ja": "{Name}との過去の会話を表示・検索できます。{shortcut}で検索。",
+        "ko": "{Name}와 나눈 이전 대화를 확인하고 검색하세요. {shortcut}로 검색할 수 있습니다.",
+        "ms": "Lihat dan cari perbualan lepas anda dengan {Name}. {shortcut} untuk mencari.",
+        "pt": "Veja e pesquise as suas conversas anteriores com o {Name}. {shortcut} para pesquisar.",
+        "ru": "Просматривайте и ищите прошлые разговоры с {Name}. {shortcut} для поиска.",
+        "tr": "{Name} ile geçmiş konuşmalarınızı görüntüleyin ve arayın. Aramak için {shortcut}.",
+        "vi": "Xem và tìm kiếm các cuộc trò chuyện trước đây của bạn với {Name}. {shortcut} để tìm kiếm.",
+        "zh-CN": "查看并搜索你与 {Name} 的过往对话。按 {shortcut} 搜索。",
+        "zh-TW": "檢視並搜尋您與 {Name} 過去的對話。{shortcut} 即可搜尋。"
+      }
+    },
+    "settings.appearance.description": {
+      "kind": "message",
+      "value": "Configure how {Name} appears on your system",
+      "description": "Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > AppSettingsSection"],
+      "sources": ["src/components/settings/app/AppSettingsSection.tsx:27"],
+      "translations": {
+        "de": "Konfigurieren Sie, wie {Name} auf Ihrem System angezeigt wird",
+        "es": "Configura cómo se ve {Name} en tu sistema",
+        "fr": "Configurez l'apparence de {Name} sur votre système",
+        "hi": "कॉन्फ़िगर करें कि {Name} आपके सिस्टम पर कैसे दिखाई देता है",
+        "id": "Konfigurasikan tampilan {Name} di sistem Anda",
+        "it": "Configura l'aspetto di {Name} sul tuo sistema",
+        "ja": "システム上での{Name}の表示を設定します",
+        "ko": "시스템에서 {Name}가 표시되는 방식을 설정합니다.",
+        "ms": "Konfigurasikan cara {Name} muncul pada sistem anda",
+        "pt": "Configure como o {Name} aparece no seu sistema",
+        "ru": "Настройте, как {Name} отображается в вашей системе",
+        "tr": "{Name}'nin sisteminizde nasıl görüneceğini yapılandırın",
+        "vi": "Định cấu hình cách {Name} hiển thị trên hệ thống của bạn",
+        "zh-CN": "配置 {Name} 在你系统中的外观",
+        "zh-TW": "設定 {Name} 在您系統上的顯示方式"
+      }
+    },
+    "settings.dockIcon.description": {
+      "kind": "message",
+      "value": "Show {Name} in the dock",
+      "description": "Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > AppSettingsSection"],
+      "sources": ["src/components/settings/app/AppSettingsSection.tsx:52"],
+      "translations": {
+        "de": "{Name} im Dock anzeigen",
+        "es": "Muestra {Name} en el dock",
+        "fr": "Afficher {Name} dans le Dock",
+        "hi": "गोदी में {Name} दिखाएँ",
+        "id": "Tampilkan {Name} di dock",
+        "it": "Mostra {Name} nel dock",
+        "ja": "Dockに{Name}を表示します",
+        "ko": "Dock에 {Name}를 표시합니다.",
+        "ms": "Tunjukkan {Name} dalam dok",
+        "pt": "Mostrar o {Name} na dock",
+        "ru": "Показывать {Name} в Dock",
+        "tr": "Dock'ta {Name}'yi göster",
+        "vi": "Hiển thị {Name} trên dock",
+        "zh-CN": "在 Dock 中显示 {Name}",
+        "zh-TW": "在 Dock 中顯示 {Name}"
+      }
+    },
+    "settings.help.description": {
+      "kind": "message",
+      "value": "Help us improve {Name} by reporting issues or requesting new features",
+      "description": "Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > AppSettingsSection"],
+      "sources": ["src/components/settings/app/AppSettingsSection.tsx:98"],
+      "translations": {
+        "de": "Helfen Sie uns, {Name} zu verbessern, indem Sie Probleme melden oder neue Funktionen anfordern",
+        "es": "Ayúdanos a mejorar {Name} reportando problemas o solicitando nuevas funciones",
+        "fr": "Aidez-nous à améliorer {Name} en signalant des problèmes ou en demandant de nouvelles fonctionnalités",
+        "hi": "समस्याओं की रिपोर्ट करके या नई सुविधाओं का अनुरोध करके {Name} को बेहतर बनाने में हमारी सहायता करें",
+        "id": "Bantu kami meningkatkan {Name} dengan melaporkan masalah atau meminta fitur baru",
+        "it": "Aiutaci a migliorare {Name} segnalando problemi o richiedendo nuove funzionalità",
+        "ja": "問題の報告や新機能のリクエストで{Name}の改善にご協力ください",
+        "ko": "문제를 신고하거나 새 기능을 요청하여 {Name} 개선에 도움을 주세요.",
+        "ms": "Bantu kami menambah baik {Name} dengan melaporkan isu atau meminta ciri baharu",
+        "pt": "Ajude-nos a melhorar o {Name} comunicando problemas ou solicitando novas funcionalidades",
+        "ru": "Помогите улучшить {Name}: сообщайте о проблемах или запрашивайте новые функции",
+        "tr": "Sorunları bildirerek veya yeni özellikler talep ederek {Name}'yi geliştirmemize yardımcı olun",
+        "vi": "Giúp chúng tôi cải thiện {Name} bằng cách báo cáo sự cố hoặc yêu cầu tính năng mới",
+        "zh-CN": "通过报告问题或请求新功能帮助我们改进 {Name}",
+        "zh-TW": "回報問題或申請新功能，協助我們改善 {Name}"
+      }
+    },
+    "settings.language.description": {
+      "kind": "message",
+      "value": "Choose the display language for {Name}",
+      "description": "Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > AppSettingsSection"],
+      "sources": ["src/components/settings/app/AppSettingsSection.tsx:70"],
+      "translations": {
+        "de": "Wählen Sie die Anzeigesprache für {Name}",
+        "es": "Elige el idioma de la interfaz de {Name}",
+        "fr": "Choisissez la langue d'affichage de {Name}",
+        "hi": "{Name} के लिए प्रदर्शन भाषा चुनें",
+        "id": "Pilih bahasa tampilan untuk {Name}",
+        "it": "Scegli la lingua di visualizzazione per {Name}",
+        "ja": "{Name} の表示言語を選択",
+        "ko": "{Name}의 표시 언어를 선택하세요",
+        "ms": "Pilih bahasa paparan untuk {Name}",
+        "pt": "Escolha o idioma de exibição do {Name}",
+        "ru": "Выберите язык интерфейса {Name}",
+        "tr": "{Name} için görüntüleme dilini seçin",
+        "vi": "Chọn ngôn ngữ hiển thị cho {Name}",
+        "zh-CN": "选择 {Name} 的显示语言",
+        "zh-TW": "選擇 {Name} 的顯示語言"
+      }
+    },
+    "settings.menuBarIcon.description": {
+      "kind": "message",
+      "value": "Show {Name} in the menu bar",
+      "description": "Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > AppSettingsSection"],
+      "sources": ["src/components/settings/app/AppSettingsSection.tsx:47"],
+      "translations": {
+        "de": "{Name} in der Menüleiste anzeigen",
+        "es": "Muestra {Name} en la barra de menús",
+        "fr": "Afficher {Name} dans la barre de menus",
+        "hi": "मेनू बार में {Name} दिखाएँ",
+        "id": "Tampilkan {Name} di bilah menu",
+        "it": "Mostra {Name} nella barra dei menu",
+        "ja": "メニューバーに{Name}を表示します",
+        "ko": "메뉴 막대에 {Name}를 표시합니다.",
+        "ms": "Tunjukkan {Name} dalam bar menu",
+        "pt": "Mostrar o {Name} na barra de menus",
+        "ru": "Показывать {Name} в строке меню",
+        "tr": "Menü çubuğunda {Name}'yi göster",
+        "vi": "Hiển thị {Name} trên thanh menu",
+        "zh-CN": "在菜单栏显示 {Name}",
+        "zh-TW": "在選單列中顯示 {Name}"
+      }
+    },
+    "settings.notifications.modal.macStep3": {
+      "kind": "message",
+      "value": "Find and select {Name} in the application list",
+      "description": "Displayed mac Step3 text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > AppSettingsSection"],
+      "sources": ["src/components/settings/app/AppSettingsSection.tsx:126"],
+      "translations": {
+        "de": "Suchen und wählen Sie {Name} in der Anwendungsliste aus",
+        "es": "Encuentra y selecciona {Name} en la lista de aplicaciones",
+        "fr": "Trouvez et sélectionnez {Name} dans la liste des applications",
+        "hi": "एप्लिकेशन सूची में {Name} ढूंढें और चुनें",
+        "id": "Temukan dan pilih {Name} di daftar aplikasi",
+        "it": "Trova e seleziona {Name} nell'elenco delle applicazioni",
+        "ja": "アプリ一覧で{Name}を見つけて選択",
+        "ko": "애플리케이션 목록에서 {Name}를 찾아 선택하세요",
+        "ms": "Cari dan pilih {Name} dalam senarai aplikasi",
+        "pt": "Encontre e selecione o {Name} na lista de aplicações",
+        "ru": "Найдите и выберите {Name} в списке приложений",
+        "tr": "Uygulama listesinde {Name}'yi bulun ve seçin",
+        "vi": "Tìm và chọn {Name} trong danh sách ứng dụng",
+        "zh-CN": "在应用列表中找到并选择 {Name}",
+        "zh-TW": "在應用程式清單中找到並選取 {Name}"
+      }
+    },
+    "settings.notifications.modal.winStep3": {
+      "kind": "message",
+      "value": "Find and select {Name} in the application list",
+      "description": "Displayed win Step3 text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > AppSettingsSection"],
+      "sources": ["src/components/settings/app/AppSettingsSection.tsx:146"],
+      "translations": {
+        "de": "Suchen und wählen Sie {Name} in der Anwendungsliste aus",
+        "es": "Encuentra y selecciona {Name} en la lista de aplicaciones",
+        "fr": "Trouvez et sélectionnez {Name} dans la liste des applications",
+        "hi": "एप्लिकेशन सूची में {Name} ढूंढें और चुनें",
+        "id": "Temukan dan pilih {Name} di daftar aplikasi",
+        "it": "Trova e seleziona {Name} nell'elenco delle applicazioni",
+        "ja": "アプリ一覧で{Name}を見つけて選択",
+        "ko": "애플리케이션 목록에서 {Name}를 찾아 선택하세요",
+        "ms": "Cari dan pilih {Name} dalam senarai aplikasi",
+        "pt": "Encontre e selecione o {Name} na lista de aplicações",
+        "ru": "Найдите и выберите {Name} в списке приложений",
+        "tr": "Uygulama listesinde {Name}'yi bulun ve seçin",
+        "vi": "Tìm và chọn {Name} trong danh sách ứng dụng",
+        "zh-CN": "在应用列表中找到并选择 {Name}",
+        "zh-TW": "在應用程式清單中找到並選取 {Name}"
+      }
+    },
+    "settings.notifications.task.description": {
+      "kind": "message",
+      "value": "Notify when {Name} finishes a task while the window is in the background",
+      "description": "Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > AppSettingsSection"],
+      "sources": ["src/components/settings/app/AppSettingsSection.tsx:42"],
+      "translations": {
+        "de": "Benachrichtigen, wenn {Name} eine Aufgabe abschließt, während sich das Fenster im Hintergrund befindet",
+        "es": "Notifica cuando {Name} termina una tarea mientras la ventana está en segundo plano",
+        "fr": "Notifier lorsque {Name} termine une tâche pendant que la fenêtre est en arrière-plan",
+        "hi": "जब विंडो पृष्ठभूमि में हो तो {Name} कोई कार्य पूरा कर ले तो सूचित करें",
+        "id": "Beri tahu saat {Name} menyelesaikan tugas selagi jendela berada di latar belakang",
+        "it": "Notifica quando {Name} completa un'attività mentre la finestra è in secondo piano",
+        "ja": "ウィンドウがバックグラウンドにある間に{Name}がタスクを完了したら通知します",
+        "ko": "창이 백그라운드에 있을 때 {Name}가 작업을 완료하면 알림을 보냅니다.",
+        "ms": "Beritahu apabila {Name} menyelesaikan tugasan semasa tetingkap berada di latar belakang",
+        "pt": "Notificar quando o {Name} concluir uma tarefa enquanto a janela está em segundo plano",
+        "ru": "Уведомлять, когда {Name} завершает задачу, пока окно в фоне",
+        "tr": "Pencere arka plandayken {Name} bir görevi tamamladığında bildirim al",
+        "vi": "Thông báo khi {Name} hoàn thành một tác vụ trong khi cửa sổ đang ở chế độ nền",
+        "zh-CN": "窗口在后台时，{Name} 完成任务后通知你",
+        "zh-TW": "當視窗在背景執行時，{Name} 完成工作後發出通知"
+      }
+    },
+    "settings.preventSleep.description": {
+      "kind": "message",
+      "value": "Keep your computer awake while {Name} is running a task (screen can still lock)",
+      "description": "Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > AppSettingsSection"],
+      "sources": ["src/components/settings/app/AppSettingsSection.tsx:54"],
+      "translations": {
+        "de": "Halten Sie Ihren Computer wach, während {Name} eine Aufgabe ausführt (der Bildschirm kann sich weiterhin sperren)",
+        "es": "Mantén tu computadora despierta mientras {Name} ejecuta una tarea (la pantalla aún puede bloquearse)",
+        "fr": "Maintenez votre ordinateur éveillé pendant que {Name} exécute une tâche (l'écran peut quand même se verrouiller)",
+        "hi": "जब {Name} कोई कार्य चला रहा हो तो अपने कंप्यूटर को चालू रखें (स्क्रीन अभी भी लॉक हो सकती है)",
+        "id": "Jaga komputer Anda tetap menyala saat {Name} menjalankan tugas (layar tetap dapat terkunci)",
+        "it": "Mantieni il computer attivo mentre {Name} esegue un'attività (lo schermo può comunque bloccarsi)",
+        "ja": "{Name}がタスクを実行中はコンピューターがスリープしないようにします（画面はロックされる場合があります）",
+        "ko": "{Name}가 작업을 실행하는 동안 컴퓨터가 잠자기 상태로 전환되지 않도록 합니다. 화면은 잠길 수 있습니다.",
+        "ms": "Pastikan komputer anda kekal terjaga semasa {Name} sedang menjalankan tugasan (skrin masih boleh dikunci)",
+        "pt": "Manter o computador ativo enquanto o {Name} executa uma tarefa (o ecrã ainda pode ser bloqueado)",
+        "ru": "Не давать компьютеру засыпать, пока {Name} выполняет задачу (экран все равно может блокироваться)",
+        "tr": "{Name} bir görevi çalıştırırken bilgisayarınızı uyanık tutun (ekran hala kilitlenebilir)",
+        "vi": "Giữ máy tính của bạn luôn hoạt động trong khi {Name} đang chạy một tác vụ (màn hình vẫn có thể khóa)",
+        "zh-CN": "{Name} 运行任务期间保持电脑不休眠（屏幕仍可锁定）",
+        "zh-TW": "在 {Name} 執行工作時讓電腦保持喚醒狀態（螢幕仍可鎖定）"
+      }
+    },
+    "settings.theme.description": {
+      "kind": "message",
+      "value": "Customize the look and feel of {Name}",
+      "description": "Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > AppSettingsSection"],
+      "sources": ["src/components/settings/app/AppSettingsSection.tsx:65"],
+      "translations": {
+        "de": "Passen Sie das Erscheinungsbild von {Name} an",
+        "es": "Personaliza la apariencia de {Name}",
+        "fr": "Personnalisez l'apparence et la convivialité de {Name}",
+        "hi": "{Name} के रूप और अनुभव को अनुकूलित करें",
+        "id": "Sesuaikan tampilan dan nuansa {Name}",
+        "it": "Personalizza l'aspetto e lo stile di {Name}",
+        "ja": "{Name}の見た目と操作感をカスタマイズします",
+        "ko": "{Name}의 모양과 느낌을 맞춤 설정합니다.",
+        "ms": "Sesuaikan rupa dan rasa {Name}",
+        "pt": "Personalize a aparência e o comportamento do {Name}",
+        "ru": "Настройте внешний вид и ощущения {Name}",
+        "tr": "{Name}'nin görünümünü ve hissini özelleştirin",
+        "vi": "Tùy chỉnh giao diện và cảm nhận của {Name}",
+        "zh-CN": "自定义 {Name} 的外观和风格",
+        "zh-TW": "自訂 {Name} 的外觀與風格"
+      }
+    },
+    "settings.updates.description": {
+      "kind": "message",
+      "value": "Check for and install updates to keep {Name} running at its best",
+      "description": "Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > AppSettingsSection"],
+      "sources": ["src/components/settings/app/AppSettingsSection.tsx:106"],
+      "translations": {
+        "de": "Suchen und installieren Sie Updates, damit {Name} stets optimal läuft",
+        "es": "Busca e instala actualizaciones para mantener {Name} funcionando al máximo",
+        "fr": "Recherchez et installez les mises à jour pour que {Name} fonctionne de manière optimale",
+        "hi": "{Name} को सर्वोत्तम रूप से चालू रखने के लिए अपडेट की जाँच करें और इंस्टॉल करें",
+        "id": "Periksa dan instal pembaruan agar {Name} berjalan optimal",
+        "it": "Controlla e installa gli aggiornamenti per mantenere {Name} sempre al meglio",
+        "ja": "{Name}を最新の状態に保つため、アップデートを確認してインストールします",
+        "ko": "{Name}가 최상의 상태로 실행되도록 업데이트를 확인하고 설치합니다.",
+        "ms": "Semak dan pasang kemas kini untuk memastikan {Name} berjalan dengan terbaik",
+        "pt": "Verifique e instale atualizações para manter o {Name} a funcionar no seu melhor",
+        "ru": "Проверяйте и устанавливайте обновления, чтобы {Name} работал оптимально",
+        "tr": "{Name}'nin en iyi şekilde çalışmasını sağlamak için güncellemeleri kontrol edin ve yükleyin",
+        "vi": "Kiểm tra và cài đặt bản cập nhật để {Name} luôn hoạt động tốt nhất",
+        "zh-CN": "检查并安装更新，让 {Name} 保持最佳状态",
+        "zh-TW": "檢查並安裝更新，讓 {Name} 保持最佳運作狀態"
+      }
+    },
+    "skillsView.skillsDescription": {
+      "kind": "message",
+      "value": "View installed skills that extend {Name} capabilities. {shortcut} to search.",
+      "description": "Displayed skills Description text on skills > SkillsView. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["skills > SkillsView"],
+      "sources": ["src/components/skills/SkillsView.tsx:49"],
+      "translations": {
+        "de": "Zeigen Sie installierte Skills an, die die Fähigkeiten von {Name} erweitern. {shortcut} zum Suchen.",
+        "es": "Mira las Skills instaladas que amplían las capacidades de {Name}. {shortcut} para buscar.",
+        "fr": "Affichez les compétences installées qui étendent les capacités de {Name}. {shortcut} pour rechercher.",
+        "hi": "स्थापित कौशल देखें जो {Name} क्षमताओं का विस्तार करते हैं। {shortcut} खोजने के लिए.",
+        "id": "Lihat keterampilan terpasang yang memperluas kemampuan {Name}. {shortcut} untuk mencari.",
+        "it": "Visualizza le competenze installate che estendono le funzionalità di {Name}. {shortcut} per cercare.",
+        "ja": "{Name}の機能を拡張するインストール済みスキルを表示します。{shortcut}で検索。",
+        "ko": "{Name} 기능을 확장하는 스킬을 확인하세요. {shortcut}로 검색할 수 있습니다.",
+        "ms": "Lihat kemahiran terpasang yang meluaskan keupayaan {Name}. {shortcut} untuk mencari.",
+        "pt": "Veja as competências instaladas que ampliam as capacidades do {Name}. {shortcut} para pesquisar.",
+        "ru": "Просматривайте установленные навыки, расширяющие возможности {Name}. {shortcut} для поиска.",
+        "tr": "{Name} yeteneklerini genişleten yüklü becerileri görüntüleyin. Aramak için {shortcut}.",
+        "vi": "Xem các kỹ năng đã cài đặt giúp mở rộng khả năng của {Name}. {shortcut} để tìm kiếm.",
+        "zh-CN": "查看已安装的用于扩展 {Name} 能力的技能。按 {shortcut} 搜索。",
+        "zh-TW": "檢視可擴充 {Name} 功能的已安裝技能。{shortcut} 即可搜尋。"
+      }
+    },
+    "telemetryConsentPrompt.description": {
+      "kind": "message",
+      "value": "Would you like to share anonymous usage data to help improve {Name}? We never collect your conversations, code, or personal data.",
+      "description": "Displayed description text on TelemetryConsentPrompt. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["TelemetryConsentPrompt"],
+      "sources": ["src/components/TelemetryConsentPrompt.tsx:18"],
+      "translations": {
+        "de": "Möchten Sie anonyme Nutzungsdaten teilen, um {Name} zu verbessern? Wir erfassen niemals Ihre Unterhaltungen, Ihren Code oder Ihre persönlichen Daten.",
+        "es": "¿Te gustaría compartir datos de uso anónimos para ayudar a mejorar {Name}? Nunca recopilamos tus conversaciones, código ni datos personales.",
+        "fr": "Souhaitez-vous partager des données d'utilisation anonymes pour aider à améliorer {Name} ? Nous ne collectons jamais vos conversations, votre code ou vos données personnelles.",
+        "hi": "क्या आप {Name} को बेहतर बनाने में सहायता के लिए अनाम उपयोग डेटा साझा करना चाहेंगे? हम कभी भी आपकी बातचीत, कोड या व्यक्तिगत डेटा एकत्र नहीं करते हैं।",
+        "id": "Apakah Anda ingin membagikan data penggunaan anonim untuk membantu meningkatkan {Name}? Kami tidak pernah mengumpulkan percakapan, kode, atau data pribadi Anda.",
+        "it": "Vuoi condividere dati di utilizzo anonimi per aiutare a migliorare {Name}? Non raccogliamo mai le tue conversazioni, il tuo codice o i tuoi dati personali.",
+        "ja": "{Name}の改善のため、匿名の使用状況データを共有しますか？会話、コード、個人データは一切収集しません。",
+        "ko": "{Name} 개선을 위해 익명의 사용 데이터를 공유하시겠습니까? 대화, 코드 또는 개인 데이터는 수집하지 않습니다.",
+        "ms": "Adakah anda ingin berkongsi data penggunaan tanpa nama untuk membantu menambah baik {Name}? Kami tidak pernah mengumpul perbualan, kod, atau data peribadi anda.",
+        "pt": "Gostaria de partilhar dados de utilização anónimos para ajudar a melhorar o {Name}? Nunca recolhemos as suas conversas, código ou dados pessoais.",
+        "ru": "Хотите поделиться анонимными данными об использовании, чтобы помочь улучшить {Name}? Мы никогда не собираем ваши разговоры, код или персональные данные.",
+        "tr": "{Name}'nin iyileştirilmesine yardımcı olmak için anonim kullanım verilerini paylaşmak ister misiniz? Konuşmalarınızı, kodlarınızı veya kişisel verilerinizi asla toplamıyoruz.",
+        "vi": "Bạn có muốn chia sẻ dữ liệu sử dụng ẩn danh để giúp cải thiện {Name} không? Chúng tôi không bao giờ thu thập các cuộc trò chuyện, mã hoặc dữ liệu cá nhân của bạn.",
+        "zh-CN": "是否愿意分享匿名使用数据帮助改进 {Name}？我们绝不采集你的对话、代码或个人数据。",
+        "zh-TW": "您願意分享匿名使用資料以協助改善 {Name} 嗎？我們絕不會收集您的對話、程式碼或個人資料。"
+      }
+    },
+    "telemetryConsentPrompt.heading": {
+      "kind": "message",
+      "value": "Help improve {Name}",
+      "description": "Displayed heading text on TelemetryConsentPrompt. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["TelemetryConsentPrompt"],
+      "sources": ["src/components/TelemetryConsentPrompt.tsx:14"],
+      "translations": {
+        "de": "Helfen Sie, {Name} zu verbessern",
+        "es": "Ayuda a mejorar {Name}",
+        "fr": "Aidez à améliorer {Name}",
+        "hi": "{Name} को बेहतर बनाने में सहायता करें",
+        "id": "Bantu tingkatkan {Name}",
+        "it": "Aiuta a migliorare {Name}",
+        "ja": "{Name}の改善に協力",
+        "ko": "{Name} 개선에 도움을 주세요",
+        "ms": "Bantu menambah baik {Name}",
+        "pt": "Ajude a melhorar o {Name}",
+        "ru": "Помогите улучшить {Name}",
+        "tr": "{Name}'nin iyileştirilmesine yardımcı olun",
+        "vi": "Giúp cải thiện {Name}",
+        "zh-CN": "帮助改进 {Name}",
+        "zh-TW": "協助改善 {Name}"
+      }
+    },
+    "telemetrySettings.toggleDescription": {
+      "kind": "message",
+      "value": "Help improve {Name} by sharing anonymous usage statistics.",
+      "description": "Displayed toggle Description text on Settings > app > TelemetrySettings. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > TelemetrySettings"],
+      "sources": ["src/components/settings/app/TelemetrySettings.tsx:27"],
+      "translations": {
+        "de": "Helfen Sie, {Name} zu verbessern, indem Sie anonyme Nutzungsstatistiken teilen.",
+        "es": "Ayuda a mejorar {Name} compartiendo estadísticas de uso anónimas.",
+        "fr": "Aidez à améliorer {Name} en partageant des statistiques d'utilisation anonymes.",
+        "hi": "अनाम उपयोग आँकड़े साझा करके {Name} को बेहतर बनाने में सहायता करें।",
+        "id": "Bantu tingkatkan {Name} dengan membagikan statistik penggunaan anonim.",
+        "it": "Aiuta a migliorare {Name} condividendo statistiche di utilizzo anonime.",
+        "ja": "{Name}の改善のため、匿名の使用統計を共有します。",
+        "ko": "익명 사용 통계를 공유하여 {Name} 개선에 도움을 주세요.",
+        "ms": "Bantu menambah baik {Name} dengan berkongsi statistik penggunaan tanpa nama.",
+        "pt": "Ajude a melhorar o {Name} partilhando estatísticas de utilização anónimas.",
+        "ru": "Помогите улучшить {Name}, делясь анонимной статистикой использования.",
+        "tr": "Anonim kullanım istatistiklerini paylaşarak {Name}'nin geliştirilmesine yardımcı olun.",
+        "vi": "Giúp cải thiện {Name} bằng cách chia sẻ số liệu thống kê sử dụng ẩn danh.",
+        "zh-CN": "通过分享匿名使用统计来帮助改进 {Name}。",
+        "zh-TW": "分享匿名使用統計資料以協助改善 {Name}。"
+      }
+    },
+    "toolConfirmation.gooseWouldLikeToCallWithName": {
+      "kind": "message",
+      "value": "{Name} would like to call {toolName}. Allow?",
+      "description": "Displayed goose Would Like To Call With Name text on ToolCallConfirmation. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["ToolCallConfirmation"],
+      "sources": ["src/components/ToolCallConfirmation.tsx:12"],
+      "translations": {
+        "de": "{Name} möchte {toolName} aufrufen. Erlauben?",
+        "es": "{Name} quiere invocar {toolName}. ¿Permitir?",
+        "fr": "{Name} souhaite appeler {toolName}. Autoriser ?",
+        "hi": "{Name} {toolName} को कॉल करना चाहेंगे। अनुमति दें?",
+        "id": "{Name} ingin memanggil {toolName}. Izinkan?",
+        "it": "{Name} desidera richiamare {toolName}. Consentire?",
+        "ja": "{Name}が{toolName}を実行しようとしています。許可しますか？",
+        "ko": "{Name}가 {toolName}을 호출하려고 합니다. 허용하시겠습니까?",
+        "ms": "{Name} ingin memanggil {toolName}. Benarkan?",
+        "pt": "O {Name} gostaria de invocar {toolName}. Permitir?",
+        "ru": "{Name} хочет вызвать {toolName}. Разрешить?",
+        "tr": "{Name}, {toolName}'yi aramak istiyor. İzin vermek?",
+        "vi": "{Name} muốn gọi {toolName}. Cho phép?",
+        "zh-CN": "{Name} 想调用 {toolName}，允许吗？",
+        "zh-TW": "{Name} 想要呼叫 {toolName}。要允許嗎？"
+      }
+    },
+    "updateSection.autoDownload": {
+      "kind": "message",
+      "value": "{Name} will download the update in the background and install it the next time you quit or restart.",
+      "description": "Displayed auto Download text on Settings > app > UpdateSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > UpdateSection"],
+      "sources": ["src/components/settings/app/UpdateSection.tsx:82"],
+      "translations": {
+        "de": "{Name} lädt das Update im Hintergrund herunter und installiert es beim nächsten Beenden oder Neustart.",
+        "es": "La actualización se descargará automáticamente en segundo plano.",
+        "fr": "{Name} téléchargera la mise à jour en arrière-plan et l'installera lors de votre prochaine fermeture ou redémarrage.",
+        "hi": "अपडेट बैकग्राउंड में अपने आप डाउनलोड हो जाएगा.",
+        "id": "{Name} akan mengunduh pembaruan di latar belakang dan menginstalnya saat Anda keluar atau memulai ulang berikutnya.",
+        "it": "{Name} scaricherà l'aggiornamento in background e lo installerà al prossimo arresto o riavvio.",
+        "ja": "アップデートはバックグラウンドで自動的にダウンロードされます。",
+        "ko": "{Name}가 백그라운드에서 업데이트를 다운로드하며, 종료하거나 다시 시작할 때 설치합니다.",
+        "ms": "{Name} akan memuat turun kemas kini di latar belakang dan memasangnya pada kali seterusnya anda keluar atau mula semula.",
+        "pt": "O {Name} transferirá a atualização em segundo plano e instalá-la-á da próxima vez que sair ou reiniciar.",
+        "ru": "Обновление будет автоматически скачано в фоновом режиме.",
+        "tr": "Güncelleme arka planda otomatik olarak indirilecektir.",
+        "vi": "{Name} sẽ tải bản cập nhật ở chế độ nền và cài đặt vào lần tiếp theo khi bạn thoát hoặc khởi động lại.",
+        "zh-CN": "更新将在后台自动下载。",
+        "zh-TW": "{Name} 會在背景下載更新，並於您下次結束或重新啟動時安裝。"
+      }
+    },
+    "updateSection.disableAutoDownloadDesc": {
+      "kind": "message",
+      "value": "When enabled, {Name} will notify you of new versions but will not download them automatically.",
+      "description": "Displayed disable Auto Download Desc text on Settings > app > UpdateSection. Preserve the ICU arguments and rich-text tags in this template.",
+      "pages": ["Settings > app > UpdateSection"],
+      "sources": ["src/components/settings/app/UpdateSection.tsx:12"],
+      "translations": {
+        "de": "Wenn aktiviert, benachrichtigt {Name} Sie über neue Versionen, lädt sie aber nicht automatisch herunter.",
+        "es": "Cuando está activado, {Name} te avisará de nuevas versiones pero no las descargará automáticamente.",
+        "fr": "Lorsque cette option est activée, {Name} vous informera des nouvelles versions mais ne les téléchargera pas automatiquement.",
+        "hi": "सक्षम होने पर, {Name} आपको नई संस्करणों की सूचना देगा लेकिन उन्हें स्वचालित रूप से डाउनलोड नहीं करेगा।",
+        "id": "Saat diaktifkan, {Name} akan memberi tahu Anda tentang versi baru tetapi tidak akan mengunduhnya secara otomatis.",
+        "it": "Se abilitato, {Name} ti avviserà delle nuove versioni ma non le scaricherà automaticamente.",
+        "ja": "有効にすると、{Name} は新しいバージョンを通知しますが、自動的にはダウンロードしません。",
+        "ko": "활성화하면 {Name}가 새 버전을 알려주지만 자동으로 다운로드하지는 않습니다.",
+        "ms": "Apabila didayakan, {Name} akan memberitahu anda tentang versi baharu tetapi tidak akan memuat turunnya secara automatik.",
+        "pt": "Quando ativado, o {Name} notificá-lo-á de novas versões, mas não as transferirá automaticamente.",
+        "ru": "Когда включено, {Name} будет уведомлять о новых версиях, но не будет загружать их автоматически.",
+        "tr": "Etkinleştirildiğinde, {Name} yeni sürümleri bildirir ancak bunları otomatik olarak indirmez.",
+        "vi": "Khi được bật, {Name} sẽ thông báo cho bạn về các phiên bản mới nhưng sẽ không tự động tải xuống.",
+        "zh-CN": "启用后，{Name} 会通知你有新版本，但不会自动下载。",
+        "zh-TW": "啟用後，{Name} 會通知您有新版本，但不會自動下載。"
+      }
+    },
+    "desktop.components.BaseChat.text1": {
+      "kind": "text",
+      "value": "{Name}",
+      "description": "Application name used in the chat watermark, native About/window titles, menu lookup, and tray tooltip.",
+      "pages": [
+        "BaseChat",
+        "Native desktop > menus, windows, About, and startup dialogs",
+        "Native desktop > update notifications and tray"
+      ],
+      "sources": [
+        "src/components/BaseChat.tsx:474",
+        "src/main.ts:730",
+        "src/main.ts:785",
+        "src/main.ts:2527",
+        "src/utils/autoUpdater.ts:755"
+      ]
+    },
+    "desktop.components.settings.mode.ModeSection.text2": {
+      "kind": "text",
+      "value": "Failed to store new {Name} mode: {value0}",
+      "description": "Error shown when the selected agent approval mode cannot be saved; value0 is the requested mode.",
+      "pages": ["Settings > mode > ModeSection"],
+      "sources": ["src/components/settings/mode/ModeSection.tsx:15"]
+    },
+    "desktop.gooseServe.text3": {
+      "kind": "text",
+      "value": "{Name} binary not found in any of the possible paths: {value0}",
+      "description": "Startup error when the bundled local executable cannot be found; value0 lists the paths checked.",
+      "pages": ["gooseServe"],
+      "sources": ["src/gooseServe.ts:100"]
+    },
+    "desktop.gooseServeLeaseRegistry.text4": {
+      "kind": "text",
+      "value": "This window's {Name} backend stopped. Close this window and open a new chat to start a new backend. If this keeps happening, restart {Name} Desktop.",
+      "description": "Chat error when its local backend exits, including the instruction to restart the desktop.",
+      "pages": ["gooseServeLeaseRegistry"],
+      "sources": ["src/gooseServeLeaseRegistry.ts:4"]
+    },
+    "desktop.gooseServeLeaseRegistry.text5": {
+      "kind": "text",
+      "value": "{Name} ACP server exited unexpectedly",
+      "description": "Local backend exit diagnostic, included in the application logs.",
+      "pages": ["gooseServeLeaseRegistry"],
+      "sources": ["src/gooseServeLeaseRegistry.ts:53"]
+    },
+    "desktop.main.text6": {
+      "kind": "text",
+      "value": "Focus {Name} Window",
+      "description": "Native tray/menu command that brings the main application window into focus.",
+      "pages": ["Native desktop > menus, windows, About, and startup dialogs"],
+      "sources": ["src/main.ts:111", "src/main.ts:2655"]
+    },
+    "desktop.main.text7": {
+      "kind": "text",
+      "value": "聚焦 {Name} 窗口",
+      "description": "Simplified Chinese translation of the native Focus Window command.",
+      "pages": ["Native desktop > menus, windows, About, and startup dialogs"],
+      "sources": ["src/main.ts:111"]
+    },
+    "desktop.main.text8": {
+      "kind": "text",
+      "value": "About {Name}",
+      "description": "Native Help menu command that opens About the application.",
+      "pages": ["Native desktop > menus, windows, About, and startup dialogs"],
+      "sources": ["src/main.ts:115", "src/main.ts:2764"]
+    },
+    "desktop.main.text9": {
+      "kind": "text",
+      "value": "关于 {Name}",
+      "description": "Simplified Chinese translation of the native About command.",
+      "pages": ["Native desktop > menus, windows, About, and startup dialogs"],
+      "sources": ["src/main.ts:115"]
+    },
+    "desktop.main.text10": {
+      "kind": "text",
+      "value": "Hide {Name}",
+      "description": "Native macOS menu command for hiding the application.",
+      "pages": ["Native desktop > menus, windows, About, and startup dialogs"],
+      "sources": ["src/main.ts:141"]
+    },
+    "desktop.main.text11": {
+      "kind": "text",
+      "value": "隐藏 {Name}",
+      "description": "Simplified Chinese translation of the native Hide command.",
+      "pages": ["Native desktop > menus, windows, About, and startup dialogs"],
+      "sources": ["src/main.ts:141"]
+    },
+    "desktop.main.text12": {
+      "kind": "text",
+      "value": "{Name} Failed to Start",
+      "description": "Title of the modal shown when the local backend cannot start.",
+      "pages": ["Native desktop > menus, windows, About, and startup dialogs"],
+      "sources": ["src/main.ts:1199"]
+    },
+    "desktop.main.text13": {
+      "kind": "text",
+      "value": "{Name} Error",
+      "description": "Title of the modal shown when the main application window cannot be created.",
+      "pages": ["Native desktop > menus, windows, About, and startup dialogs"],
+      "sources": ["src/main.ts:3080"]
+    },
+    "desktop.toasts.text14": {
+      "kind": "text",
+      "value": "Ask {Name}",
+      "description": "Button on an extension-error toast that asks the assistant for help.",
+      "pages": ["toasts"],
+      "sources": ["src/toasts.tsx:202"]
+    },
+    "desktop.utils.autoUpdater.text15": {
+      "kind": "text",
+      "value": "Version {value0} will be installed when you quit {Name}. Click to install now.",
+      "description": "Native update-ready notification body; value0 is the downloaded version.",
+      "pages": ["Native desktop > update notifications and tray"],
+      "sources": ["src/utils/autoUpdater.ts:656"]
+    },
+    "desktop.utils.autoUpdater.text16": {
+      "kind": "text",
+      "value": "{Name} - Update Available",
+      "description": "Tray tooltip while an update is available.",
+      "pages": ["Native desktop > update notifications and tray"],
+      "sources": ["src/utils/autoUpdater.ts:747"]
+    },
+    "desktop.built-in-extensions.json.text17": {
+      "kind": "text",
+      "value": "Teach {Name} your preferences as you go.",
+      "description": "Description on the bundled Memory extension card and its first-run configuration.",
+      "pages": ["Extensions > Memory"],
+      "sources": [
+        "src/built-in-extensions.json:32",
+        "src/components/settings/extensions/bundled-extensions.json:39"
+      ]
+    },
+    "backend.unsupportedRecipeParameters": {
+      "kind": "text",
+      "value": "The connected {Name} server does not support securely scoped deeplink recipe parameters. Update the server and try again.",
+      "description": "Error shown when opening a recipe that requires a newer ACP server.",
+      "pages": ["Chat > recipe errors"],
+      "sources": ["src/acp/errors.ts:17"]
+    },
+    "build.packageDescription": {
+      "kind": "text",
+      "value": "{Name} App",
+      "description": "Product description shown in installer and operating-system application metadata.",
+      "pages": ["Installer > application description"],
+      "sources": ["package.json:6"]
+    },
+    "build.protocolLabel": {
+      "kind": "text",
+      "value": "{Name} Protocol",
+      "description": "Friendly label in operating-system dialogs for opening an application link. The goose:// protocol itself stays compatible.",
+      "pages": ["Operating system > Open With / application links"],
+      "sources": ["forge.config.ts:22"]
+    },
+    "build.microphonePermission": {
+      "kind": "text",
+      "value": "{Name} needs access to your microphone for voice dictation.",
+      "description": "macOS microphone permission explanation.",
+      "pages": ["Operating system > microphone permission"],
+      "sources": ["forge.config.ts:39"]
+    },
+    "build.automationPermission": {
+      "kind": "text",
+      "value": "{Name} needs access to send Apple Events to control other apps on your behalf.",
+      "description": "macOS Automation permission explanation.",
+      "pages": ["Operating system > Automation permission"],
+      "sources": ["forge.config.ts:41"]
+    }
+  },
+  "technicalReferences": [
+    {
+      "file": "src/acp/gooseAcpClient.ts",
+      "value": "goose",
+      "description": "ACP protocol client identifier, not a visible product label."
+    },
+    {
+      "file": "src/branding/electron-init.ts",
+      "value": "Goose",
+      "description": "Legacy Electron user-data directory: changing it would hide the existing settings and profile."
+    },
+    {
+      "file": "src/components/settings/extensions/deeplink.ts",
+      "value": "goose",
+      "description": "Registered URL scheme used to parse extension installation links."
+    },
+    {
+      "file": "src/components/settings/mode/ConfigureApproveMode.tsx",
+      "value": "Error configuring goose mode:",
+      "description": "Developer-only diagnostic about the native goose mode setting."
+    },
+    {
+      "file": "src/components/settings/mode/ModeSection.tsx",
+      "value": "Error updating goose mode:",
+      "description": "Developer-only diagnostic about the native goose mode setting."
+    },
+    {
+      "file": "src/gooseServe.ts",
+      "value": "goose",
+      "description": "Actual goose executable / goose serve command and its diagnostics; the bundled executable has not been renamed."
+    },
+    {
+      "file": "src/gooseServe.ts",
+      "value": "GOOSE_SERVER__SECRET_KEY is required for goose serve",
+      "description": "Actual goose executable / goose serve command and its diagnostics; the bundled executable has not been renamed."
+    },
+    {
+      "file": "src/gooseServe.ts",
+      "value": "`Starting goose serve from: ${goosePath} on port ${port} in dir ${workingDir}`",
+      "description": "Actual goose executable / goose serve command and its diagnostics; the bundled executable has not been renamed."
+    },
+    {
+      "file": "src/gooseServe.ts",
+      "value": "`goose serve stderr for port ${port} and dir ${workingDir}: ${line}`",
+      "description": "Actual goose executable / goose serve command and its diagnostics; the bundled executable has not been renamed."
+    },
+    {
+      "file": "src/gooseServe.ts",
+      "value": "`goose serve process exited with code ${code} and signal ${signal} for port ${port} and dir ${workingDir}`",
+      "description": "Actual goose executable / goose serve command and its diagnostics; the bundled executable has not been renamed."
+    },
+    {
+      "file": "src/gooseServe.ts",
+      "value": "`Failed to start goose serve on port ${port} and dir ${workingDir}`",
+      "description": "Actual goose executable / goose serve command and its diagnostics; the bundled executable has not been renamed."
+    },
+    {
+      "file": "src/gooseServe.ts",
+      "value": "Terminating goose serve",
+      "description": "Actual goose executable / goose serve command and its diagnostics; the bundled executable has not been renamed."
+    },
+    {
+      "file": "src/gooseServe.ts",
+      "value": "Error while terminating goose serve process:",
+      "description": "Actual goose executable / goose serve command and its diagnostics; the bundled executable has not been renamed."
+    },
+    {
+      "file": "src/gooseServe.ts",
+      "value": "`goose serve did not become ready on ${statusUrl}.${exitDetails}${stderrDetails}`",
+      "description": "Actual goose executable / goose serve command and its diagnostics; the bundled executable has not been renamed."
+    },
+    {
+      "file": "src/gooseServe.ts",
+      "value": "`goose serve did not emit TLS certificate fingerprint on ${statusUrl}.${exitDetails}${stderrDetails}`",
+      "description": "Actual goose executable / goose serve command and its diagnostics; the bundled executable has not been renamed."
+    },
+    {
+      "file": "src/gooseServeLeaseRegistry.ts",
+      "value": "Failed to cleanup goose serve backend:",
+      "description": "Actual goose executable / goose serve command and its diagnostics; the bundled executable has not been renamed."
+    },
+    {
+      "file": "src/main.ts",
+      "value": "goose",
+      "description": "Registered URL scheme or existing configuration directory; must match the local runtime."
+    },
+    {
+      "file": "src/main.ts",
+      "value": "goose",
+      "description": "Registered URL scheme or existing configuration directory; must match the local runtime."
+    },
+    {
+      "file": "src/main.ts",
+      "value": "goose",
+      "description": "Registered URL scheme or existing configuration directory; must match the local runtime."
+    },
+    {
+      "file": "src/main.ts",
+      "value": "goose serve started with TLS but did not return a certificate fingerprint",
+      "description": "Actual goose executable / goose serve command and its diagnostics; the bundled executable has not been renamed."
+    },
+    {
+      "file": "src/main.ts",
+      "value": "goose serve TLS certificate fingerprint did not match readiness probe",
+      "description": "Actual goose executable / goose serve command and its diagnostics; the bundled executable has not been renamed."
+    },
+    {
+      "file": "src/main.ts",
+      "value": "goose serve failed to start",
+      "description": "Actual goose executable / goose serve command and its diagnostics; the bundled executable has not been renamed."
+    },
+    {
+      "file": "src/main.ts",
+      "value": "Backend: goose serve",
+      "description": "Actual goose executable / goose serve command and its diagnostics; the bundled executable has not been renamed."
+    },
+    {
+      "file": "src/main.ts",
+      "value": "goose",
+      "description": "Registered URL scheme or existing configuration directory; must match the local runtime."
+    },
+    {
+      "file": "src/utils/autoUpdater.ts",
+      "value": "goose",
+      "description": "Upstream release repository or registered URL scheme; changing the display name does not change this integration."
+    },
+    {
+      "file": "src/utils/githubUpdater.ts",
+      "value": "goose",
+      "description": "Upstream release repository or registered URL scheme; changing the display name does not change this integration."
+    },
+    {
+      "file": "src/utils/winShims.ts",
+      "value": "Goose",
+      "description": "Existing Windows helper-binary directory, retained for compatibility."
+    },
+    {
+      "file": "forge.config.ts",
+      "value": "goose",
+      "description": "Upstream release repository or registered URL scheme; changing the display name does not change this integration."
+    },
+    {
+      "file": "forge.config.ts",
+      "value": "goose",
+      "description": "Upstream release repository or registered URL scheme; changing the display name does not change this integration."
+    },
+    {
+      "file": "src/utils/githubUpdater.ts",
+      "value": "`Goose-Desktop/${app.getVersion()}`",
+      "description": "HTTP User-Agent identifier for update checks; not a displayed application label."
+    },
+    {
+      "file": "src/acp/chatNotifications.ts",
+      "value": "goose:device-code",
+      "description": "DOM event or state identifier used by chat/ACP handlers."
+    },
+    {
+      "file": "src/acp/sessions.ts",
+      "value": "goose-desktop",
+      "description": "URL protocol or ACP client identifier; changing this would affect integrations."
+    },
+    {
+      "file": "src/components/BaseChat.tsx",
+      "value": "size-5 goose-icon-animation",
+      "description": "CSS class name used by component styling; not a displayed product label."
+    },
+    {
+      "file": "src/components/ChatInput.tsx",
+      "value": "goose-queue-paused",
+      "description": "DOM event or state identifier used by chat/ACP handlers."
+    },
+    {
+      "file": "src/components/ChatInput.tsx",
+      "value": "goose-queue-interruption",
+      "description": "DOM event or state identifier used by chat/ACP handlers."
+    },
+    {
+      "file": "src/components/ChatInput.tsx",
+      "value": "goose-queue-paused",
+      "description": "DOM event or state identifier used by chat/ACP handlers."
+    },
+    {
+      "file": "src/components/ChatInput.tsx",
+      "value": "goose-queue-interruption",
+      "description": "DOM event or state identifier used by chat/ACP handlers."
+    },
+    {
+      "file": "src/components/ElicitationRequest.tsx",
+      "value": "goose-message-content bg-background-secondary rounded-2xl px-4 py-2 text-text-primary",
+      "description": "CSS class name used by component styling; not a displayed product label."
+    },
+    {
+      "file": "src/components/ElicitationRequest.tsx",
+      "value": "goose-message-content bg-background-secondary rounded-2xl px-4 py-2 text-text-primary",
+      "description": "CSS class name used by component styling; not a displayed product label."
+    },
+    {
+      "file": "src/components/ElicitationRequest.tsx",
+      "value": "goose-message-content bg-background-secondary rounded-2xl px-4 py-2 text-text-primary",
+      "description": "CSS class name used by component styling; not a displayed product label."
+    },
+    {
+      "file": "src/components/ElicitationRequest.tsx",
+      "value": "goose-message-content bg-background-secondary rounded-2xl rounded-b-none px-4 py-2 text-text-primary",
+      "description": "CSS class name used by component styling; not a displayed product label."
+    },
+    {
+      "file": "src/components/ElicitationRequest.tsx",
+      "value": "goose-message-content bg-background-primary border border-border-primary dark:border-gray-700 rounded-b-2xl px-4 py-3",
+      "description": "CSS class name used by component styling; not a displayed product label."
+    },
+    {
+      "file": "src/components/GooseMessage.tsx",
+      "value": "goose-message flex w-[90%] justify-start min-w-0",
+      "description": "CSS class name used by component styling; not a displayed product label."
+    },
+    {
+      "file": "src/components/GooseMessage.tsx",
+      "value": "goose-message-tool",
+      "description": "CSS class name used by component styling; not a displayed product label."
+    },
+    {
+      "file": "src/components/ToolCallConfirmation.tsx",
+      "value": "goose-message-content bg-background-primary border border-border-primary rounded-2xl overflow-hidden",
+      "description": "CSS class name used by component styling; not a displayed product label."
+    },
+    {
+      "file": "src/components/settings/extensions/deeplink.ts",
+      "value": "goose:",
+      "description": "URL protocol or ACP client identifier; changing this would affect integrations."
+    },
+    {
+      "file": "src/gooseServe.ts",
+      "value": "[goose-serve]",
+      "description": "Technical process/log/temp-file prefix or CSS marker, not displayed application branding."
+    },
+    {
+      "file": "src/gooseServe.ts",
+      "value": "[goose-serve]",
+      "description": "Technical process/log/temp-file prefix or CSS marker, not displayed application branding."
+    },
+    {
+      "file": "src/hooks/useProviderDeviceCode.ts",
+      "value": "goose:device-code",
+      "description": "DOM event or state identifier used by chat/ACP handlers."
+    },
+    {
+      "file": "src/hooks/useProviderDeviceCode.ts",
+      "value": "goose:device-code",
+      "description": "DOM event or state identifier used by chat/ACP handlers."
+    },
+    {
+      "file": "src/startupDiagnostics.ts",
+      "value": "goose-serve-startup-",
+      "description": "Technical process/log/temp-file prefix or CSS marker, not displayed application branding."
+    },
+    {
+      "file": "src/startupDiagnostics.ts",
+      "value": "`goose-serve-startup-${startedAt.toISOString().replace(/:/g, '-')}-${process.pid}.json`",
+      "description": "Technical process/log/temp-file prefix or CSS marker, not displayed application branding."
+    },
+    {
+      "file": "src/utils/githubUpdater.ts",
+      "value": "goose-update-",
+      "description": "Technical process/log/temp-file prefix or CSS marker, not displayed application branding."
+    },
+    {
+      "file": "src/utils/localMessageStorage.ts",
+      "value": "goose-chat-history",
+      "description": "Existing local-storage key for conversation data; keep existing history accessible."
+    },
+    {
+      "file": "src/utils/urlSecurity.ts",
+      "value": "goose:",
+      "description": "URL protocol or ACP client identifier; changing this would affect integrations."
+    }
+  ]
+}

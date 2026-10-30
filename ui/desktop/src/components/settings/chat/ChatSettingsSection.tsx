@@ -1,3 +1,4 @@
+import { brandMessage } from '../../../branding';
 import { ModeSection } from '../mode/ModeSection';
 import { DictationSettings } from '../dictation/DictationSettings';
 import { SecurityToggle } from '../security/SecurityToggle';
@@ -13,18 +14,9 @@ const i18n = defineMessages({
     id: 'chatSettings.modeTitle',
     defaultMessage: 'Default Mode',
   },
-  modeDescription: {
-    id: 'chatSettings.modeDescription',
-    defaultMessage:
-      'Choose the default mode Goose uses for new sessions. Existing sessions keep their current mode.',
-  },
   responseStylesTitle: {
     id: 'chatSettings.responseStylesTitle',
     defaultMessage: 'Response Styles',
-  },
-  responseStylesDescription: {
-    id: 'chatSettings.responseStylesDescription',
-    defaultMessage: 'Choose how Goose should format and style its responses',
   },
 });
 
@@ -36,7 +28,9 @@ export default function ChatSettingsSection() {
       <Card className="pb-2 rounded-lg">
         <CardHeader className="pb-0">
           <CardTitle className="">{intl.formatMessage(i18n.modeTitle)}</CardTitle>
-          <CardDescription>{intl.formatMessage(i18n.modeDescription)}</CardDescription>
+          <CardDescription>
+            {intl.formatMessage(brandMessage('chatSettings.modeDescription'))}
+          </CardDescription>
         </CardHeader>
         <CardContent className="px-2">
           <ModeSection />
@@ -60,7 +54,9 @@ export default function ChatSettingsSection() {
       <Card className="pb-2 rounded-lg">
         <CardHeader className="pb-0">
           <CardTitle className="">{intl.formatMessage(i18n.responseStylesTitle)}</CardTitle>
-          <CardDescription>{intl.formatMessage(i18n.responseStylesDescription)}</CardDescription>
+          <CardDescription>
+            {intl.formatMessage(brandMessage('chatSettings.responseStylesDescription'))}
+          </CardDescription>
         </CardHeader>
         <CardContent className="px-2">
           <ResponseStylesSection />

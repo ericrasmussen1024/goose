@@ -1,3 +1,4 @@
+import { brandText } from '../branding';
 import { RequestError } from '@agentclientprotocol/sdk';
 import { errorMessage } from '../utils/conversionUtils';
 
@@ -13,8 +14,9 @@ const AUTH_REQUIRED_CODE = -32000;
 // Kept in sync with RECIPE_PARAMS_CANCELLED_REASON in crates/goose/src/acp/server/recipe.rs.
 const RECIPE_PARAMS_CANCELLED_REASON = 'recipe_params_cancelled';
 
-export const RECIPE_PARAMETER_SCOPES_UNSUPPORTED_MESSAGE =
-  'The connected Goose server does not support securely scoped deeplink recipe parameters. Update the server and try again.';
+export const RECIPE_PARAMETER_SCOPES_UNSUPPORTED_MESSAGE = brandText(
+  'backend.unsupportedRecipeParameters'
+);
 
 export class RecipeParameterScopesUnsupportedError extends Error {
   constructor() {

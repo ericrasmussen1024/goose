@@ -29,7 +29,7 @@
   {
     "id": "memory",
     "name": "Memory",
-    "description": "Teach goose your preferences as you go.",
+    "description": "@brand:desktop.built-in-extensions.json.text17",
     "enabled": false,
     "type": "builtin",
     "env_keys": [],

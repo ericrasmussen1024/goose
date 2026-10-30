@@ -1,5 +1,5 @@
 import { Card } from '../ui/card';
-import GooseLogo from '../GooseLogo';
+import BrandLogo from '../../branding/BrandLogo';
 import MarkdownContent from '../MarkdownContent';
 
 interface RecipeActivitiesProps {
@@ -26,7 +26,7 @@ export default function RecipeActivities({ append, activities }: RecipeActivitie
       <div className="flex flex-col px-6">
         {/* Animated goose icon */}
         <div className="flex justify-start mb-6">
-          <GooseLogo size="default" hover={true} />
+          <BrandLogo size="default" hover={true} />
         </div>
 
         {messagePill && (

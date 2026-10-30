@@ -1,3 +1,4 @@
+import { brandText } from './branding';
 import { spawn, type ChildProcess } from 'child_process';
 import fs from 'node:fs';
 import { createServer } from 'node:net';
@@ -96,9 +97,7 @@ export const findGooseBinaryPath = (options: FindGooseBinaryOptions = {}): strin
     }
   }
 
-  throw new Error(
-    `Goose binary not found in any of the possible paths: ${possiblePaths.join(', ')}`
-  );
+  throw new Error(brandText('desktop.gooseServe.text3', { value0: possiblePaths.join(', ') }));
 };
 
 const findAvailablePort = (): Promise<number> => {
@@ -136,10 +135,7 @@ const appendErrorTail = (target: string[], lines: string[], maxLines = 100): voi
 const CERT_FINGERPRINT_PREFIX = 'GOOSED_CERT_FINGERPRINT=';
 const TLS_FINGERPRINT_TIMEOUT_MS = 5000;
 
-const fetchStatus = async (
-  statusUrl: string,
-  readinessFetch: ReadinessFetch
-): Promise<boolean> => {
+const fetchStatus = async (statusUrl: string, readinessFetch: ReadinessFetch): Promise<boolean> => {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 1000);
 

@@ -1,3 +1,4 @@
+import { brandText } from './branding';
 import { toast, ToastOptions } from 'react-toastify';
 import { Button } from './components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from './components/ui/Tooltip';
@@ -199,7 +200,7 @@ function ToastErrorContent({
       <div className="flex-none flex items-center gap-2">
         {showRecovery && (
           <Button onClick={() => startNewSession(recoverHints, setView, getInitialWorkingDir())}>
-            Ask goose
+            {brandText('desktop.toasts.text14')}
           </Button>
         )}
         {hasBoth && (

@@ -1,3 +1,4 @@
+import { brandMessage } from '../../../branding';
 import { useState, useEffect, useCallback } from 'react';
 import { type MessageDescriptor } from 'react-intl';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/card';
@@ -9,15 +10,6 @@ import { trackSettingToggled } from '../../../utils/analytics';
 import { defineMessages, useIntl } from '../../../i18n';
 
 const i18n = defineMessages({
-  // Shortcut labels
-  focusWindowLabel: {
-    id: 'keyboardShortcuts.focusWindowLabel',
-    defaultMessage: 'Focus Goose Window',
-  },
-  focusWindowDescription: {
-    id: 'keyboardShortcuts.focusWindowDescription',
-    defaultMessage: 'Bring Goose window to front from anywhere',
-  },
   quickLauncherLabel: {
     id: 'keyboardShortcuts.quickLauncherLabel',
     defaultMessage: 'Quick Launcher',
@@ -37,10 +29,6 @@ const i18n = defineMessages({
   newChatWindowLabel: {
     id: 'keyboardShortcuts.newChatWindowLabel',
     defaultMessage: 'New Chat Window',
-  },
-  newChatWindowDescription: {
-    id: 'keyboardShortcuts.newChatWindowDescription',
-    defaultMessage: 'Open a new Goose window',
   },
   openDirectoryLabel: {
     id: 'keyboardShortcuts.openDirectoryLabel',
@@ -98,23 +86,13 @@ const i18n = defineMessages({
     id: 'keyboardShortcuts.toggleNavigationDescription',
     defaultMessage: 'Show or hide the navigation menu',
   },
-
-  // Category labels and descriptions
   categoryGlobal: {
     id: 'keyboardShortcuts.categoryGlobal',
     defaultMessage: 'Global Shortcuts',
   },
-  categoryGlobalDescription: {
-    id: 'keyboardShortcuts.categoryGlobalDescription',
-    defaultMessage: 'These shortcuts work system-wide, even when Goose is not focused',
-  },
   categoryApplication: {
     id: 'keyboardShortcuts.categoryApplication',
     defaultMessage: 'Application Shortcuts',
-  },
-  categoryApplicationDescription: {
-    id: 'keyboardShortcuts.categoryApplicationDescription',
-    defaultMessage: 'These shortcuts work when Goose is the active application',
   },
   categorySearch: {
     id: 'keyboardShortcuts.categorySearch',
@@ -132,8 +110,6 @@ const i18n = defineMessages({
     id: 'keyboardShortcuts.categoryWindowDescription',
     defaultMessage: 'These shortcuts control window behavior',
   },
-
-  // UI strings
   loading: {
     id: 'keyboardShortcuts.loading',
     defaultMessage: 'Loading...',
@@ -141,11 +117,6 @@ const i18n = defineMessages({
   restartRequired: {
     id: 'keyboardShortcuts.restartRequired',
     defaultMessage: 'Restart Required',
-  },
-  restartDescription: {
-    id: 'keyboardShortcuts.restartDescription',
-    defaultMessage:
-      'Changes to application shortcuts (like New Chat, Settings, etc.) require restarting Goose to take effect. Global shortcuts (Focus Window, Quick Launcher) work immediately.',
   },
   dismiss: {
     id: 'keyboardShortcuts.dismiss',
@@ -171,16 +142,13 @@ const i18n = defineMessages({
     id: 'keyboardShortcuts.resetAllShortcuts',
     defaultMessage: 'Reset All Shortcuts',
   },
-
-  // Dialog strings
   shortcutConflictTitle: {
     id: 'keyboardShortcuts.shortcutConflictTitle',
     defaultMessage: 'Shortcut Conflict',
   },
   shortcutConflictToggleMessage: {
     id: 'keyboardShortcuts.shortcutConflictToggleMessage',
-    defaultMessage:
-      'The shortcut {shortcut} is already assigned to "{conflictLabel}".',
+    defaultMessage: 'The shortcut {shortcut} is already assigned to "{conflictLabel}".',
   },
   shortcutConflictToggleDetail: {
     id: 'keyboardShortcuts.shortcutConflictToggleDetail',
@@ -224,8 +192,8 @@ interface ShortcutConfig {
 const shortcutConfigs: ShortcutConfig[] = [
   {
     key: 'focusWindow',
-    label: i18n.focusWindowLabel,
-    description: i18n.focusWindowDescription,
+    label: brandMessage('keyboardShortcuts.focusWindowLabel'),
+    description: brandMessage('keyboardShortcuts.focusWindowDescription'),
     category: 'global',
   },
   {
@@ -243,7 +211,7 @@ const shortcutConfigs: ShortcutConfig[] = [
   {
     key: 'newChatWindow',
     label: i18n.newChatWindowLabel,
-    description: i18n.newChatWindowDescription,
+    description: brandMessage('keyboardShortcuts.newChatWindowDescription'),
     category: 'application',
   },
   {
@@ -327,8 +295,8 @@ const categoryLabelMessages: Record<string, MessageDescriptor> = {
 };
 
 const categoryDescriptionMessages: Record<string, MessageDescriptor> = {
-  global: i18n.categoryGlobalDescription,
-  application: i18n.categoryApplicationDescription,
+  global: brandMessage('keyboardShortcuts.categoryGlobalDescription'),
+  application: brandMessage('keyboardShortcuts.categoryApplicationDescription'),
   search: i18n.categorySearchDescription,
   window: i18n.categoryWindowDescription,
 };
@@ -371,10 +339,7 @@ export default function KeyboardShortcutsSection() {
             conflictLabel: getShortcutLabel(conflictingKey, intl.formatMessage),
             targetLabel: getShortcutLabel(key, intl.formatMessage),
           }),
-          buttons: [
-            intl.formatMessage(i18n.reassignShortcut),
-            intl.formatMessage(i18n.cancel),
-          ],
+          buttons: [intl.formatMessage(i18n.reassignShortcut), intl.formatMessage(i18n.cancel)],
           defaultId: 1,
         });
 
@@ -421,10 +386,7 @@ export default function KeyboardShortcutsSection() {
           conflictLabel: getShortcutLabel(conflictingKey, intl.formatMessage),
           targetLabel: getShortcutLabel(editingKey, intl.formatMessage),
         }),
-        buttons: [
-          intl.formatMessage(i18n.reassignShortcut),
-          intl.formatMessage(i18n.cancel),
-        ],
+        buttons: [intl.formatMessage(i18n.reassignShortcut), intl.formatMessage(i18n.cancel)],
         defaultId: 1,
       });
 
@@ -459,10 +421,7 @@ export default function KeyboardShortcutsSection() {
       title: intl.formatMessage(i18n.resetShortcutsTitle),
       message: intl.formatMessage(i18n.resetShortcutsMessage),
       detail: intl.formatMessage(i18n.resetShortcutsDetail),
-      buttons: [
-        intl.formatMessage(i18n.resetToDefaultsHeading),
-        intl.formatMessage(i18n.cancel),
-      ],
+      buttons: [intl.formatMessage(i18n.resetToDefaultsHeading), intl.formatMessage(i18n.cancel)],
       defaultId: 1,
     });
 
@@ -500,7 +459,7 @@ export default function KeyboardShortcutsSection() {
                   {intl.formatMessage(i18n.restartRequired)}
                 </h3>
                 <p className="text-xs text-text-secondary">
-                  {intl.formatMessage(i18n.restartDescription)}
+                  {intl.formatMessage(brandMessage('keyboardShortcuts.restartDescription'))}
                 </p>
               </div>
               <Button

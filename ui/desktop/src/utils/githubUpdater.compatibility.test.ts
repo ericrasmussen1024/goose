@@ -1,3 +1,4 @@
+import { APP_NAME } from '../branding';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { execFileSync } from 'node:child_process';
 import * as fs from 'node:fs';
@@ -16,29 +17,33 @@ const originalSystemVersion = Object.getOwnPropertyDescriptor(process, 'getSyste
 const metadataUrl = 'https://example.invalid/mac-update-requirements.json';
 const assets = [
   { name: 'mac-update-requirements.json', browser_download_url: metadataUrl, size: 100 },
-  { name: 'Goose.zip', browser_download_url: 'https://example.invalid/Goose.zip', size: 100 },
   {
-    name: 'Goose_intel_mac.zip',
-    browser_download_url: 'https://example.invalid/Goose_intel_mac.zip',
+    name: `${APP_NAME}.zip`,
+    browser_download_url: `https://example.invalid/${APP_NAME}.zip`,
     size: 100,
   },
   {
-    name: 'Goose-win32-x64.zip',
-    browser_download_url: 'https://example.invalid/Goose-win32-x64.zip',
+    name: `${APP_NAME}_intel_mac.zip`,
+    browser_download_url: `https://example.invalid/${APP_NAME}_intel_mac.zip`,
     size: 100,
   },
   {
-    name: 'Goose-linux-x64.zip',
-    browser_download_url: 'https://example.invalid/Goose-linux-x64.zip',
+    name: `${APP_NAME}-win32-x64.zip`,
+    browser_download_url: `https://example.invalid/${APP_NAME}-win32-x64.zip`,
+    size: 100,
+  },
+  {
+    name: `${APP_NAME}-linux-x64.zip`,
+    browser_download_url: `https://example.invalid/${APP_NAME}-linux-x64.zip`,
     size: 100,
   },
 ];
-const release = { tag_name: 'v1.51.0', name: 'Goose', assets };
+const release = { tag_name: 'v1.51.0', name: `${APP_NAME}`, assets };
 
 function generatedRequirements(minimumMacOSVersion: string) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'goose-fallback-release-test-'));
   try {
-    for (const name of ['Goose.zip', 'Goose_intel_mac.zip']) {
+    for (const name of [`${APP_NAME}.zip`, `${APP_NAME}_intel_mac.zip`]) {
       fs.writeFileSync(path.join(directory, name), 'archive fixture');
       fs.writeFileSync(
         path.join(directory, `${name}.macos.json`),
@@ -108,9 +113,9 @@ describe('GitHub updater macOS compatibility', () => {
   });
 
   it.each([
-    ['arm64', '13.0', 'Goose.zip'],
-    ['x64', '13.0', 'Goose_intel_mac.zip'],
-    ['arm64', '26.0', 'Goose.zip'],
+    ['arm64', '13.0', `${APP_NAME}.zip`],
+    ['x64', '13.0', `${APP_NAME}_intel_mac.zip`],
+    ['arm64', '26.0', `${APP_NAME}.zip`],
   ])('offers the %s download on macOS %s', async (arch, version, asset) => {
     Object.defineProperty(process, 'arch', { value: arch });
     vi.mocked(process.getSystemVersion).mockReturnValue(version);
@@ -166,7 +171,7 @@ describe('GitHub updater macOS compatibility', () => {
     );
     expect(await new GitHubUpdater().checkForUpdates()).toMatchObject({
       updateAvailable: true,
-      downloadUrl: `https://example.invalid/Goose-${platform}-x64.zip`,
+      downloadUrl: `https://example.invalid/${APP_NAME}-${platform}-x64.zip`,
     });
   });
 });

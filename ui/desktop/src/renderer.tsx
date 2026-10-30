@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { IntlProvider } from 'react-intl';
 import { ConfigProvider } from './components/ConfigContext';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { LanAuthGate } from './lan-auth/LanAuthGate';
+import { ThemeProvider } from './contexts/ThemeContext';
 import SuspenseLoader from './suspense-loader';
 import { applyThemeTokens } from './theme/theme-tokens';
 import { currentLocale, currentMessageLocale, loadMessages } from './i18n';
@@ -37,13 +39,17 @@ function handleIntlError(err: { code: string; message?: string }) {
         messages={messages}
         onError={handleIntlError}
       >
-        <Suspense fallback={SuspenseLoader()}>
-          <ConfigProvider>
-            <ErrorBoundary>
-              <App />
-            </ErrorBoundary>
-          </ConfigProvider>
-        </Suspense>
+        <ThemeProvider>
+          <Suspense fallback={SuspenseLoader()}>
+            <LanAuthGate>
+              <ConfigProvider>
+                <ErrorBoundary>
+                  <App />
+                </ErrorBoundary>
+              </ConfigProvider>
+            </LanAuthGate>
+          </Suspense>
+        </ThemeProvider>
       </IntlProvider>
     </React.StrictMode>
   );

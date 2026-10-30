@@ -1,3 +1,5 @@
+import './branding/electron-init';
+import { brandText } from './branding';
 import type { IpcMainInvokeEvent, OpenDialogOptions, OpenDialogReturnValue } from 'electron';
 import {
   app,
@@ -66,8 +68,10 @@ import {
   readSelectedRecipe,
 } from './desktopFileAccess';
 import { getWindowIconFilename } from './utils/windowIcon';
+import { createBrandTrayImage, getBrandAssetPath } from './branding/native-assets';
+import { registerLanAuth } from './lan-auth/main';
 
-const windowIconPath = path.join(__dirname, '../images', getWindowIconFilename(process.platform));
+const windowIconPath = getBrandAssetPath(getWindowIconFilename(process.platform));
 
 function shouldSetupUpdater(): boolean {
   // Setup updater if either the flag is enabled OR dev updates are enabled
@@ -108,11 +112,11 @@ const MENU_TRANSLATIONS_ZH_CN: Record<string, string> = {
   'New Chat Window': '新建聊天窗口',
   'Open Directory...': '打开目录…',
   'Recent Directories': '最近的目录',
-  'Focus Goose Window': '聚焦 Goose 窗口',
+  [brandText('desktop.main.text6')]: brandText('desktop.main.text7'),
   'Quick Launcher': '快速启动器',
   'Always on Top': '窗口置顶',
   'Toggle Navigation': '切换导航',
-  'About Goose': '关于 Goose',
+  [brandText('desktop.main.text8')]: brandText('desktop.main.text9'),
   // Electron's default role-based labels we want to translate as well.
   // (The menu role itself still provides the correct behaviour; only the
   // display string is overridden.)
@@ -138,7 +142,7 @@ const MENU_TRANSLATIONS_ZH_CN: Record<string, string> = {
   'Bring All to Front': '全部置于最前',
   'Emoji & Symbols': '表情符号',
   'Start Dictation…': '开始听写…',
-  'Hide Goose': '隐藏 Goose',
+  [brandText('desktop.main.text10')]: brandText('desktop.main.text11'),
   'Hide Others': '隐藏其他',
   'Show All': '全部显示',
   Services: '服务',
@@ -384,6 +388,10 @@ function isTrustedHost(hostname: string): boolean {
 
 // Renderer requests: pin to the exact cert once known.
 app.on('certificate-error', (event, _webContents, url, _error, certificate, callback) => {
+  if (lanAuth.isServerUrl(url)) {
+    callback(false);
+    return;
+  }
   const parsed = new URL(url);
   if (!isTrustedHost(parsed.hostname)) {
     callback(false);
@@ -727,7 +735,7 @@ app.on('open-url', async (_event, url) => {
 app.on('will-finish-launching', () => {
   if (process.platform === 'darwin') {
     app.setAboutPanelOptions({
-      applicationName: 'Goose',
+      applicationName: brandText('desktop.components.BaseChat.text1'),
       applicationVersion: app.getVersion(),
     });
   }
@@ -782,7 +790,8 @@ async function handleFileOpen(filePath: string) {
 
     // Show user-friendly error notification
     new Notification({
-      title: 'Goose',
+      icon: getBrandAssetPath('app.png'),
+      title: brandText('desktop.components.BaseChat.text1'),
       body: `Could not open directory: ${path.basename(filePath)}`,
     }).show();
   }
@@ -976,6 +985,8 @@ function requireRegularRendererWindow(event: IpcMainInvokeEvent): BrowserWindow 
 function getRegularWindows(): BrowserWindow[] {
   return [...windowMap.values()].filter((w) => !w.isDestroyed());
 }
+
+const lanAuth = registerLanAuth(requireRegularRendererWindow, getRegularWindows);
 
 const gooseServeLeases = new GooseServeLeaseRegistry(log);
 
@@ -1196,7 +1207,7 @@ const createChat = async (
       log.error('goose serve failed to start', error);
       dialog.showMessageBoxSync({
         type: 'error',
-        title: 'Goose Failed to Start',
+        title: brandText('desktop.main.text12'),
         message: 'The backend server failed to start.',
         detail: [
           'Backend: goose serve',
@@ -1529,6 +1540,7 @@ const createLauncher = () => {
   }
 
   const launcherWindow = new BrowserWindow({
+    icon: windowIconPath,
     width: 600,
     height: 80,
     frame: false,
@@ -1614,24 +1626,8 @@ const disableTray = () => {
 const createTray = () => {
   destroyTray();
 
-  const possiblePaths = [
-    path.join(process.resourcesPath, 'images', 'iconTemplate.png'),
-    path.join(process.cwd(), 'src', 'images', 'iconTemplate.png'),
-    path.join(__dirname, '..', 'images', 'iconTemplate.png'),
-    path.join(__dirname, 'images', 'iconTemplate.png'),
-    path.join(process.cwd(), 'images', 'iconTemplate.png'),
-  ];
-
-  const iconPath = possiblePaths.find((p) => fsSync.existsSync(p));
-
-  if (!iconPath) {
-    console.warn('[Main] Tray icon not found. App will continue without system tray.');
-    disableTray();
-    return;
-  }
-
   try {
-    tray = new Tray(iconPath);
+    tray = new Tray(createBrandTrayImage());
     setTrayRef(tray);
     updateTrayMenu(getUpdateAvailable());
 
@@ -1972,6 +1968,8 @@ ipcMain.handle('set-setting', (_event, key: SettingKey, value: unknown) => {
 });
 
 ipcMain.handle('get-secret-key', (event) => {
+  requireRegularRendererWindow(event);
+  if (!lanAuth.isAuthenticated()) return null;
   const windowId = BrowserWindow.fromWebContents(event.sender)?.id;
   if (!windowId) {
     return null;
@@ -1980,6 +1978,8 @@ ipcMain.handle('get-secret-key', (event) => {
 });
 
 ipcMain.handle('get-acp-url', async (event) => {
+  requireRegularRendererWindow(event);
+  if (!lanAuth.isAuthenticated()) return null;
   const windowId = BrowserWindow.fromWebContents(event.sender)?.id;
   if (!windowId) {
     return null;
@@ -2524,7 +2524,9 @@ async function appMain() {
 
   const shortcuts = getKeyboardShortcuts(settings);
 
-  const appMenu = menu?.items.find((item) => item.label === 'Goose');
+  const appMenu = menu?.items.find(
+    (item) => item.label === brandText('desktop.components.BaseChat.text1')
+  );
   if (appMenu?.submenu) {
     appMenu.submenu.insert(1, new MenuItem({ type: 'separator' }));
     if (shortcuts.settings) {
@@ -2652,7 +2654,7 @@ async function appMain() {
     if (shortcuts.focusWindow) {
       fileMenu.submenu.append(
         new MenuItem({
-          label: menuT('Focus Goose Window'),
+          label: menuT(brandText('desktop.main.text6')),
           accelerator: shortcuts.focusWindow,
           click() {
             focusWindow();
@@ -2761,7 +2763,7 @@ async function appMain() {
 
       // Create the About Goose menu item with a submenu
       const aboutGooseMenuItem = new MenuItem({
-        label: menuT('About Goose'),
+        label: menuT(brandText('desktop.main.text8')),
         submenu: Menu.buildFromTemplate([]), // Start with an empty submenu for About
       });
 
@@ -2864,6 +2866,7 @@ async function appMain() {
       const sanitizeText = (text: string) => text.replace(/<[^>]*>/g, '');
 
       const notification = new Notification({
+        icon: getBrandAssetPath('app.png'),
         title: sanitizeText(data.title),
         body: sanitizeText(data.body),
       });
@@ -3075,9 +3078,10 @@ async function appMain() {
 
 app.whenReady().then(async () => {
   try {
+    app.dock?.setIcon(getBrandAssetPath('app.png'));
     await appMain();
   } catch (error) {
-    dialog.showErrorBox('Goose Error', `Failed to create main window: ${error}`);
+    dialog.showErrorBox(brandText('desktop.main.text13'), `Failed to create main window: ${error}`);
     app.quit();
   }
 });

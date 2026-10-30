@@ -1,3 +1,4 @@
+import { brandMessage } from '../../../branding';
 import { useState, useEffect } from 'react';
 import { Button } from '../../ui/button';
 import { Check } from '../../icons';
@@ -16,16 +17,6 @@ const i18n = defineMessages({
   dialogTitle: {
     id: 'goosehintsModal.dialogTitle',
     defaultMessage: 'Configure Project Hints (.goosehints)',
-  },
-  dialogDescription: {
-    id: 'goosehintsModal.dialogDescription',
-    defaultMessage:
-      'Provide additional context about your project to improve communication with Goose',
-  },
-  helpText1: {
-    id: 'goosehintsModal.helpText1',
-    defaultMessage:
-      '.goosehints is a text file used to provide additional context about your project and improve the communication with Goose.',
   },
   helpText2: {
     id: 'goosehintsModal.helpText2',
@@ -91,7 +82,7 @@ const HelpText = () => {
 
   return (
     <div className="text-sm flex-col space-y-4 text-text-secondary">
-      <p>{intl.formatMessage(i18n.helpText1)}</p>
+      <p>{intl.formatMessage(brandMessage('goosehintsModal.helpText1'))}</p>
       <p>
         {intl.formatMessage(i18n.helpText2, {
           bold: <span className="font-bold">{intl.formatMessage(i18n.developer)}</span>,
@@ -104,10 +95,7 @@ const HelpText = () => {
               variant="link"
               className="text-blue-500 hover:text-blue-600 p-0 h-auto"
               onClick={() =>
-                window.open(
-                  'https://goose-docs.ai/docs/guides/using-goosehints/',
-                  '_blank'
-                )
+                window.open('https://goose-docs.ai/docs/guides/using-goosehints/', '_blank')
               }
             >
               {intl.formatMessage(i18n.helpTextLink)}
@@ -201,7 +189,9 @@ export const GoosehintsModal = ({ directory, setIsGoosehintsModalOpen }: Goosehi
       <DialogContent className="w-[80vw] max-w-[80vw] sm:max-w-[80vw] max-h-[90vh] flex flex-col">
         <DialogHeader>
           <DialogTitle>{intl.formatMessage(i18n.dialogTitle)}</DialogTitle>
-          <DialogDescription>{intl.formatMessage(i18n.dialogDescription)}</DialogDescription>
+          <DialogDescription>
+            {intl.formatMessage(brandMessage('goosehintsModal.dialogDescription'))}
+          </DialogDescription>
         </DialogHeader>
 
         <div className="flex-1 overflow-y-auto space-y-4 pt-2 pb-4">

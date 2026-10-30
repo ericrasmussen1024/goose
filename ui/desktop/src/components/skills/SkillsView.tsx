@@ -1,3 +1,4 @@
+import { brandMessage } from '../../branding';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Zap, AlertCircle, Plus } from 'lucide-react';
 import { ScrollArea } from '../ui/scroll-area';
@@ -45,10 +46,6 @@ const i18n = defineMessages({
   addSkill: {
     id: 'skillsView.addSkill',
     defaultMessage: 'Add Skill',
-  },
-  skillsDescription: {
-    id: 'skillsView.skillsDescription',
-    defaultMessage: 'View installed skills that extend Goose capabilities. {shortcut} to search.',
   },
   searchSkillsPlaceholder: {
     id: 'skillsView.searchSkillsPlaceholder',
@@ -219,7 +216,7 @@ export default function SkillsView() {
               </Button>
             </div>
             <p className="text-sm text-text-secondary mb-1">
-              {intl.formatMessage(i18n.skillsDescription, {
+              {intl.formatMessage(brandMessage('skillsView.skillsDescription'), {
                 shortcut: getSearchShortcutText(),
               })}
             </p>

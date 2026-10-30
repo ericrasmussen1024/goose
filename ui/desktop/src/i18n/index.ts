@@ -1,3 +1,4 @@
+import { resolveBrandTokens } from '../branding';
 /**
  * Locale detection and message loading for the i18n system.
  *
@@ -110,7 +111,7 @@ export async function loadMessages(locale: string): Promise<Record<string, strin
   try {
     // Dynamic import so compiled translation bundles are code-split.
     const mod = await import(`./compiled/${locale}.json`);
-    return mod.default ?? mod;
+    return resolveBrandTokens(mod.default ?? mod);
   } catch {
     console.warn(
       `[i18n] No message catalog found for locale "${locale}", falling back to English.`

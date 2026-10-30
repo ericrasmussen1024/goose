@@ -1,3 +1,4 @@
+import { brandMessage } from '../../../../branding';
 import { useState, Fragment } from 'react';
 import {
   Dialog,
@@ -52,10 +53,6 @@ const i18n = defineMessages({
     id: 'providerConfigurationModal.oauthSignInDescription',
     defaultMessage: 'Sign in with your {providerName} account to use this provider',
   },
-  addApiKeyDescription: {
-    id: 'providerConfigurationModal.addApiKeyDescription',
-    defaultMessage: 'Add your API key(s) for this provider to integrate into goose',
-  },
   oauthLoginFailed: {
     id: 'providerConfigurationModal.oauthLoginFailed',
     defaultMessage: 'OAuth login failed: {error}',
@@ -96,10 +93,6 @@ const i18n = defineMessages({
     id: 'providerConfigurationModal.deviceCodeFlowHint',
     defaultMessage:
       'A browser window will open. The verification code will appear here so you can enter it to complete sign-in.',
-  },
-  externalSetupIntro: {
-    id: 'providerConfigurationModal.externalSetupIntro',
-    defaultMessage: 'This provider is configured outside of goose. Follow these steps:',
   },
   chooseModel: {
     id: 'providerConfigurationModal.chooseModel',
@@ -223,7 +216,7 @@ export default function ProviderConfigurationModal({
         })
       : isExternalSetup
         ? provider.metadata.description
-        : intl.formatMessage(i18n.addApiKeyDescription);
+        : intl.formatMessage(brandMessage('providerConfigurationModal.addApiKeyDescription'));
 
   const handleOAuthLogin = async () => {
     setIsOAuthLoading(true);
@@ -487,7 +480,9 @@ export default function ProviderConfigurationModal({
                     ) : (
                       <>
                         <p className="text-sm text-text-secondary">
-                          {intl.formatMessage(i18n.externalSetupIntro)}
+                          {intl.formatMessage(
+                            brandMessage('providerConfigurationModal.externalSetupIntro')
+                          )}
                         </p>
                         <ol className="ml-5 list-decimal text-sm text-text-primary space-y-2">
                           {provider.metadata.setup_steps?.map((step, i) => (

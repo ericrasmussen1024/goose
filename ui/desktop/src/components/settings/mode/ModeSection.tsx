@@ -1,3 +1,4 @@
+import { brandText } from '../../../branding';
 import { useEffect, useState } from 'react';
 import { all_goose_modes, ModeSelectionItem } from './ModeSelectionItem';
 import { useConfig } from '../../ConfigContext';
@@ -12,7 +13,10 @@ export const ModeSection = () => {
       setCurrentMode(newMode);
     } catch (error) {
       console.error('Error updating goose mode:', error);
-      throw new Error(`Failed to store new goose mode: ${newMode}`, { cause: error });
+      throw new Error(
+        brandText('desktop.components.settings.mode.ModeSection.text2', { value0: newMode }),
+        { cause: error }
+      );
     }
   };
 

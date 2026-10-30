@@ -1,6 +1,8 @@
 import type { ExtensionConfig } from '../../../types/extensions';
 import { FixedExtensionEntry } from '../../ConfigContext';
-import bundledExtensionsData from './bundled-extensions.json';
+import bundledExtensionsSource from './bundled-extensions.json';
+import { resolveExtensionBranding } from '../../../branding';
+const bundledExtensionsData = bundledExtensionsSource.map(resolveExtensionBranding);
 import deprecatedBundledExtensionsData from './deprecated-bundled-extensions.json';
 import { nameToKey } from './utils';
 

@@ -1,3 +1,4 @@
+import { brandText } from './branding';
 import { EventEmitter } from 'node:events';
 import { describe, expect, it, vi } from 'vitest';
 import type { GooseServeResult, Logger } from './gooseServe';
@@ -55,7 +56,7 @@ describe('GooseServeLeaseRegistry', () => {
     expect(() => store.getAcpUrl(1)).toThrow(GOOSE_SERVE_EXITED_USER_MESSAGE);
     expect(() => store.getSecretKey(1)).toThrow(GOOSE_SERVE_EXITED_USER_MESSAGE);
     expect(logger.error).toHaveBeenCalledWith(
-      'Goose ACP server exited unexpectedly',
+      brandText('desktop.gooseServeLeaseRegistry.text5'),
       expect.objectContaining({ code: 1, signal: null, windowIds: [1] })
     );
   });

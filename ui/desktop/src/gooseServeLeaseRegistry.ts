@@ -1,7 +1,7 @@
+import { brandText } from './branding';
 import type { GooseServeExitSignal, GooseServeResult, Logger } from './gooseServe';
 
-export const GOOSE_SERVE_EXITED_USER_MESSAGE =
-  "This window's Goose backend stopped. Close this window and open a new chat to start a new backend. If this keeps happening, restart Goose Desktop.";
+export const GOOSE_SERVE_EXITED_USER_MESSAGE = brandText('desktop.gooseServeLeaseRegistry.text4');
 
 export interface GooseServeLease {
   acpUrl: string;
@@ -50,7 +50,7 @@ export class GooseServeLeaseRegistry {
       }
 
       if (logUnexpected && firstExit && !lease.cleanedUp) {
-        this.logger.error('Goose ACP server exited unexpectedly', {
+        this.logger.error(brandText('desktop.gooseServeLeaseRegistry.text5'), {
           code: lease.exitCode,
           signal: lease.exitSignal,
           windowIds: [...lease.windowIds],

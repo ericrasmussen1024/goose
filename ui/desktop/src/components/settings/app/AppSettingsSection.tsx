@@ -1,3 +1,4 @@
+import { brandMessage } from '../../../branding';
 import { useState, useEffect, useRef } from 'react';
 import { defineMessages, useIntl } from '../../../i18n';
 import { Switch } from '../../ui/switch';
@@ -16,18 +17,13 @@ import UpdateSection from './UpdateSection';
 import { COST_TRACKING_ENABLED, UPDATES_ENABLED } from '../../../updates';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/card';
 import ThemeSelector from '../../GooseSidebar/ThemeSelector';
-import BlockLogoBlack from './icons/block-lockup_black.png';
-import BlockLogoWhite from './icons/block-lockup_white.png';
+import BrandIcon from '../../../branding/BrandIcon';
 import TelemetrySettings from './TelemetrySettings';
 import { trackSettingToggled } from '../../../utils/analytics';
 import type { LanguageSetting } from '../../../utils/settings';
 
 const i18n = defineMessages({
   appearanceTitle: { id: 'settings.appearance.title', defaultMessage: 'Appearance' },
-  appearanceDesc: {
-    id: 'settings.appearance.description',
-    defaultMessage: 'Configure how goose appears on your system',
-  },
   notifications: { id: 'settings.notifications.title', defaultMessage: 'Notifications' },
   notificationsDesc: {
     id: 'settings.notifications.description',
@@ -39,38 +35,16 @@ const i18n = defineMessages({
     id: 'settings.notifications.task.title',
     defaultMessage: 'Task completion notifications',
   },
-  taskNotificationsDesc: {
-    id: 'settings.notifications.task.description',
-    defaultMessage: 'Notify when Goose finishes a task while the window is in the background',
-  },
   menuBarIcon: { id: 'settings.menuBarIcon.title', defaultMessage: 'Menu bar icon' },
-  menuBarIconDesc: {
-    id: 'settings.menuBarIcon.description',
-    defaultMessage: 'Show goose in the menu bar',
-  },
   dockIcon: { id: 'settings.dockIcon.title', defaultMessage: 'Dock icon' },
-  dockIconDesc: { id: 'settings.dockIcon.description', defaultMessage: 'Show goose in the dock' },
   preventSleep: { id: 'settings.preventSleep.title', defaultMessage: 'Prevent Sleep' },
-  preventSleepDesc: {
-    id: 'settings.preventSleep.description',
-    defaultMessage:
-      'Keep your computer awake while goose is running a task (screen can still lock)',
-  },
   costTracking: { id: 'settings.costTracking.title', defaultMessage: 'Cost Tracking' },
   costTrackingDesc: {
     id: 'settings.costTracking.description',
     defaultMessage: 'Show model pricing and usage costs',
   },
   themeTitle: { id: 'settings.theme.title', defaultMessage: 'Theme' },
-  themeDesc: {
-    id: 'settings.theme.description',
-    defaultMessage: 'Customize the look and feel of goose',
-  },
   languageTitle: { id: 'settings.language.title', defaultMessage: 'Language' },
-  languageDesc: {
-    id: 'settings.language.description',
-    defaultMessage: 'Choose the display language for goose',
-  },
   languageSystem: { id: 'settings.language.systemDefault', defaultMessage: 'System Default' },
   languageEnglish: { id: 'settings.language.english', defaultMessage: 'English' },
   languageChineseSimplified: {
@@ -95,18 +69,10 @@ const i18n = defineMessages({
     defaultMessage: 'Chinese (Traditional)',
   },
   helpTitle: { id: 'settings.help.title', defaultMessage: 'Help & feedback' },
-  helpDesc: {
-    id: 'settings.help.description',
-    defaultMessage: 'Help us improve goose by reporting issues or requesting new features',
-  },
   reportBug: { id: 'settings.help.reportBug', defaultMessage: 'Report a Bug' },
   requestFeature: { id: 'settings.help.requestFeature', defaultMessage: 'Request a Feature' },
   versionTitle: { id: 'settings.version.title', defaultMessage: 'Version' },
   updatesTitle: { id: 'settings.updates.title', defaultMessage: 'Updates' },
-  updatesDesc: {
-    id: 'settings.updates.description',
-    defaultMessage: 'Check for and install updates to keep goose running at its best',
-  },
   notificationsModalTitle: {
     id: 'settings.notifications.modal.title',
     defaultMessage: 'How to Enable Notifications',
@@ -123,10 +89,6 @@ const i18n = defineMessages({
     id: 'settings.notifications.modal.macStep2',
     defaultMessage: 'Click on Notifications',
   },
-  notificationsMacStep3: {
-    id: 'settings.notifications.modal.macStep3',
-    defaultMessage: 'Find and select goose in the application list',
-  },
   notificationsMacStep4: {
     id: 'settings.notifications.modal.macStep4',
     defaultMessage: 'Enable notifications and adjust settings as desired',
@@ -142,10 +104,6 @@ const i18n = defineMessages({
   notificationsWinStep2: {
     id: 'settings.notifications.modal.winStep2',
     defaultMessage: 'Go to System > Notifications',
-  },
-  notificationsWinStep3: {
-    id: 'settings.notifications.modal.winStep3',
-    defaultMessage: 'Find and select goose in the application list',
   },
   notificationsWinStep4: {
     id: 'settings.notifications.modal.winStep4',
@@ -188,28 +146,11 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
   const [showNotificationModal, setShowNotificationModal] = useState(false);
   const [showPricing, setShowPricing] = useState(true);
   const [language, setLanguage] = useState<LanguageSetting>('system');
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const updateSectionRef = useRef<HTMLDivElement>(null);
   const shouldShowUpdates = !window.appConfig.get('GOOSE_VERSION');
 
   useEffect(() => {
     setIsMacOS(window.electron.platform === 'darwin');
-  }, []);
-
-  useEffect(() => {
-    const updateTheme = () => {
-      setIsDarkMode(document.documentElement.classList.contains('dark'));
-    };
-
-    updateTheme();
-
-    const observer = new MutationObserver(updateTheme);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
-
-    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -335,7 +276,9 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
       <Card className="rounded-lg">
         <CardHeader className="pb-0">
           <CardTitle className="">{intl.formatMessage(i18n.appearanceTitle)}</CardTitle>
-          <CardDescription>{intl.formatMessage(i18n.appearanceDesc)}</CardDescription>
+          <CardDescription>
+            {intl.formatMessage(brandMessage('settings.appearance.description'))}
+          </CardDescription>
         </CardHeader>
         <CardContent className="pt-4 space-y-4 px-4">
           <div className="flex items-center justify-between">
@@ -381,7 +324,7 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
                 {intl.formatMessage(i18n.taskNotifications)}
               </h3>
               <p className="text-xs text-text-secondary max-w-md mt-[2px]">
-                {intl.formatMessage(i18n.taskNotificationsDesc)}
+                {intl.formatMessage(brandMessage('settings.notifications.task.description'))}
               </p>
             </div>
             <div className="flex items-center">
@@ -397,7 +340,7 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
             <div>
               <h3 className="text-text-primary text-xs">{intl.formatMessage(i18n.menuBarIcon)}</h3>
               <p className="text-xs text-text-secondary max-w-md mt-[2px]">
-                {intl.formatMessage(i18n.menuBarIconDesc)}
+                {intl.formatMessage(brandMessage('settings.menuBarIcon.description'))}
               </p>
             </div>
             <div className="flex items-center">
@@ -414,7 +357,7 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
               <div>
                 <h3 className="text-text-primary text-xs">{intl.formatMessage(i18n.dockIcon)}</h3>
                 <p className="text-xs text-text-secondary max-w-md mt-[2px]">
-                  {intl.formatMessage(i18n.dockIconDesc)}
+                  {intl.formatMessage(brandMessage('settings.dockIcon.description'))}
                 </p>
               </div>
               <div className="flex items-center">
@@ -433,7 +376,7 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
             <div>
               <h3 className="text-text-primary text-xs">{intl.formatMessage(i18n.preventSleep)}</h3>
               <p className="text-xs text-text-secondary max-w-md mt-[2px]">
-                {intl.formatMessage(i18n.preventSleepDesc)}
+                {intl.formatMessage(brandMessage('settings.preventSleep.description'))}
               </p>
             </div>
             <div className="flex items-center">
@@ -469,7 +412,9 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
       <Card className="rounded-lg">
         <CardHeader className="pb-0">
           <CardTitle className="mb-1">{intl.formatMessage(i18n.themeTitle)}</CardTitle>
-          <CardDescription>{intl.formatMessage(i18n.themeDesc)}</CardDescription>
+          <CardDescription>
+            {intl.formatMessage(brandMessage('settings.theme.description'))}
+          </CardDescription>
         </CardHeader>
         <CardContent className="pt-4 px-4">
           <ThemeSelector className="w-auto" hideTitle horizontal />
@@ -479,7 +424,9 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
       <Card className="rounded-lg">
         <CardHeader className="pb-0">
           <CardTitle className="mb-1">{intl.formatMessage(i18n.languageTitle)}</CardTitle>
-          <CardDescription>{intl.formatMessage(i18n.languageDesc)}</CardDescription>
+          <CardDescription>
+            {intl.formatMessage(brandMessage('settings.language.description'))}
+          </CardDescription>
         </CardHeader>
         <CardContent className="pt-4 px-4">
           <DropdownMenu>
@@ -504,7 +451,9 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
       <Card className="rounded-lg">
         <CardHeader className="pb-0">
           <CardTitle className="mb-1">{intl.formatMessage(i18n.helpTitle)}</CardTitle>
-          <CardDescription>{intl.formatMessage(i18n.helpDesc)}</CardDescription>
+          <CardDescription>
+            {intl.formatMessage(brandMessage('settings.help.description'))}
+          </CardDescription>
         </CardHeader>
         <CardContent className="pt-4 px-4">
           <div className="flex space-x-4">
@@ -544,11 +493,7 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
           </CardHeader>
           <CardContent className="pt-4 px-4">
             <div className="flex items-center gap-3">
-              <img
-                src={isDarkMode ? BlockLogoWhite : BlockLogoBlack}
-                alt="Block Logo" // TODO: replace with AAIF logo asset
-                className="h-8 w-auto"
-              />
+              <BrandIcon width={32} height={32} className="h-8 w-8" />
               <span className="text-2xl font-mono text-black dark:text-white">
                 {String(window.appConfig.get('GOOSE_VERSION') || 'Development')}
               </span>
@@ -563,7 +508,9 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
           <Card className="rounded-lg">
             <CardHeader className="pb-0">
               <CardTitle className="mb-1">{intl.formatMessage(i18n.updatesTitle)}</CardTitle>
-              <CardDescription>{intl.formatMessage(i18n.updatesDesc)}</CardDescription>
+              <CardDescription>
+                {intl.formatMessage(brandMessage('settings.updates.description'))}
+              </CardDescription>
             </CardHeader>
             <CardContent className="px-4">
               <UpdateSection />
@@ -593,7 +540,9 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
                 <ol className="list-decimal pl-5 space-y-2">
                   <li>{intl.formatMessage(i18n.notificationsMacStep1)}</li>
                   <li>{intl.formatMessage(i18n.notificationsMacStep2)}</li>
-                  <li>{intl.formatMessage(i18n.notificationsMacStep3)}</li>
+                  <li>
+                    {intl.formatMessage(brandMessage('settings.notifications.modal.macStep3'))}
+                  </li>
                   <li>{intl.formatMessage(i18n.notificationsMacStep4)}</li>
                 </ol>
               </div>
@@ -603,7 +552,9 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
                 <ol className="list-decimal pl-5 space-y-2">
                   <li>{intl.formatMessage(i18n.notificationsWinStep1)}</li>
                   <li>{intl.formatMessage(i18n.notificationsWinStep2)}</li>
-                  <li>{intl.formatMessage(i18n.notificationsWinStep3)}</li>
+                  <li>
+                    {intl.formatMessage(brandMessage('settings.notifications.modal.winStep3'))}
+                  </li>
                   <li>{intl.formatMessage(i18n.notificationsWinStep4)}</li>
                 </ol>
               </div>

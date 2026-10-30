@@ -1,3 +1,4 @@
+import { brandMessage } from '../branding';
 import { useState } from 'react';
 import { defineMessages, useIntl } from '../i18n';
 
@@ -5,10 +6,6 @@ const i18n = defineMessages({
   unableToLoad: {
     id: 'imagePreview.unableToLoad',
     defaultMessage: 'Unable to load image',
-  },
-  altText: {
-    id: 'imagePreview.altText',
-    defaultMessage: 'goose image',
   },
   clickToCollapse: {
     id: 'imagePreview.clickToCollapse',
@@ -41,7 +38,7 @@ export default function ImagePreview({ src }: ImagePreviewProps) {
     <div className={`image-preview mt-2 mb-2`}>
       <img
         src={src}
-        alt={intl.formatMessage(i18n.altText)}
+        alt={intl.formatMessage(brandMessage('imagePreview.altText'))}
         onError={() => setError(true)}
         onClick={() => setIsExpanded(!isExpanded)}
         className={`rounded border border-border-primary cursor-pointer hover:border-border-primary transition-all ${

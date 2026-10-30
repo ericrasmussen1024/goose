@@ -1,0 +1,10 @@
+const fs = require('fs');
+const path = require('path');
+const { Name, text } = require('./branding.cjs');
+const filename = path.join(__dirname, '../package.json');
+const pkg = JSON.parse(fs.readFileSync(filename, 'utf8'));
+pkg.productName = Name;
+pkg.desktopName = Name.toLowerCase().replace(/[^a-z0-9+.-]+/g, '-') + '.desktop';
+pkg.description = text('build.packageDescription');
+const output = JSON.stringify(pkg, null, 2) + '\n';
+if (fs.readFileSync(filename, 'utf8') !== output) fs.writeFileSync(filename, output);

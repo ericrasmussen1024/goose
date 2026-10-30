@@ -1,3 +1,6 @@
+const { Name, text } = require('./scripts/branding.cjs');
+require('./scripts/sync-branding.cjs');
+require('./scripts/check-branding-assets.cjs');
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
 const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 const { resolve } = require('path');
@@ -5,12 +8,15 @@ const { resolve } = require('path');
 const isLinuxVulkanBuild = process.env.GOOSE_DESKTOP_LINUX_VARIANT === 'vulkan';
 
 let cfg = {
+  name: Name,
+  executableName: Name,
+  appBundleId: 'com.electron.goose',
   asar: true,
-  extraResource: ['src/bin', 'src/images', 'src/app-update.yml'],
-  icon: 'src/images/icon',
+  extraResource: ['src/bin', 'src/branding/assets', 'src/app-update.yml'],
+  icon: 'src/branding/assets/app',
   // Windows specific configuration
   win32: {
-    icon: 'src/images/icon.ico',
+    icon: 'src/branding/assets/app.ico',
     certificateFile: process.env.WINDOWS_CERTIFICATE_FILE,
     signingRole: process.env.WINDOW_SIGNING_ROLE,
     rfc3161TimeStampServer: 'http://timestamp.digicert.com',
@@ -19,7 +25,7 @@ let cfg = {
   // Protocol registration
   protocols: [
     {
-      name: 'GooseProtocol',
+      name: text('build.protocolLabel'),
       schemes: ['goose'],
     },
   ],
@@ -35,10 +41,8 @@ let cfg = {
       },
     ],
     // Usage descriptions for macOS TCC (Transparency, Consent, and Control)
-    NSMicrophoneUsageDescription:
-      'Goose needs access to your microphone for voice dictation.',
-    NSAppleEventsUsageDescription:
-      'Goose needs access to send Apple Events to control other apps on your behalf.',
+    NSMicrophoneUsageDescription: text('build.microphonePermission'),
+    NSAppleEventsUsageDescription: text('build.automationPermission'),
   },
 };
 
@@ -80,21 +84,21 @@ module.exports = {
       config: {
         arch: process.env.ELECTRON_ARCH === 'x64' ? ['x64'] : ['arm64'],
         options: {
-          icon: 'src/images/icon.ico',
+          icon: 'src/branding/assets/app.ico',
         },
       },
     },
     {
       name: '@electron-forge/maker-deb',
       config: {
-        name: 'Goose',
-        bin: 'Goose',
+        name: Name.toLowerCase().replace(/[^a-z0-9+.-]+/g, '-'),
+        bin: Name,
         maintainer: 'AAIF (Agentic AI Foundation)',
         homepage: 'https://goose-docs.ai/',
         categories: ['Development'],
         desktopTemplate: './forge.deb.desktop',
         options: {
-          icon: 'src/images/icon.png',
+          icon: 'src/branding/assets/app.png',
           prefix: '/opt',
           ...(isLinuxVulkanBuild ? { depends: ['libvulkan1'] } : {}),
         },
@@ -103,14 +107,14 @@ module.exports = {
     {
       name: '@electron-forge/maker-rpm',
       config: {
-        name: 'Goose',
-        bin: 'Goose',
+        name: Name.toLowerCase().replace(/[^a-z0-9+.-]+/g, '-'),
+        bin: Name,
         maintainer: 'AAIF (Agentic AI Foundation)',
         homepage: 'https://goose-docs.ai/',
         categories: ['Development'],
         desktopTemplate: './forge.rpm.desktop',
         options: {
-          icon: 'src/images/icon.png',
+          icon: 'src/branding/assets/app.png',
           prefix: '/opt',
           ...(isLinuxVulkanBuild ? { requires: ['vulkan-loader'] } : {}),
         },
@@ -124,13 +128,13 @@ module.exports = {
           categories: ['Development'],
           mimeType: ['x-scheme-handler/goose'],
           icon: {
-            scalable: 'src/images/icon.svg',
-            '512x512': 'src/images/icon-512.png',
+            scalable: 'src/branding/assets/app.svg',
+            '512x512': 'src/branding/assets/app-512.png',
           },
           homepage: 'https://goose-docs.ai/',
           runtimeVersion: '25.08',
           baseVersion: '25.08',
-          bin: 'Goose',
+          bin: Name,
           modules: [
             {
               name: 'libbz2-shim',

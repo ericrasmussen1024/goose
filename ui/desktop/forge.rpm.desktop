@@ -1,7 +1,8 @@
 [Desktop Entry]
-Name=Goose
-Exec=/usr/lib/Goose/Goose %U
-Icon=/usr/share/pixmaps/Goose.png
+Name=<%= productName %>
+Exec=<%= name %> %U
+Icon=<%= name %>
+StartupWMClass=<%= productName %>
 Terminal=false
 Type=Application
 Categories=Development;

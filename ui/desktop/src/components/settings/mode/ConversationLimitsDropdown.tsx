@@ -1,3 +1,4 @@
+import { brandMessage } from '../../../branding';
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Input } from '../../ui/input';
@@ -11,10 +12,6 @@ const i18n = defineMessages({
   maxTurns: {
     id: 'conversationLimitsDropdown.maxTurns',
     defaultMessage: 'Max Turns',
-  },
-  maxTurnsDescription: {
-    id: 'conversationLimitsDropdown.maxTurnsDescription',
-    defaultMessage: 'Maximum agent turns before Goose asks for user input',
   },
 });
 
@@ -59,7 +56,7 @@ export const ConversationLimitsDropdown = ({
             <div>
               <h4 className="text-text-primary text-sm">{intl.formatMessage(i18n.maxTurns)}</h4>
               <p className="text-xs text-text-secondary mt-[2px]">
-                {intl.formatMessage(i18n.maxTurnsDescription)}
+                {intl.formatMessage(brandMessage('conversationLimitsDropdown.maxTurnsDescription'))}
               </p>
             </div>
             <Input

@@ -1,9 +1,5 @@
-export function getWindowIconFilename(platform: typeof process.platform): string {
-  if (platform === 'darwin') {
-    return 'icon.icns';
-  }
-  if (platform === 'win32') {
-    return 'icon.ico';
-  }
-  return 'icon.png';
+import manifest from '../branding/assets/manifest.json';
+
+export function getWindowIconFilename(platform: string): string {
+  return platform === 'win32' ? manifest.window.win32 : manifest.window.default;
 }

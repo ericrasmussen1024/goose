@@ -48,7 +48,8 @@
     "defaultMessage": "Delete \"{name}\"? This cannot be undone."
   },
   "appsView.description": {
-    "defaultMessage": "Applications from your MCP servers and Apps built by goose itself. You can ask it to create new apps through the chat interface and they will appear here."
+    "defaultMessage": "Applications from your MCP servers and Apps built by __APP_NAME__ itself. You can ask it to create new apps through the chat interface and they will appear here.",
+    "description": "Pages: apps > AppsView. Displayed description text on apps > AppsView. Preserve the ICU arguments and rich-text tags in this template."
   },
   "appsView.errorLoading": {
     "defaultMessage": "Error loading apps: {error}"
@@ -66,7 +67,8 @@
     "defaultMessage": "Loading apps..."
   },
   "appsView.noAppsDescription": {
-    "defaultMessage": "Open a chat and ask goose for the app you want to have. It can build one for you and that will appear here. Or if somebody shared an app, you can import it using the button above."
+    "defaultMessage": "Open a chat and ask __APP_NAME__ for the app you want to have. It can build one for you and that will appear here. Or if somebody shared an app, you can import it using the button above.",
+    "description": "Pages: apps > AppsView. Displayed no Apps Description text on apps > AppsView. Preserve the ICU arguments and rich-text tags in this template."
   },
   "appsView.noAppsTitle": {
     "defaultMessage": "No apps available"
@@ -105,7 +107,8 @@
     "defaultMessage": "Credential deleted"
   },
   "authSettings.description": {
-    "defaultMessage": "Manage provider credentials stored locally by goose."
+    "defaultMessage": "Manage provider credentials stored locally by __APP_NAME__.",
+    "description": "Pages: Settings > auth > AuthSettingsSection. Displayed description text on Settings > auth > AuthSettingsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "authSettings.empty": {
     "defaultMessage": "No locally stored provider credentials were found."
@@ -192,10 +195,12 @@
     "defaultMessage": "Launch"
   },
   "chat.notification.taskComplete.body": {
-    "defaultMessage": "Click here to bring Goose back into focus."
+    "defaultMessage": "Click here to bring __APP_NAME__ back into focus.",
+    "description": "Pages: Chat > background task notifications. Displayed body text on Chat > background task notifications. Preserve the ICU arguments and rich-text tags in this template."
   },
   "chat.notification.taskComplete.title": {
-    "defaultMessage": "Goose finished the task."
+    "defaultMessage": "__APP_NAME__ finished the task.",
+    "description": "Pages: Chat > background task notifications. Displayed title text on Chat > background task notifications. Preserve the ICU arguments and rich-text tags in this template."
   },
   "chatInput.contextWindow": {
     "defaultMessage": "Context window"
@@ -246,13 +251,15 @@
     "defaultMessage": "Waiting for images to save..."
   },
   "chatSettings.modeDescription": {
-    "defaultMessage": "Choose the default mode Goose uses for new sessions. Existing sessions keep their current mode."
+    "defaultMessage": "Choose the default mode __APP_NAME__ uses for new sessions. Existing sessions keep their current mode.",
+    "description": "Pages: Settings > chat > ChatSettingsSection. Displayed mode Description text on Settings > chat > ChatSettingsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "chatSettings.modeTitle": {
     "defaultMessage": "Default Mode"
   },
   "chatSettings.responseStylesDescription": {
-    "defaultMessage": "Choose how Goose should format and style its responses"
+    "defaultMessage": "Choose how __APP_NAME__ should format and style its responses",
+    "description": "Pages: Settings > chat > ChatSettingsSection. Displayed response Styles Description text on Settings > chat > ChatSettingsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "chatSettings.responseStylesTitle": {
     "defaultMessage": "Response Styles"
@@ -273,10 +280,12 @@
     "defaultMessage": "Configuration Editor"
   },
   "configSettings.description": {
-    "defaultMessage": "Edit your goose configuration settings"
+    "defaultMessage": "Edit your __APP_NAME__ configuration settings",
+    "description": "Pages: Settings > config > ConfigSettings. Displayed description text on Settings > config > ConfigSettings. Preserve the ICU arguments and rich-text tags in this template."
   },
   "configSettings.descriptionWithProvider": {
-    "defaultMessage": "Edit your goose configuration settings (current settings for {provider})"
+    "defaultMessage": "Edit your __APP_NAME__ configuration settings (current settings for {provider})",
+    "description": "Pages: Settings > config > ConfigSettings. Displayed description With Provider text on Settings > config > ConfigSettings. Preserve the ICU arguments and rich-text tags in this template."
   },
   "configSettings.done": {
     "defaultMessage": "Done"
@@ -348,7 +357,8 @@
     "defaultMessage": "Max Turns"
   },
   "conversationLimitsDropdown.maxTurnsDescription": {
-    "defaultMessage": "Maximum agent turns before Goose asks for user input"
+    "defaultMessage": "Maximum agent turns before __APP_NAME__ asks for user input",
+    "description": "Pages: Settings > mode > ConversationLimitsDropdown. Displayed max Turns Description text on Settings > mode > ConversationLimitsDropdown. Preserve the ICU arguments and rich-text tags in this template."
   },
   "costTracker.costUnavailable": {
     "defaultMessage": "Cost data not available for {model} ({inputTokens} input, {outputTokens} output tokens)"
@@ -804,7 +814,8 @@
     "defaultMessage": "Edit {name} settings"
   },
   "defaultCardButtons.getStarted": {
-    "defaultMessage": "Get started with goose!"
+    "defaultMessage": "Get started with __APP_NAME__!",
+    "description": "Pages: Settings > providers > subcomponents > buttons > DefaultCardButtons. Displayed get Started text on Settings > providers > subcomponents > buttons > DefaultCardButtons. Preserve the ICU arguments and rich-text tags in this template."
   },
   "defaultProviderSetupForm.apiHostLabel": {
     "defaultMessage": "API Host"
@@ -972,7 +983,8 @@
     "defaultMessage": "Information request was cancelled."
   },
   "elicitationRequest.defaultMessage": {
-    "defaultMessage": "Goose needs some information from you."
+    "defaultMessage": "__APP_NAME__ needs some information from you.",
+    "description": "Pages: ElicitationRequest. Displayed default Message text on ElicitationRequest. Preserve the ICU arguments and rich-text tags in this template."
   },
   "elicitationRequest.expired": {
     "defaultMessage": "This request has expired. The extension will need to ask again."
@@ -1017,7 +1029,8 @@
     "defaultMessage": "An error occurred."
   },
   "errorBoundary.errorWithVersion": {
-    "defaultMessage": "An error occurred in Goose v{version}."
+    "defaultMessage": "An error occurred in __APP_NAME__ v{version}.",
+    "description": "Pages: ErrorBoundary. Displayed error With Version text on ErrorBoundary. Preserve the ICU arguments and rich-text tags in this template."
   },
   "errorBoundary.heading": {
     "defaultMessage": "Honk!"
@@ -1206,7 +1219,8 @@
     "defaultMessage": "Extensions enabled here are used as the default for new chats. You can also toggle active extensions during chat."
   },
   "extensionsView.description": {
-    "defaultMessage": "These extensions use the Model Context Protocol (MCP). They can expand Goose's capabilities using three main components: Prompts, Resources, and Tools. {searchShortcut} to search."
+    "defaultMessage": "These extensions use the Model Context Protocol (MCP). They can expand __APP_NAME__'s capabilities using three main components: Prompts, Resources, and Tools. {searchShortcut} to search.",
+    "description": "Pages: extensions > ExtensionsView. Displayed description text on extensions > ExtensionsView. Preserve the ICU arguments and rich-text tags in this template."
   },
   "extensionsView.heading": {
     "defaultMessage": "Extensions"
@@ -1224,19 +1238,22 @@
     "defaultMessage": "AA:BB:CC:... or sha256/base64"
   },
   "externalBackendSection.description": {
-    "defaultMessage": "By default Goose starts a local backend. Use this to connect to an external ACP-compatible backend."
+    "defaultMessage": "By default __APP_NAME__ starts a local backend. Use this to connect to an external ACP-compatible backend.",
+    "description": "Pages: Settings > app > ExternalBackendSection. Displayed description text on Settings > app > ExternalBackendSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "externalBackendSection.fingerprintRequiresHttps": {
     "defaultMessage": "Certificate fingerprint requires an https URL"
   },
   "externalBackendSection.restartNote": {
-    "defaultMessage": "Changes apply to new chat windows. Restart Goose to update existing windows."
+    "defaultMessage": "Changes apply to new chat windows. Restart __APP_NAME__ to update existing windows.",
+    "description": "Pages: Settings > app > ExternalBackendSection. Displayed restart Note text on Settings > app > ExternalBackendSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "externalBackendSection.secretKey": {
     "defaultMessage": "Secret Key"
   },
   "externalBackendSection.secretKeyHelp": {
-    "defaultMessage": "The secret key configured on the external backend (GOOSE_SERVER__SECRET_KEY)."
+    "defaultMessage": "The secret key configured on the external backend (GOOSE_SERVER__SECRET_KEY).",
+    "description": "Pages: Settings > app > ExternalBackendSection. Displayed secret Key Help text on Settings > app > ExternalBackendSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "externalBackendSection.secretKeyPlaceholder": {
     "defaultMessage": "Enter the server's secret key"
@@ -1245,10 +1262,12 @@
     "defaultMessage": "Backend Base URL"
   },
   "externalBackendSection.serverUrlHelp": {
-    "defaultMessage": "Enter the HTTP(S) base URL. Goose checks /status and connects to /acp under this base."
+    "defaultMessage": "Enter the HTTP(S) base URL. __APP_NAME__ checks /status and connects to /acp under this base.",
+    "description": "Pages: Settings > app > ExternalBackendSection. Displayed server Url Help text on Settings > app > ExternalBackendSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "externalBackendSection.title": {
-    "defaultMessage": "External Backend (ACP)"
+    "defaultMessage": "External Backend (ACP)",
+    "description": "Pages: Settings > app > ExternalBackendSection. Displayed title text on Settings > app > ExternalBackendSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "externalBackendSection.urlBaseError": {
     "defaultMessage": "URL must be the backend base URL before /acp, without query parameters or fragments"
@@ -1263,7 +1282,8 @@
     "defaultMessage": "Use external backend"
   },
   "externalBackendSection.useExternalServerDescription": {
-    "defaultMessage": "Connect to an ACP-compatible backend running elsewhere."
+    "defaultMessage": "Connect to an ACP-compatible backend running elsewhere.",
+    "description": "Pages: Settings > app > ExternalBackendSection. Displayed use External Server Description text on Settings > app > ExternalBackendSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "externalBackendSection.workingDir": {
     "defaultMessage": "Remote Working Directory (optional)"
@@ -1293,7 +1313,8 @@
     "defaultMessage": "Developer"
   },
   "goosehintsModal.dialogDescription": {
-    "defaultMessage": "Provide additional context about your project to improve communication with Goose"
+    "defaultMessage": "Provide additional context about your project to improve communication with __APP_NAME__",
+    "description": "Pages: Settings > chat > GoosehintsModal. Displayed dialog Description text on Settings > chat > GoosehintsModal. Preserve the ICU arguments and rich-text tags in this template."
   },
   "goosehintsModal.dialogTitle": {
     "defaultMessage": "Configure Project Hints (.goosehints)"
@@ -1314,7 +1335,8 @@
     "defaultMessage": ".goosehints file found at: {filePath}"
   },
   "goosehintsModal.helpText1": {
-    "defaultMessage": ".goosehints is a text file used to provide additional context about your project and improve the communication with Goose."
+    "defaultMessage": ".goosehints is a text file used to provide additional context about your project and improve the communication with __APP_NAME__.",
+    "description": "Pages: Settings > chat > GoosehintsModal. Displayed help Text1 text on Settings > chat > GoosehintsModal. Preserve the ICU arguments and rich-text tags in this template."
   },
   "goosehintsModal.helpText2": {
     "defaultMessage": "Please make sure {bold} extension is enabled in the extensions page. This extension is required to use .goosehints. You'll need to restart your session for .goosehints updates to take effect."
@@ -1341,13 +1363,15 @@
     "defaultMessage": "Configure"
   },
   "goosehintsSection.description": {
-    "defaultMessage": "Configure your project's .goosehints file to provide additional context to Goose"
+    "defaultMessage": "Configure your project's .goosehints file to provide additional context to __APP_NAME__",
+    "description": "Pages: Settings > chat > GoosehintsSection. Displayed description text on Settings > chat > GoosehintsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "goosehintsSection.title": {
     "defaultMessage": "Project Hints (.goosehints)"
   },
   "groupedExtensionLoadingToast.askGoose": {
-    "defaultMessage": "Ask goose"
+    "defaultMessage": "Ask __APP_NAME__",
+    "description": "Pages: GroupedExtensionLoadingToast. Displayed ask Goose text on GroupedExtensionLoadingToast. Preserve the ICU arguments and rich-text tags in this template."
   },
   "groupedExtensionLoadingToast.collapseDetails": {
     "defaultMessage": "Collapse details"
@@ -1467,7 +1491,8 @@
     "defaultMessage": "Hugging Face"
   },
   "imagePreview.altText": {
-    "defaultMessage": "goose image"
+    "defaultMessage": "__APP_NAME__ image",
+    "description": "Pages: ImagePreview. Displayed alt Text text on ImagePreview. Preserve the ICU arguments and rich-text tags in this template."
   },
   "imagePreview.clickToCollapse": {
     "defaultMessage": "Click to collapse"
@@ -1515,7 +1540,8 @@
     "defaultMessage": "Recipe File"
   },
   "importRecipeForm.reviewWarning": {
-    "defaultMessage": "Ensure you review contents of recipe files before adding them to your goose interface."
+    "defaultMessage": "Ensure you review contents of recipe files before adding them to your __APP_NAME__ interface.",
+    "description": "Pages: recipes > ImportRecipeForm. Displayed review Warning text on recipes > ImportRecipeForm. Preserve the ICU arguments and rich-text tags in this template."
   },
   "importRecipeForm.schemaDescription": {
     "defaultMessage": "Your YAML or JSON file should follow this structure. Required fields are: title, description, and either instructions or prompt."
@@ -1626,13 +1652,15 @@
     "defaultMessage": "Application Shortcuts"
   },
   "keyboardShortcuts.categoryApplicationDescription": {
-    "defaultMessage": "These shortcuts work when Goose is the active application"
+    "defaultMessage": "These shortcuts work when __APP_NAME__ is the active application",
+    "description": "Pages: Settings > keyboard > KeyboardShortcutsSection. Displayed category Application Description text on Settings > keyboard > KeyboardShortcutsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "keyboardShortcuts.categoryGlobal": {
     "defaultMessage": "Global Shortcuts"
   },
   "keyboardShortcuts.categoryGlobalDescription": {
-    "defaultMessage": "These shortcuts work system-wide, even when Goose is not focused"
+    "defaultMessage": "These shortcuts work system-wide, even when __APP_NAME__ is not focused",
+    "description": "Pages: Settings > keyboard > KeyboardShortcutsSection. Displayed category Global Description text on Settings > keyboard > KeyboardShortcutsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "keyboardShortcuts.categorySearch": {
     "defaultMessage": "Search Shortcuts"
@@ -1674,10 +1702,12 @@
     "defaultMessage": "Find Previous"
   },
   "keyboardShortcuts.focusWindowDescription": {
-    "defaultMessage": "Bring Goose window to front from anywhere"
+    "defaultMessage": "Bring __APP_NAME__ window to front from anywhere",
+    "description": "Pages: Settings > keyboard > KeyboardShortcutsSection. Displayed focus Window Description text on Settings > keyboard > KeyboardShortcutsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "keyboardShortcuts.focusWindowLabel": {
-    "defaultMessage": "Focus Goose Window"
+    "defaultMessage": "Focus __APP_NAME__ Window",
+    "description": "Pages: Settings > keyboard > KeyboardShortcutsSection. Displayed focus Window Label text on Settings > keyboard > KeyboardShortcutsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "keyboardShortcuts.loading": {
     "defaultMessage": "Loading..."
@@ -1689,7 +1719,8 @@
     "defaultMessage": "New Chat"
   },
   "keyboardShortcuts.newChatWindowDescription": {
-    "defaultMessage": "Open a new Goose window"
+    "defaultMessage": "Open a new __APP_NAME__ window",
+    "description": "Pages: Settings > keyboard > KeyboardShortcutsSection. Displayed new Chat Window Description text on Settings > keyboard > KeyboardShortcutsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "keyboardShortcuts.newChatWindowLabel": {
     "defaultMessage": "New Chat Window"
@@ -1728,7 +1759,8 @@
     "defaultMessage": "Reset to Defaults"
   },
   "keyboardShortcuts.restartDescription": {
-    "defaultMessage": "Changes to application shortcuts (like New Chat, Settings, etc.) require restarting Goose to take effect. Global shortcuts (Focus Window, Quick Launcher) work immediately."
+    "defaultMessage": "Changes to application shortcuts (like New Chat, Settings, etc.) require restarting __APP_NAME__ to take effect. Global shortcuts (Focus Window, Quick Launcher) work immediately.",
+    "description": "Pages: Settings > keyboard > KeyboardShortcutsSection. Displayed restart Description text on Settings > keyboard > KeyboardShortcutsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "keyboardShortcuts.restartRequired": {
     "defaultMessage": "Restart Required"
@@ -1758,7 +1790,8 @@
     "defaultMessage": "Toggle Navigation"
   },
   "launcher.placeholder": {
-    "defaultMessage": "Ask goose anything..."
+    "defaultMessage": "Ask __APP_NAME__ anything...",
+    "description": "Pages: LauncherView. Displayed placeholder text on LauncherView. Preserve the ICU arguments and rich-text tags in this template."
   },
   "liveVoice.connecting": {
     "defaultMessage": "Connecting Live voice"
@@ -1785,16 +1818,19 @@
     "defaultMessage": "Unmute microphone"
   },
   "liveVoiceSettings.description": {
-    "defaultMessage": "Have a real-time voice conversation with Goose"
+    "defaultMessage": "Have a real-time voice conversation with __APP_NAME__",
+    "description": "Pages: Settings > chat > LiveVoiceSettings. Displayed description text on Settings > chat > LiveVoiceSettings. Preserve the ICU arguments and rich-text tags in this template."
   },
   "liveVoiceSettings.title": {
     "defaultMessage": "Live voice"
   },
   "loadingGoose.compacting": {
-    "defaultMessage": "goose is compacting the conversation..."
+    "defaultMessage": "__APP_NAME__ is compacting the conversation...",
+    "description": "Pages: LoadingGoose. Displayed compacting text on LoadingGoose. Preserve the ICU arguments and rich-text tags in this template."
   },
   "loadingGoose.idle": {
-    "defaultMessage": "goose is working on it…"
+    "defaultMessage": "__APP_NAME__ is working on it…",
+    "description": "Pages: LoadingGoose. Displayed idle text on LoadingGoose. Preserve the ICU arguments and rich-text tags in this template."
   },
   "loadingGoose.loadingConversation": {
     "defaultMessage": "loading conversation..."
@@ -1803,13 +1839,16 @@
     "defaultMessage": "restarting session..."
   },
   "loadingGoose.streaming": {
-    "defaultMessage": "goose is working on it…"
+    "defaultMessage": "__APP_NAME__ is working on it…",
+    "description": "Pages: LoadingGoose. Displayed streaming text on LoadingGoose. Preserve the ICU arguments and rich-text tags in this template."
   },
   "loadingGoose.thinking": {
-    "defaultMessage": "goose is thinking…"
+    "defaultMessage": "__APP_NAME__ is thinking…",
+    "description": "Pages: LoadingGoose. Displayed thinking text on LoadingGoose. Preserve the ICU arguments and rich-text tags in this template."
   },
   "loadingGoose.waiting": {
-    "defaultMessage": "goose is waiting…"
+    "defaultMessage": "__APP_NAME__ is waiting…",
+    "description": "Pages: LoadingGoose. Displayed waiting text on LoadingGoose. Preserve the ICU arguments and rich-text tags in this template."
   },
   "localInferenceSettings.deleteConfirm": {
     "defaultMessage": "Delete this model? You can re-download it later."
@@ -2466,7 +2505,8 @@
     "defaultMessage": "The server may be starting up or temporarily unavailable."
   },
   "onboardingGuard.checkProviderErrorTitle": {
-    "defaultMessage": "Unable to connect to Goose server"
+    "defaultMessage": "Unable to connect to __APP_NAME__ server",
+    "description": "Pages: onboarding > OnboardingGuard. Displayed check Provider Error Title text on onboarding > OnboardingGuard. Preserve the ICU arguments and rich-text tags in this template."
   },
   "onboardingGuard.retry": {
     "defaultMessage": "Retry"
@@ -2475,10 +2515,12 @@
     "defaultMessage": "Your local AI agent. Connect an AI model provider to get started."
   },
   "onboardingGuard.welcomeTitle": {
-    "defaultMessage": "Welcome to goose"
+    "defaultMessage": "Welcome to __APP_NAME__",
+    "description": "Pages: onboarding > OnboardingGuard. Displayed welcome Title text on onboarding > OnboardingGuard. Preserve the ICU arguments and rich-text tags in this template."
   },
   "onboardingSuccess.allSet": {
-    "defaultMessage": "You're all set to start using goose."
+    "defaultMessage": "You're all set to start using __APP_NAME__.",
+    "description": "Pages: onboarding > OnboardingSuccess. Displayed all Set text on onboarding > OnboardingSuccess. Preserve the ICU arguments and rich-text tags in this template."
   },
   "onboardingSuccess.connectedTo": {
     "defaultMessage": "Connected to {providerName}"
@@ -2493,7 +2535,8 @@
     "defaultMessage": "Local model ready"
   },
   "onboardingSuccess.privacyDescription": {
-    "defaultMessage": "Anonymous usage data helps improve goose. We never collect your conversations, code, or personal data."
+    "defaultMessage": "Anonymous usage data helps improve __APP_NAME__. We never collect your conversations, code, or personal data.",
+    "description": "Pages: onboarding > OnboardingSuccess. Displayed privacy Description text on onboarding > OnboardingSuccess. Preserve the ICU arguments and rich-text tags in this template."
   },
   "onboardingSuccess.privacyTitle": {
     "defaultMessage": "Privacy"
@@ -2661,10 +2704,12 @@
     "defaultMessage": "Session metrics (duration, interaction count, token usage)"
   },
   "privacyInfoModal.collectVersion": {
-    "defaultMessage": "goose version and install method"
+    "defaultMessage": "__APP_NAME__ version and install method",
+    "description": "Pages: onboarding > PrivacyInfoModal. Displayed collect Version text on onboarding > PrivacyInfoModal. Preserve the ICU arguments and rich-text tags in this template."
   },
   "privacyInfoModal.description": {
-    "defaultMessage": "Anonymous usage data helps us understand how goose is used and identify areas for improvement."
+    "defaultMessage": "Anonymous usage data helps us understand how __APP_NAME__ is used and identify areas for improvement.",
+    "description": "Pages: onboarding > PrivacyInfoModal. Displayed description text on onboarding > PrivacyInfoModal. Preserve the ICU arguments and rich-text tags in this template."
   },
   "privacyInfoModal.neverCollect": {
     "defaultMessage": "We never collect your conversations, code, tool arguments, error messages, or any personal data. You can change this setting anytime in Settings."
@@ -2724,7 +2769,8 @@
     "defaultMessage": "Failed to save prompt"
   },
   "promptsSettings.promptEditingDescription": {
-    "defaultMessage": "Customize the prompts that define goose's behavior in different contexts. These prompts use Jinja2 templating syntax. Be careful when modifying template variables, as incorrect changes can break functionality. Please share any improvements with the community."
+    "defaultMessage": "Customize the prompts that define __APP_NAME__'s behavior in different contexts. These prompts use Jinja2 templating syntax. Be careful when modifying template variables, as incorrect changes can break functionality. Please share any improvements with the community.",
+    "description": "Pages: Settings > PromptsSettingsSection. Displayed prompt Editing Description text on Settings > PromptsSettingsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "promptsSettings.promptEditingTitle": {
     "defaultMessage": "Prompt Editing"
@@ -2826,7 +2872,8 @@
     "defaultMessage": "Signing in..."
   },
   "providerConfigurationModal.addApiKeyDescription": {
-    "defaultMessage": "Add your API key(s) for this provider to integrate into goose"
+    "defaultMessage": "Add your API key(s) for this provider to integrate into __APP_NAME__",
+    "description": "Pages: Settings > providers > modal > ProviderConfigurationModal. Displayed add Api Key Description text on Settings > providers > modal > ProviderConfigurationModal. Preserve the ICU arguments and rich-text tags in this template."
   },
   "providerConfigurationModal.browserWindowHint": {
     "defaultMessage": "A browser window will open for you to complete the login."
@@ -2874,7 +2921,8 @@
     "defaultMessage": "Error"
   },
   "providerConfigurationModal.externalSetupIntro": {
-    "defaultMessage": "This provider is configured outside of goose. Follow these steps:"
+    "defaultMessage": "This provider is configured outside of __APP_NAME__. Follow these steps:",
+    "description": "Pages: Settings > providers > modal > ProviderConfigurationModal. Displayed external Setup Intro text on Settings > providers > modal > ProviderConfigurationModal. Preserve the ICU arguments and rich-text tags in this template."
   },
   "providerConfigurationModal.goBack": {
     "defaultMessage": "Go Back"
@@ -2958,7 +3006,8 @@
     "defaultMessage": "Loading providers..."
   },
   "providerSettings.onboardingDescription": {
-    "defaultMessage": "Select an AI model provider to get started with goose. You'll need to use API keys generated by each provider which will be encrypted and stored locally. You can change your provider at any time in settings."
+    "defaultMessage": "Select an AI model provider to get started with __APP_NAME__. You'll need to use API keys generated by each provider which will be encrypted and stored locally. You can change your provider at any time in settings.",
+    "description": "Pages: Settings > providers > ProviderSettingsPage. Displayed onboarding Description text on Settings > providers > ProviderSettingsPage. Preserve the ICU arguments and rich-text tags in this template."
   },
   "providerSettings.otherProviders": {
     "defaultMessage": "Other providers"
@@ -3888,7 +3937,8 @@
     "defaultMessage": "Chat history"
   },
   "sessions.chatHistoryDesc": {
-    "defaultMessage": "View and search your past conversations with Goose. {shortcut} to search."
+    "defaultMessage": "View and search your past conversations with __APP_NAME__. {shortcut} to search.",
+    "description": "Pages: sessions > SessionListView. Displayed chat History Desc text on sessions > SessionListView. Preserve the ICU arguments and rich-text tags in this template."
   },
   "sessions.close": {
     "defaultMessage": "Close"
@@ -4071,7 +4121,8 @@
     "defaultMessage": "Agent Loop"
   },
   "settings.appearance.description": {
-    "defaultMessage": "Configure how goose appears on your system"
+    "defaultMessage": "Configure how __APP_NAME__ appears on your system",
+    "description": "Pages: Settings > app > AppSettingsSection. Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "settings.appearance.title": {
     "defaultMessage": "Appearance"
@@ -4086,13 +4137,15 @@
     "defaultMessage": "Cost Tracking"
   },
   "settings.dockIcon.description": {
-    "defaultMessage": "Show goose in the dock"
+    "defaultMessage": "Show __APP_NAME__ in the dock",
+    "description": "Pages: Settings > app > AppSettingsSection. Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "settings.dockIcon.title": {
     "defaultMessage": "Dock icon"
   },
   "settings.help.description": {
-    "defaultMessage": "Help us improve goose by reporting issues or requesting new features"
+    "defaultMessage": "Help us improve __APP_NAME__ by reporting issues or requesting new features",
+    "description": "Pages: Settings > app > AppSettingsSection. Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "settings.help.reportBug": {
     "defaultMessage": "Report a Bug"
@@ -4104,7 +4157,8 @@
     "defaultMessage": "Help & feedback"
   },
   "settings.language.description": {
-    "defaultMessage": "Choose the display language for goose"
+    "defaultMessage": "Choose the display language for __APP_NAME__",
+    "description": "Pages: Settings > app > AppSettingsSection. Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "settings.language.english": {
     "defaultMessage": "English"
@@ -4161,7 +4215,8 @@
     "defaultMessage": "Chinese (Traditional)"
   },
   "settings.menuBarIcon.description": {
-    "defaultMessage": "Show goose in the menu bar"
+    "defaultMessage": "Show __APP_NAME__ in the menu bar",
+    "description": "Pages: Settings > app > AppSettingsSection. Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "settings.menuBarIcon.title": {
     "defaultMessage": "Menu bar icon"
@@ -4182,7 +4237,8 @@
     "defaultMessage": "Click on Notifications"
   },
   "settings.notifications.modal.macStep3": {
-    "defaultMessage": "Find and select goose in the application list"
+    "defaultMessage": "Find and select __APP_NAME__ in the application list",
+    "description": "Pages: Settings > app > AppSettingsSection. Displayed mac Step3 text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "settings.notifications.modal.macStep4": {
     "defaultMessage": "Enable notifications and adjust settings as desired"
@@ -4200,7 +4256,8 @@
     "defaultMessage": "Go to System > Notifications"
   },
   "settings.notifications.modal.winStep3": {
-    "defaultMessage": "Find and select goose in the application list"
+    "defaultMessage": "Find and select __APP_NAME__ in the application list",
+    "description": "Pages: Settings > app > AppSettingsSection. Displayed win Step3 text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "settings.notifications.modal.winStep4": {
     "defaultMessage": "Toggle notifications on and adjust settings as desired"
@@ -4209,7 +4266,8 @@
     "defaultMessage": "Open Settings"
   },
   "settings.notifications.task.description": {
-    "defaultMessage": "Notify when Goose finishes a task while the window is in the background"
+    "defaultMessage": "Notify when __APP_NAME__ finishes a task while the window is in the background",
+    "description": "Pages: Settings > app > AppSettingsSection. Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "settings.notifications.task.title": {
     "defaultMessage": "Task completion notifications"
@@ -4218,19 +4276,22 @@
     "defaultMessage": "Notifications"
   },
   "settings.preventSleep.description": {
-    "defaultMessage": "Keep your computer awake while goose is running a task (screen can still lock)"
+    "defaultMessage": "Keep your computer awake while __APP_NAME__ is running a task (screen can still lock)",
+    "description": "Pages: Settings > app > AppSettingsSection. Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "settings.preventSleep.title": {
     "defaultMessage": "Prevent Sleep"
   },
   "settings.theme.description": {
-    "defaultMessage": "Customize the look and feel of goose"
+    "defaultMessage": "Customize the look and feel of __APP_NAME__",
+    "description": "Pages: Settings > app > AppSettingsSection. Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "settings.theme.title": {
     "defaultMessage": "Theme"
   },
   "settings.updates.description": {
-    "defaultMessage": "Check for and install updates to keep goose running at its best"
+    "defaultMessage": "Check for and install updates to keep __APP_NAME__ running at its best",
+    "description": "Pages: Settings > app > AppSettingsSection. Displayed description text on Settings > app > AppSettingsSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "settings.updates.title": {
     "defaultMessage": "Updates"
@@ -4305,7 +4366,8 @@
     "defaultMessage": "Search skills..."
   },
   "skillsView.skillsDescription": {
-    "defaultMessage": "View installed skills that extend Goose capabilities. {shortcut} to search."
+    "defaultMessage": "View installed skills that extend __APP_NAME__ capabilities. {shortcut} to search.",
+    "description": "Pages: skills > SkillsView. Displayed skills Description text on skills > SkillsView. Preserve the ICU arguments and rich-text tags in this template."
   },
   "skillsView.skillsTitle": {
     "defaultMessage": "Skills"
@@ -4554,10 +4616,12 @@
     "defaultMessage": "Use other provider"
   },
   "telemetryConsentPrompt.description": {
-    "defaultMessage": "Would you like to share anonymous usage data to help improve goose? We never collect your conversations, code, or personal data."
+    "defaultMessage": "Would you like to share anonymous usage data to help improve __APP_NAME__? We never collect your conversations, code, or personal data.",
+    "description": "Pages: TelemetryConsentPrompt. Displayed description text on TelemetryConsentPrompt. Preserve the ICU arguments and rich-text tags in this template."
   },
   "telemetryConsentPrompt.heading": {
-    "defaultMessage": "Help improve goose"
+    "defaultMessage": "Help improve __APP_NAME__",
+    "description": "Pages: TelemetryConsentPrompt. Displayed heading text on TelemetryConsentPrompt. Preserve the ICU arguments and rich-text tags in this template."
   },
   "telemetryConsentPrompt.learnMore": {
     "defaultMessage": "Learn more"
@@ -4584,7 +4648,8 @@
     "defaultMessage": "Privacy"
   },
   "telemetrySettings.toggleDescription": {
-    "defaultMessage": "Help improve goose by sharing anonymous usage statistics."
+    "defaultMessage": "Help improve __APP_NAME__ by sharing anonymous usage statistics.",
+    "description": "Pages: Settings > app > TelemetrySettings. Displayed toggle Description text on Settings > app > TelemetrySettings. Preserve the ICU arguments and rich-text tags in this template."
   },
   "telemetrySettings.toggleLabel": {
     "defaultMessage": "Anonymous usage data"
@@ -4665,10 +4730,12 @@
     "defaultMessage": "Allow {toolName}?"
   },
   "toolConfirmation.gooseWouldLikeToCallWithName": {
-    "defaultMessage": "Goose would like to call {toolName}. Allow?"
+    "defaultMessage": "__APP_NAME__ would like to call {toolName}. Allow?",
+    "description": "Pages: ToolCallConfirmation. Displayed goose Would Like To Call With Name text on ToolCallConfirmation. Preserve the ICU arguments and rich-text tags in this template."
   },
   "updateSection.autoDownload": {
-    "defaultMessage": "Goose will download the update in the background and install it the next time you quit or restart."
+    "defaultMessage": "__APP_NAME__ will download the update in the background and install it the next time you quit or restart.",
+    "description": "Pages: Settings > app > UpdateSection. Displayed auto Download text on Settings > app > UpdateSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "updateSection.autoDownloadDisabledByEnv": {
     "defaultMessage": "Automatic downloads are disabled via the GOOSE_DISABLE_AUTO_DOWNLOAD environment variable."
@@ -4689,7 +4756,8 @@
     "defaultMessage": "Disable automatic update downloads"
   },
   "updateSection.disableAutoDownloadDesc": {
-    "defaultMessage": "When enabled, Goose will notify you of new versions but will not download them automatically."
+    "defaultMessage": "When enabled, __APP_NAME__ will notify you of new versions but will not download them automatically.",
+    "description": "Pages: Settings > app > UpdateSection. Displayed disable Auto Download Desc text on Settings > app > UpdateSection. Preserve the ICU arguments and rich-text tags in this template."
   },
   "updateSection.downloadNow": {
     "defaultMessage": "Download Now"

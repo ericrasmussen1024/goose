@@ -1,15 +1,15 @@
+import { brandText } from '../branding';
+import { createBrandTrayImage, getBrandAssetPath } from '../branding/native-assets';
 import { autoUpdater, UpdateInfo } from 'electron-updater';
 import {
   BrowserWindow,
   ipcMain,
-  nativeImage,
   Tray,
   app,
   Menu,
   MenuItemConstructorOptions,
   Notification,
 } from 'electron';
-import * as path from 'path';
 import * as fs from 'fs/promises';
 import log from './logger';
 import { githubUpdater, isInstallerManaged } from './githubUpdater';
@@ -652,8 +652,9 @@ export function setupAutoUpdater() {
 
     // Show native notification
     const notification = new Notification({
+      icon: getBrandAssetPath('app.png'),
       title: 'Update Ready',
-      body: `Version ${info.version} will be installed when you quit Goose. Click to install now.`,
+      body: brandText('desktop.utils.autoUpdater.text15', { value0: info.version }),
     });
     notification.show();
 
@@ -734,33 +735,16 @@ function updateTrayIcon(hasUpdate: boolean) {
     hasUpdate = false;
   }
 
-  const isDev = !app.isPackaged;
-  let iconPath: string;
-
-  if (hasUpdate) {
-    // Use icon with update indicator
-    if (isDev) {
-      iconPath = path.join(process.cwd(), 'src', 'images', 'iconTemplateUpdate.png');
-    } else {
-      iconPath = path.join(process.resourcesPath, 'images', 'iconTemplateUpdate.png');
-    }
-    trayRef.setToolTip('Goose - Update Available');
-  } else {
-    // Use normal icon
-    if (isDev) {
-      iconPath = path.join(process.cwd(), 'src', 'images', 'iconTemplate.png');
-    } else {
-      iconPath = path.join(process.resourcesPath, 'images', 'iconTemplate.png');
-    }
-    trayRef.setToolTip('Goose');
+  try {
+    trayRef.setImage(createBrandTrayImage(hasUpdate));
+  } catch (error) {
+    log.error('Could not update application tray artwork:', error);
   }
-
-  const icon = nativeImage.createFromPath(iconPath);
-  if (process.platform === 'darwin') {
-    // Mark as template for macOS to handle dark/light mode
-    icon.setTemplateImage(true);
-  }
-  trayRef.setImage(icon);
+  trayRef.setToolTip(
+    hasUpdate
+      ? brandText('desktop.utils.autoUpdater.text16')
+      : brandText('desktop.components.BaseChat.text1')
+  );
 
   // Update tray menu when icon changes
   updateTrayMenu(hasUpdate);

@@ -1,3 +1,4 @@
+import { brandMessage } from '../../../branding';
 import React, { useState, useEffect } from 'react';
 import { Button } from '../../ui/button';
 import { Loader2, Download, CheckCircle, AlertCircle } from 'lucide-react';
@@ -8,11 +9,6 @@ const i18n = defineMessages({
   disableAutoDownload: {
     id: 'updateSection.disableAutoDownload',
     defaultMessage: 'Disable automatic update downloads',
-  },
-  disableAutoDownloadDesc: {
-    id: 'updateSection.disableAutoDownloadDesc',
-    defaultMessage:
-      'When enabled, Goose will notify you of new versions but will not download them automatically.',
   },
   autoDownloadDisabledByEnv: {
     id: 'updateSection.autoDownloadDisabledByEnv',
@@ -79,21 +75,10 @@ const i18n = defineMessages({
     id: 'updateSection.downloadingUpdate',
     defaultMessage: 'Downloading update...',
   },
-  autoDownload: {
-    id: 'updateSection.autoDownload',
-    defaultMessage:
-      'Goose will download the update in the background and install it the next time you quit or restart.',
-  },
 });
 
 type UpdateStatus =
-  | 'idle'
-  | 'checking'
-  | 'downloading'
-  | 'installing'
-  | 'success'
-  | 'error'
-  | 'ready';
+  'idle' | 'checking' | 'downloading' | 'installing' | 'success' | 'error' | 'ready';
 
 interface UpdateInfo {
   currentVersion: string;
@@ -400,7 +385,7 @@ export default function UpdateSection() {
                 {intl.formatMessage(i18n.autoDownloadDisabledNote)}
               </p>
             ) : (
-              <p>{intl.formatMessage(i18n.autoDownload)}</p>
+              <p>{intl.formatMessage(brandMessage('updateSection.autoDownload'))}</p>
             )}
           </div>
         )}
@@ -424,7 +409,7 @@ export default function UpdateSection() {
                 {intl.formatMessage(i18n.disableAutoDownload)}
               </p>
               <p className="text-xs text-text-secondary mt-0.5">
-                {intl.formatMessage(i18n.disableAutoDownloadDesc)}
+                {intl.formatMessage(brandMessage('updateSection.disableAutoDownloadDesc'))}
               </p>
             </div>
           </label>

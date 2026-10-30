@@ -1,3 +1,4 @@
+import { brandMessage } from '../../branding';
 import { useState, useEffect, useCallback } from 'react';
 import {
   acpGetPrompt,
@@ -108,11 +109,6 @@ const i18n = defineMessages({
   promptEditingTitle: {
     id: 'promptsSettings.promptEditingTitle',
     defaultMessage: 'Prompt Editing',
-  },
-  promptEditingDescription: {
-    id: 'promptsSettings.promptEditingDescription',
-    defaultMessage:
-      "Customize the prompts that define goose's behavior in different contexts. These prompts use Jinja2 templating syntax. Be careful when modifying template variables, as incorrect changes can break functionality. Please share any improvements with the community.",
   },
   resetAll: {
     id: 'promptsSettings.resetAll',
@@ -343,7 +339,7 @@ export default function PromptsSettingsSection() {
                 {intl.formatMessage(i18n.promptEditingTitle)}
               </CardTitle>
               <p className="text-sm text-text-secondary mt-2">
-                {intl.formatMessage(i18n.promptEditingDescription)}
+                {intl.formatMessage(brandMessage('promptsSettings.promptEditingDescription'))}
               </p>
             </div>
             {hasCustomizedPrompts && (

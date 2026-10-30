@@ -5,6 +5,8 @@
  */
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
+const { withBrandMessages } = require('./branding.cjs');
 const { execFileSync } = require('child_process');
 
 const projectDir = path.join(__dirname, '..');
@@ -18,10 +20,17 @@ const files = fs.readdirSync(messagesDir).filter((f) => f.endsWith('.json'));
 
 for (const file of files) {
   const locale = path.basename(file, '.json');
-  const inFile = path.join(messagesDir, file).split(path.sep).join('/');
+  const source = JSON.parse(fs.readFileSync(path.join(messagesDir, file), 'utf8'));
+  const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'desktop-locale-'));
+  const inFile = path.join(temporary, file);
+  fs.writeFileSync(inFile, JSON.stringify(withBrandMessages(locale, source)));
   const outFile = path.join(compiledDir, `${locale}.json`);
-  execFileSync(process.execPath, [formatjs, 'compile', inFile, '--out-file', outFile], {
-    stdio: 'inherit',
-    cwd: projectDir,
-  });
+  try {
+    execFileSync(process.execPath, [formatjs, 'compile', inFile, '--out-file', outFile], {
+      stdio: 'inherit',
+      cwd: projectDir,
+    });
+  } finally {
+    fs.rmSync(temporary, { recursive: true, force: true });
+  }
 }

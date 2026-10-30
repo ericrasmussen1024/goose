@@ -1,3 +1,4 @@
+import { brandMessage } from '../../../branding';
 import { useState, useEffect, useCallback } from 'react';
 import { Switch } from '../../ui/switch';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/card';
@@ -23,10 +24,6 @@ const i18n = defineMessages({
   toggleLabel: {
     id: 'telemetrySettings.toggleLabel',
     defaultMessage: 'Anonymous usage data',
-  },
-  toggleDescription: {
-    id: 'telemetrySettings.toggleDescription',
-    defaultMessage: 'Help improve goose by sharing anonymous usage statistics.',
   },
   learnMore: {
     id: 'telemetrySettings.learnMore',
@@ -103,7 +100,7 @@ export default function TelemetrySettings() {
   const title = intl.formatMessage(i18n.title);
   const description = intl.formatMessage(i18n.description);
   const toggleLabel = intl.formatMessage(i18n.toggleLabel);
-  const toggleDescription = intl.formatMessage(i18n.toggleDescription);
+  const toggleDescription = intl.formatMessage(brandMessage('telemetrySettings.toggleDescription'));
 
   const learnMoreLink = (
     <button

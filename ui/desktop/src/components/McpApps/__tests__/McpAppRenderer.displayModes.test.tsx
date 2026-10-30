@@ -38,9 +38,11 @@ describe('McpAppRenderer display modes', () => {
   beforeEach(() => {
     electron.getAcpUrl = vi.fn(async () => 'ws://127.0.0.1:3000/acp');
     electron.getSecretKey = vi.fn(async () => 'secret');
-    window.matchMedia = vi
-      .fn()
-      .mockReturnValue({ matches: false }) as unknown as typeof window.matchMedia;
+    window.matchMedia = vi.fn().mockReturnValue({
+      matches: false,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    }) as unknown as typeof window.matchMedia;
     window.ResizeObserver = class {
       observe() {}
       unobserve() {}

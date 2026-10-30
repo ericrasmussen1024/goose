@@ -1,3 +1,4 @@
+import { brandMessage } from '../../../branding';
 import { useCallback, useEffect, useState } from 'react';
 import { KeyRound, Loader2, LogIn, RefreshCw, Trash2 } from 'lucide-react';
 import { toast } from 'react-toastify';
@@ -18,10 +19,6 @@ const i18n = defineMessages({
   title: {
     id: 'authSettings.title',
     defaultMessage: 'Provider Credentials',
-  },
-  description: {
-    id: 'authSettings.description',
-    defaultMessage: 'Manage provider credentials stored locally by goose.',
   },
   loading: {
     id: 'authSettings.loading',
@@ -45,7 +42,8 @@ const i18n = defineMessages({
   },
   activeProviderWarning: {
     id: 'authSettings.activeProviderWarning',
-    defaultMessage: 'This is the active provider. New requests may fail until you configure another credential.',
+    defaultMessage:
+      'This is the active provider. New requests may fail until you configure another credential.',
   },
   delete: {
     id: 'authSettings.delete',
@@ -202,7 +200,9 @@ export default function AuthSettingsSection() {
             <KeyRound className="h-4 w-4" />
             {intl.formatMessage(i18n.title)}
           </CardTitle>
-          <CardDescription>{intl.formatMessage(i18n.description)}</CardDescription>
+          <CardDescription>
+            {intl.formatMessage(brandMessage('authSettings.description'))}
+          </CardDescription>
         </CardHeader>
         <CardContent className="px-4 py-2">
           {loading ? (

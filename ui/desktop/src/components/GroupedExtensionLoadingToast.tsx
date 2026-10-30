@@ -1,3 +1,4 @@
+import { brandMessage } from '../branding';
 import { useState } from 'react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
 import { ChevronDown, ChevronUp, Loader2 } from 'lucide-react';
@@ -20,7 +21,8 @@ const i18n = defineMessages({
   },
   partiallyLoaded: {
     id: 'groupedExtensionLoadingToast.partiallyLoaded',
-    defaultMessage: 'Loaded {successCount}/{totalCount, plural, one {# extension} other {# extensions}}',
+    defaultMessage:
+      'Loaded {successCount}/{totalCount, plural, one {# extension} other {# extensions}}',
   },
   failedToLoad: {
     id: 'groupedExtensionLoadingToast.failedToLoad',
@@ -29,10 +31,6 @@ const i18n = defineMessages({
   failedToAddExtension: {
     id: 'groupedExtensionLoadingToast.failedToAddExtension',
     defaultMessage: 'Failed to add extension',
-  },
-  askGoose: {
-    id: 'groupedExtensionLoadingToast.askGoose',
-    defaultMessage: 'Ask goose',
   },
   copied: {
     id: 'groupedExtensionLoadingToast.copied',
@@ -158,7 +156,10 @@ export function GroupedExtensionLoadingToast({
                       {ext.status === 'error' && ext.error && (
                         <div className="ml-7 flex flex-col gap-2">
                           <div className="text-xs opacity-75 break-words">
-                            {formatExtensionErrorMessage(ext.error, intl.formatMessage(i18n.failedToAddExtension))}
+                            {formatExtensionErrorMessage(
+                              ext.error,
+                              intl.formatMessage(i18n.failedToAddExtension)
+                            )}
                           </div>
                           <div className="flex gap-2">
                             {ext.recoverHints && setView && (
@@ -173,7 +174,9 @@ export function GroupedExtensionLoadingToast({
                                   );
                                 }}
                               >
-                                {intl.formatMessage(i18n.askGoose)}
+                                {intl.formatMessage(
+                                  brandMessage('groupedExtensionLoadingToast.askGoose')
+                                )}
                               </Button>
                             )}
                             <Button
@@ -185,7 +188,9 @@ export function GroupedExtensionLoadingToast({
                                 setTimeout(() => setCopiedExtension(null), 2000);
                               }}
                             >
-                              {copiedExtension === ext.name ? intl.formatMessage(i18n.copied) : intl.formatMessage(i18n.copyError)}
+                              {copiedExtension === ext.name
+                                ? intl.formatMessage(i18n.copied)
+                                : intl.formatMessage(i18n.copyError)}
                             </Button>
                           </div>
                         </div>
@@ -202,7 +207,11 @@ export function GroupedExtensionLoadingToast({
             <CollapsibleTrigger asChild>
               <button
                 className="flex items-center justify-center gap-1 text-xs opacity-60 hover:opacity-100 transition-opacity mt-2 py-1.5 w-full"
-                aria-label={isOpen ? intl.formatMessage(i18n.collapseDetails) : intl.formatMessage(i18n.expandDetails)}
+                aria-label={
+                  isOpen
+                    ? intl.formatMessage(i18n.collapseDetails)
+                    : intl.formatMessage(i18n.expandDetails)
+                }
               >
                 {isOpen ? (
                   <>

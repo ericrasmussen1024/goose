@@ -1,3 +1,4 @@
+import { brandMessage } from '../branding';
 import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from './ui/dialog';
@@ -11,15 +12,6 @@ import PrivacyInfoModal from './onboarding/PrivacyInfoModal';
 import { defineMessages, useIntl } from '../i18n';
 
 const i18n = defineMessages({
-  heading: {
-    id: 'telemetryConsentPrompt.heading',
-    defaultMessage: 'Help improve goose',
-  },
-  description: {
-    id: 'telemetryConsentPrompt.description',
-    defaultMessage:
-      'Would you like to share anonymous usage data to help improve goose? We never collect your conversations, code, or personal data.',
-  },
   learnMore: {
     id: 'telemetryConsentPrompt.learnMore',
     defaultMessage: 'Learn more',
@@ -87,10 +79,12 @@ export default function TelemetryConsentPrompt() {
       >
         <DialogContent className="w-[440px]">
           <DialogHeader>
-            <DialogTitle className="text-center">{intl.formatMessage(i18n.heading)}</DialogTitle>
+            <DialogTitle className="text-center">
+              {intl.formatMessage(brandMessage('telemetryConsentPrompt.heading'))}
+            </DialogTitle>
           </DialogHeader>
           <p className="text-text-muted text-sm">
-            {intl.formatMessage(i18n.description)}{' '}
+            {intl.formatMessage(brandMessage('telemetryConsentPrompt.description'))}{' '}
             <button
               onClick={() => setShowPrivacyInfo(true)}
               className="text-blue-600 dark:text-blue-400 hover:underline"

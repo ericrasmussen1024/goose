@@ -1,3 +1,4 @@
+import { brandText } from '../branding';
 import { AppEvents } from '../constants/events';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { defineMessages, useIntl } from '../i18n';
@@ -30,7 +31,7 @@ import {
   type UserInput,
 } from '../types/message';
 import { useAutoSubmit } from '../hooks/useAutoSubmit';
-import { Goose } from './icons';
+import BrandIcon from '../branding/BrandIcon';
 import EnvironmentBadge from './GooseSidebar/EnvironmentBadge';
 import SessionActionsHeader from './SessionActionsHeader';
 import { isAcpRecovering, subscribeToAcpRecovery } from '../acp/acpConnection';
@@ -469,9 +470,9 @@ export default function BaseChat({
               rel="noopener noreferrer"
               className="no-drag flex flex-row items-center gap-1 hover:opacity-80 transition-opacity"
             >
-              <Goose className="size-5 goose-icon-animation" />
+              <BrandIcon className="size-5 goose-icon-animation" />
               <span className="text-sm leading-none text-text-secondary -translate-y-px">
-                goose
+                {brandText('desktop.components.BaseChat.text1')}
               </span>
             </a>
             <EnvironmentBadge className="translate-y-px" />

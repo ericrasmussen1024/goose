@@ -1,3 +1,4 @@
+import { brandMessage } from '../../branding';
 import { View, ViewOptions } from '../../utils/navigationUtils';
 import ExtensionsSection from '../settings/extensions/ExtensionsSection';
 import type { ExtensionConfig } from '../../types/extensions';
@@ -23,11 +24,6 @@ const i18n = defineMessages({
   heading: {
     id: 'extensionsView.heading',
     defaultMessage: 'Extensions',
-  },
-  description: {
-    id: 'extensionsView.description',
-    defaultMessage:
-      "These extensions use the Model Context Protocol (MCP). They can expand Goose's capabilities using three main components: Prompts, Resources, and Tools. {searchShortcut} to search.",
   },
   defaultNote: {
     id: 'extensionsView.defaultNote',
@@ -136,7 +132,9 @@ export default function ExtensionsView({
               <h1 className="text-4xl font-light">{intl.formatMessage(i18n.heading)}</h1>
             </div>
             <p className="text-sm text-text-secondary mb-2">
-              {intl.formatMessage(i18n.description, { searchShortcut: getSearchShortcutText() })}
+              {intl.formatMessage(brandMessage('extensionsView.description'), {
+                searchShortcut: getSearchShortcutText(),
+              })}
             </p>
             <p className="text-sm text-text-secondary mb-6">
               {intl.formatMessage(i18n.defaultNote)}

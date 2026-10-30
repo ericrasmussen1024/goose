@@ -1,0 +1,24 @@
+{
+  "icon": "app.svg",
+  "frames": [
+    "activity-01.svg",
+    "activity-02.svg",
+    "activity-03.svg",
+    "activity-04.svg",
+    "activity-05.svg",
+    "activity-06.svg"
+  ],
+  "frameMs": 155,
+  "imageRendering": "pixelated",
+  "window": { "default": "app.png", "win32": "app.ico" },
+  "tray": {
+    "default": "tray.png",
+    "darwin": "trayTemplate.png",
+    "win32": "tray.ico"
+  },
+  "trayUpdate": {
+    "default": "tray-update.png",
+    "darwin": "tray-updateTemplate.png",
+    "win32": "tray-update.ico"
+  }
+}

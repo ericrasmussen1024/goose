@@ -1,3 +1,4 @@
+import { brandMessage } from '../branding';
 import { useState, useEffect, useRef } from 'react';
 import type { ActionRequired } from '../types/message';
 import { defineMessages, useIntl } from '../i18n';
@@ -17,10 +18,6 @@ const i18n = defineMessages({
   expired: {
     id: 'elicitationRequest.expired',
     defaultMessage: 'This request has expired. The extension will need to ask again.',
-  },
-  defaultMessage: {
-    id: 'elicitationRequest.defaultMessage',
-    defaultMessage: 'Goose needs some information from you.',
   },
   submit: {
     id: 'elicitationRequest.submit',
@@ -186,7 +183,9 @@ export default function ElicitationRequest({
     <div className="flex flex-col">
       <div className="goose-message-content bg-background-secondary rounded-2xl rounded-b-none px-4 py-2 text-text-primary">
         <div className="flex justify-between items-start gap-4">
-          <span>{message || intl.formatMessage(i18n.defaultMessage)}</span>
+          <span>
+            {message || intl.formatMessage(brandMessage('elicitationRequest.defaultMessage'))}
+          </span>
         </div>
       </div>
       <div className="goose-message-content bg-background-primary border border-border-primary dark:border-gray-700 rounded-b-2xl px-4 py-3">

@@ -1,5 +1,7 @@
 import ExtensionItem from './ExtensionItem';
-import builtInExtensionsData from '../../../../built-in-extensions.json';
+import builtInExtensionsSource from '../../../../built-in-extensions.json';
+import { resolveExtensionBranding } from '../../../../branding';
+const builtInExtensionsData = builtInExtensionsSource.map(resolveExtensionBranding);
 import type { ExtensionConfig } from '../../../../types/extensions';
 import { FixedExtensionEntry } from '../../../ConfigContext';
 import { combineCmdAndArgs } from '../utils';

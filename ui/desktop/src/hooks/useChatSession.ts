@@ -1,5 +1,6 @@
+import { brandMessage } from '../branding';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import { defineMessages, useIntl } from '../i18n';
+import { useIntl } from '../i18n';
 import { AppEvents } from '../constants/events';
 import { toastError } from '../toasts';
 import { ChatState } from '../types/chatState';
@@ -42,17 +43,6 @@ function isClearCommand(message: string): boolean {
 function isSlashCommand(message: string): boolean {
   return message.trim().startsWith('/');
 }
-
-const i18n = defineMessages({
-  notificationTitle: {
-    id: 'chat.notification.taskComplete.title',
-    defaultMessage: 'Goose finished the task.',
-  },
-  notificationBody: {
-    id: 'chat.notification.taskComplete.body',
-    defaultMessage: 'Click here to bring Goose back into focus.',
-  },
-});
 
 export function useChatSession({
   sessionId,
@@ -122,8 +112,8 @@ export function useChatSession({
           ]);
           if (notificationsEnabled === true && !anyWindowFocused) {
             window.electron.showNotification({
-              title: intl.formatMessage(i18n.notificationTitle),
-              body: intl.formatMessage(i18n.notificationBody),
+              title: intl.formatMessage(brandMessage('chat.notification.taskComplete.title')),
+              body: intl.formatMessage(brandMessage('chat.notification.taskComplete.body')),
             });
           }
         } catch (notifyError) {

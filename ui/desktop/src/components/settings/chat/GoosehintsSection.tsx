@@ -1,3 +1,4 @@
+import { brandMessage } from '../../../branding';
 import { useState } from 'react';
 import { Button } from '../../ui/button';
 import { FolderKey } from 'lucide-react';
@@ -8,11 +9,6 @@ const i18n = defineMessages({
   title: {
     id: 'goosehintsSection.title',
     defaultMessage: 'Project Hints (.goosehints)',
-  },
-  description: {
-    id: 'goosehintsSection.description',
-    defaultMessage:
-      "Configure your project's .goosehints file to provide additional context to Goose",
   },
   configure: {
     id: 'goosehintsSection.configure',
@@ -31,7 +27,7 @@ export const GoosehintsSection = () => {
         <div className="flex-1">
           <h3 className="text-text-primary">{intl.formatMessage(i18n.title)}</h3>
           <p className="text-xs text-text-secondary mt-[2px]">
-            {intl.formatMessage(i18n.description)}
+            {intl.formatMessage(brandMessage('goosehintsSection.description'))}
           </p>
         </div>
         <Button

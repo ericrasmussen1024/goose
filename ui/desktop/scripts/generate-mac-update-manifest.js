@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const { Name } = require('./branding.cjs');
 
 const crypto = require('node:crypto');
 const fs = require('node:fs');
@@ -66,12 +67,12 @@ function yamlString(value) {
 function writeManifest({ directory, version }) {
   const files = [
     {
-      sourceName: 'Goose.zip',
-      updateName: 'Goose-darwin-arm64.zip',
+      sourceName: `${Name}.zip`,
+      updateName: `${Name}-darwin-arm64.zip`,
     },
     {
-      sourceName: 'Goose_intel_mac.zip',
-      updateName: 'Goose-darwin-x64.zip',
+      sourceName: `${Name}_intel_mac.zip`,
+      updateName: `${Name}-darwin-x64.zip`,
     },
   ];
 

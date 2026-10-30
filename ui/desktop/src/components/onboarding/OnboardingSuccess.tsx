@@ -1,3 +1,4 @@
+import { brandMessage } from '../../branding';
 import { useState } from 'react';
 import { Button } from '../ui/button';
 import PrivacyInfoModal from './PrivacyInfoModal';
@@ -14,17 +15,9 @@ const i18n = defineMessages({
     id: 'onboardingSuccess.connectedTo',
     defaultMessage: 'Connected to {providerName}',
   },
-  allSet: {
-    id: 'onboardingSuccess.allSet',
-    defaultMessage: "You're all set to start using goose.",
-  },
   privacyTitle: {
     id: 'onboardingSuccess.privacyTitle',
     defaultMessage: 'Privacy',
-  },
-  privacyDescription: {
-    id: 'onboardingSuccess.privacyDescription',
-    defaultMessage: 'Anonymous usage data helps improve goose. We never collect your conversations, code, or personal data.',
   },
   learnMore: {
     id: 'onboardingSuccess.learnMore',
@@ -76,13 +69,17 @@ export default function OnboardingSuccess({ providerName, onFinish }: Onboarding
                   ? intl.formatMessage(i18n.localModelReady)
                   : intl.formatMessage(i18n.connectedTo, { providerName })}
               </h2>
-              <p className="text-text-muted text-sm">{intl.formatMessage(i18n.allSet)}</p>
+              <p className="text-text-muted text-sm">
+                {intl.formatMessage(brandMessage('onboardingSuccess.allSet'))}
+              </p>
             </div>
 
             <div className="w-full p-4 bg-transparent border rounded-xl text-left mb-6">
-              <h3 className="font-medium text-text-default text-sm mb-1">{intl.formatMessage(i18n.privacyTitle)}</h3>
+              <h3 className="font-medium text-text-default text-sm mb-1">
+                {intl.formatMessage(i18n.privacyTitle)}
+              </h3>
               <p className="text-text-muted text-sm">
-                {intl.formatMessage(i18n.privacyDescription)}{' '}
+                {intl.formatMessage(brandMessage('onboardingSuccess.privacyDescription'))}{' '}
                 <button
                   onClick={() => setShowPrivacyInfo(true)}
                   className="text-blue-600 dark:text-blue-400 hover:underline"
@@ -97,7 +94,9 @@ export default function OnboardingSuccess({ providerName, onFinish }: Onboarding
                   onChange={(e) => setTelemetryOptIn(e.target.checked)}
                   className="rounded"
                 />
-                <span className="text-text-muted text-sm">{intl.formatMessage(i18n.shareUsageData)}</span>
+                <span className="text-text-muted text-sm">
+                  {intl.formatMessage(i18n.shareUsageData)}
+                </span>
               </label>
             </div>
 

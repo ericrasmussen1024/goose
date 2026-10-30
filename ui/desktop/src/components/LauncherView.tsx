@@ -1,13 +1,7 @@
+import { brandMessage } from '../branding';
 import { useRef, useState } from 'react';
-import { defineMessages, useIntl } from '../i18n';
+import { useIntl } from '../i18n';
 import { getInitialWorkingDir } from '../utils/workingDir';
-
-const messages = defineMessages({
-  placeholder: {
-    id: 'launcher.placeholder',
-    defaultMessage: 'Ask goose anything...',
-  },
-});
 
 export default function LauncherView() {
   const [query, setQuery] = useState('');
@@ -46,7 +40,7 @@ export default function LauncherView() {
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           className="w-full h-full bg-transparent text-text-primary text-xl px-6 outline-none placeholder:text-text-secondary"
-          placeholder={intl.formatMessage(messages.placeholder)}
+          placeholder={intl.formatMessage(brandMessage('launcher.placeholder'))}
           autoFocus
         />
       </form>

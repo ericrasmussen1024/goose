@@ -1,0 +1,24 @@
+{
+  "source": "app.svg",
+  "imageRendering": "pixelated",
+  "sourceSha256": "84c17d18a57a6039786c694b1e51ccafa7d3f457a4e3efedbf6b1296f3e1ffaf",
+  "exports": {
+    "app-512.png": "97b61363548056c56640a02934e0b2f19346207c7c3c2061a5101a80e44110db",
+    "app.icns": "d0dd3f4e25545f8e2f75d25f604e884c271d330873841005630c6a31bdf02cc9",
+    "app.ico": "9adbdb23b28836ff47af6c12353bf0a1a4e3227439fb84cca88efd27f187e0c7",
+    "app.png": "da00b6fb4a8f09ffea579b4f66f46530e1159e6834b94b81751ff6165e6a84c0",
+    "app@2x.png": "be51956b13d532f4af0c98dd7f743fa0bc25f648ff806382b17b39b4a7bfdab6",
+    "installer-header.bmp": "3ad03cae9b76351a9b9068d9b47b7a35257061425db9a53c9208464f0312db0d",
+    "installer-sidebar.bmp": "77d91eb8c50e80f174d20c281cf093557b9c6546d6c79fc00aaa715ecabeb0e2",
+    "tray-update.ico": "6519859d55b5b9d327fd3207fffecd8b312f28539a6c29b19de35fc46c5c4748",
+    "tray-update.png": "efa0b49f6f3a33ef4173eaa17f18addd0c8873522a2c3b6119a581266c77139b",
+    "tray-update@2x.png": "60454e34ff5b1c832eb6255625b37c3b6440e1d8df8dcbd50ba97ea9b36a3039",
+    "tray-updateTemplate.png": "c5a6a098ed72ae7f3983a0fe015eee90894b7034ab51d3a96812e3e42f717933",
+    "tray-updateTemplate@2x.png": "9046141136e164f5f3ed670761e848331c7cf13d2de2f44463823dc74df42f2a",
+    "tray.ico": "9adbdb23b28836ff47af6c12353bf0a1a4e3227439fb84cca88efd27f187e0c7",
+    "tray.png": "7160d576b2f1d028dcd37b40cbf8279e71b25fb7301d983f8d90f994793e1185",
+    "tray@2x.png": "80c3e9fc67f68ffa0e6722667af0927c5550aa1407f0c059d0f71bd01cf27b6f",
+    "trayTemplate.png": "3a891587ca9eb3008011801df6a95fe70687a16d7971e859028e1a1f5e7df2d3",
+    "trayTemplate@2x.png": "1c09913aea75f347a10e4a71f02ee4169128555d4dcb2b6fbad8f4c742ba6f53"
+  }
+}

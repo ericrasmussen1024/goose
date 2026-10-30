@@ -1,3 +1,4 @@
+import { brandMessage } from '../../../branding';
 import { useEffect, useState } from 'react';
 import { useConfig } from '../../ConfigContext';
 import { Switch } from '../../ui/switch';
@@ -9,10 +10,6 @@ const i18n = defineMessages({
   title: {
     id: 'liveVoiceSettings.title',
     defaultMessage: 'Live voice',
-  },
-  description: {
-    id: 'liveVoiceSettings.description',
-    defaultMessage: 'Have a real-time voice conversation with Goose',
   },
 });
 
@@ -37,7 +34,7 @@ export const LiveVoiceSettings = () => {
       <div>
         <h3 className="text-text-primary">{intl.formatMessage(i18n.title)}</h3>
         <p className="text-xs text-text-secondary max-w-md mt-[2px]">
-          {intl.formatMessage(i18n.description)}
+          {intl.formatMessage(brandMessage('liveVoiceSettings.description'))}
         </p>
       </div>
       <Switch

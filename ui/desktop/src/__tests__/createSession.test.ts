@@ -1,3 +1,4 @@
+import { brandText } from '../branding';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { createSession } from '../sessions';
 import type { ExtensionConfig } from '../types/extensions';
@@ -47,7 +48,10 @@ vi.mock('../acp/capabilities', () => ({
   getAcpFeatureCapabilities: vi.fn(),
 }));
 
-const testRecipe = vi.hoisted(() => ({ title: 'Test recipe', description: 'Recipe used in tests' }));
+const testRecipe = vi.hoisted(() => ({
+  title: 'Test recipe',
+  description: 'Recipe used in tests',
+}));
 
 const testSession: Session = {
   id: 'session-1',
@@ -209,9 +213,7 @@ describe('createSession ACP session extensions', () => {
 
     await expect(
       createSession('/tmp', { recipeDeeplink: 'goose://recipe?url=example' })
-    ).rejects.toThrow(
-      'The connected Goose server does not support securely scoped deeplink recipe parameters. Update the server and try again.'
-    );
+    ).rejects.toThrow(brandText('backend.unsupportedRecipeParameters'));
 
     expect(mockedCreateAcpSession).not.toHaveBeenCalled();
     expect(finishConfiguredRecipeParameterScope).toHaveBeenCalledOnce();

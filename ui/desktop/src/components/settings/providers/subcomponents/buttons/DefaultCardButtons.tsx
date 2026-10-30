@@ -1,3 +1,4 @@
+import { brandMessage } from '../../../../../branding';
 import { ConfigureSettingsButton, RocketButton } from './CardButtons';
 import type { ProviderDetails } from '../../../../../types/providers';
 import { defineMessages, useIntl } from '../../../../../i18n';
@@ -14,10 +15,6 @@ const i18n = defineMessages({
   deleteSettings: {
     id: 'defaultCardButtons.deleteSettings',
     defaultMessage: 'Delete {name} settings',
-  },
-  getStarted: {
-    id: 'defaultCardButtons.getStarted',
-    defaultMessage: 'Get started with goose!',
   },
 });
 
@@ -63,7 +60,7 @@ export default function DefaultCardButtons({
       {/*show Launch button for configured providers on onboarding page*/}
       {provider.is_configured && isOnboardingPage && (
         <RocketButton
-          tooltip={intl.formatMessage(i18n.getStarted)}
+          tooltip={intl.formatMessage(brandMessage('defaultCardButtons.getStarted'))}
           onClick={(e) => {
             e.stopPropagation();
             onLaunch(provider);

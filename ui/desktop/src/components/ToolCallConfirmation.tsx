@@ -1,3 +1,4 @@
+import { brandMessage } from '../branding';
 import type { ActionRequired } from '../types/message';
 import { defineMessages, useIntl } from '../i18n';
 import { snakeToTitleCase } from '../utils';
@@ -8,10 +9,6 @@ const i18n = defineMessages({
   allowToolCallWithName: {
     id: 'toolConfirmation.allowToolCallWithName',
     defaultMessage: 'Allow {toolName}?',
-  },
-  gooseWouldLikeToCallWithName: {
-    id: 'toolConfirmation.gooseWouldLikeToCallWithName',
-    defaultMessage: 'Goose would like to call {toolName}. Allow?',
   },
 });
 
@@ -44,7 +41,9 @@ export default function ToolConfirmation({
       <div className="bg-background-secondary px-4 py-2 text-text-primary">
         {prompt
           ? intl.formatMessage(i18n.allowToolCallWithName, { toolName: displayName })
-          : intl.formatMessage(i18n.gooseWouldLikeToCallWithName, { toolName: displayName })}
+          : intl.formatMessage(brandMessage('toolConfirmation.gooseWouldLikeToCallWithName'), {
+              toolName: displayName,
+            })}
       </div>
       <div className="px-4 pb-2">
         {prompt && <div className="py-2 text-sm text-amber-600 dark:text-amber-400">{prompt}</div>}

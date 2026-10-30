@@ -1,3 +1,4 @@
+import { brandMessage } from '../../branding';
 import { AppEvents } from '../../constants/events';
 import React, { useEffect, useState, useRef, useCallback, useMemo, startTransition } from 'react';
 import { defineMessages, useIntl } from '../../i18n';
@@ -68,10 +69,6 @@ const i18n = defineMessages({
   },
   chatHistory: { id: 'sessions.chatHistory', defaultMessage: 'Chat history' },
   importSession: { id: 'sessions.import', defaultMessage: 'Import Session' },
-  chatHistoryDesc: {
-    id: 'sessions.chatHistoryDesc',
-    defaultMessage: 'View and search your past conversations with Goose. {shortcut} to search.',
-  },
   searchPlaceholder: { id: 'sessions.searchPlaceholder', defaultMessage: 'Search history...' },
   errorLoading: { id: 'sessions.error.loading', defaultMessage: 'Error Loading Sessions' },
   tryAgain: { id: 'sessions.error.tryAgain', defaultMessage: 'Try Again' },
@@ -992,7 +989,9 @@ const SessionListView: React.FC<SessionListViewProps> = React.memo(({ onSelectSe
                 </div>
               </div>
               <p className="text-sm text-text-secondary mb-4">
-                {intl.formatMessage(i18n.chatHistoryDesc, { shortcut: getSearchShortcutText() })}
+                {intl.formatMessage(brandMessage('sessions.chatHistoryDesc'), {
+                  shortcut: getSearchShortcutText(),
+                })}
               </p>
               <label className="flex items-center gap-2 text-sm text-text-secondary mb-4 cursor-pointer w-fit">
                 <Switch

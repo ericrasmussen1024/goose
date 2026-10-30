@@ -1,3 +1,4 @@
+import { brandMessage } from '../../../branding';
 import { useState, useEffect } from 'react';
 import { Switch } from '../../ui/switch';
 import { Input } from '../../ui/input';
@@ -8,31 +9,13 @@ import { defineMessages, useIntl } from '../../../i18n';
 import { normalizeAcpHttpBaseUrl } from '../../../acp/url';
 
 const i18n = defineMessages({
-  title: {
-    id: 'externalBackendSection.title',
-    defaultMessage: 'External Backend (ACP)',
-  },
-  description: {
-    id: 'externalBackendSection.description',
-    defaultMessage:
-      'By default Goose starts a local backend. Use this to connect to an external ACP-compatible backend.',
-  },
   useExternalServer: {
     id: 'externalBackendSection.useExternalServer',
     defaultMessage: 'Use external backend',
   },
-  useExternalServerDescription: {
-    id: 'externalBackendSection.useExternalServerDescription',
-    defaultMessage: 'Connect to an ACP-compatible backend running elsewhere.',
-  },
   serverUrl: {
     id: 'externalBackendSection.serverUrl',
     defaultMessage: 'Backend Base URL',
-  },
-  serverUrlHelp: {
-    id: 'externalBackendSection.serverUrlHelp',
-    defaultMessage:
-      'Enter the HTTP(S) base URL. Goose checks /status and connects to /acp under this base.',
   },
   workingDir: {
     id: 'externalBackendSection.workingDir',
@@ -55,10 +38,6 @@ const i18n = defineMessages({
     id: 'externalBackendSection.secretKeyPlaceholder',
     defaultMessage: "Enter the server's secret key",
   },
-  secretKeyHelp: {
-    id: 'externalBackendSection.secretKeyHelp',
-    defaultMessage: 'The secret key configured on the external backend (GOOSE_SERVER__SECRET_KEY).',
-  },
   certFingerprint: {
     id: 'externalBackendSection.certFingerprint',
     defaultMessage: 'Certificate Fingerprint (optional)',
@@ -71,10 +50,6 @@ const i18n = defineMessages({
     id: 'externalBackendSection.certFingerprintHelp',
     defaultMessage:
       'Pin a specific TLS certificate fingerprint. If omitted, the certificate is trusted on first use (TOFU).',
-  },
-  restartNote: {
-    id: 'externalBackendSection.restartNote',
-    defaultMessage: 'Changes apply to new chat windows. Restart Goose to update existing windows.',
   },
   urlProtocolError: {
     id: 'externalBackendSection.urlProtocolError',
@@ -185,8 +160,10 @@ export default function ExternalBackendSection() {
     <section id="external-backend" className="space-y-4 pr-4 mt-1">
       <Card className="pb-2">
         <CardHeader className="pb-0">
-          <CardTitle>{intl.formatMessage(i18n.title)}</CardTitle>
-          <CardDescription>{intl.formatMessage(i18n.description)}</CardDescription>
+          <CardTitle>{intl.formatMessage(brandMessage('externalBackendSection.title'))}</CardTitle>
+          <CardDescription>
+            {intl.formatMessage(brandMessage('externalBackendSection.description'))}
+          </CardDescription>
         </CardHeader>
         <CardContent className="pt-4 space-y-4 px-4">
           <div className="flex items-center justify-between">
@@ -195,7 +172,9 @@ export default function ExternalBackendSection() {
                 {intl.formatMessage(i18n.useExternalServer)}
               </h3>
               <p className="text-xs text-text-secondary max-w-md mt-[2px]">
-                {intl.formatMessage(i18n.useExternalServerDescription)}
+                {intl.formatMessage(
+                  brandMessage('externalBackendSection.useExternalServerDescription')
+                )}
               </p>
             </div>
             <div className="flex items-center">
@@ -231,7 +210,7 @@ export default function ExternalBackendSection() {
                   </p>
                 )}
                 <p className="text-xs text-text-secondary">
-                  {intl.formatMessage(i18n.serverUrlHelp)}
+                  {intl.formatMessage(brandMessage('externalBackendSection.serverUrlHelp'))}
                 </p>
               </div>
 
@@ -267,7 +246,7 @@ export default function ExternalBackendSection() {
                   disabled={isSaving}
                 />
                 <p className="text-xs text-text-secondary">
-                  {intl.formatMessage(i18n.secretKeyHelp)}
+                  {intl.formatMessage(brandMessage('externalBackendSection.secretKeyHelp'))}
                 </p>
               </div>
 
@@ -292,7 +271,8 @@ export default function ExternalBackendSection() {
 
               <div className="bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-md p-3">
                 <p className="text-xs text-amber-800 dark:text-amber-200">
-                  <strong>Note:</strong> {intl.formatMessage(i18n.restartNote)}
+                  <strong>Note:</strong>{' '}
+                  {intl.formatMessage(brandMessage('externalBackendSection.restartNote'))}
                 </p>
               </div>
             </>

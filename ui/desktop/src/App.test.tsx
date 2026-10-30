@@ -4,6 +4,7 @@
  * @vitest-environment jsdom
  */
 import React from 'react';
+import { brandText, brandMessage } from './branding';
 import { screen, render, waitFor } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { AppInner, PairRouteWrapper, resolveSessionInitialMessage } from './App';
@@ -277,7 +278,9 @@ describe('App Component - Brand New State', () => {
       expect(mockElectron.reactReady).toHaveBeenCalled();
     });
 
-    expect(screen.getByText(/^Welcome to goose/)).toBeInTheDocument();
+    expect(
+      screen.getByText(brandMessage('onboardingGuard.welcomeTitle').defaultMessage)
+    ).toBeInTheDocument();
   });
 
   it('should not redirect when provider is configured', async () => {
@@ -312,9 +315,7 @@ describe('App Component - Brand New State', () => {
     });
 
     await waitFor(() => {
-      expect(mockToastError).toHaveBeenCalledWith(
-        'The connected Goose server does not support securely scoped deeplink recipe parameters. Update the server and try again.'
-      );
+      expect(mockToastError).toHaveBeenCalledWith(brandText('backend.unsupportedRecipeParameters'));
     });
     expect(mockNavigate).toHaveBeenCalledWith('/');
   });

@@ -5,6 +5,7 @@
  */
 const fs = require('fs');
 const path = require('path');
+const { withBrandMessages } = require('./branding.cjs');
 const { TYPE, parse } = require('@formatjs/icu-messageformat-parser');
 
 const requestedLocales = process.argv.slice(2);
@@ -73,7 +74,7 @@ function validateLocale(locale, en, enKeys) {
     };
   }
 
-  const translated = readJson(localePath);
+  const translated = withBrandMessages(locale, readJson(localePath));
   const localeKeys = Object.keys(translated).sort();
   const missing = enKeys.filter((key) => !Object.prototype.hasOwnProperty.call(translated, key));
   const extra = localeKeys.filter((key) => !Object.prototype.hasOwnProperty.call(en, key));

@@ -1,3 +1,4 @@
+import './lan-auth/preload';
 import Electron, { contextBridge, ipcRenderer, webUtils } from 'electron';
 import { Recipe } from './recipe';
 import type { GooseApp } from './types/apps';

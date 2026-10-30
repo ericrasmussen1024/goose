@@ -26,9 +26,6 @@
   "appsView.deleteConfirm": {
     "defaultMessage": "Delete \"{name}\"? This cannot be undone."
   },
-  "appsView.description": {
-    "defaultMessage": "Applicazioni dai tuoi server MCP e app create da goose stesso. Puoi chiedere di creare nuove app tramite l'interfaccia di chat e appariranno qui."
-  },
   "appsView.errorLoading": {
     "defaultMessage": "Errore durante il caricamento delle app: {error}"
   },
@@ -43,9 +40,6 @@
   },
   "appsView.loading": {
     "defaultMessage": "Caricamento app..."
-  },
-  "appsView.noAppsDescription": {
-    "defaultMessage": "Apri una chat e chiedi a goose l'app che desideri avere. Può crearne una per te e apparirà qui. Oppure, se qualcuno ha condiviso un'app, puoi importarla usando il pulsante qui sopra."
   },
   "appsView.noAppsTitle": {
     "defaultMessage": "Nessuna app disponibile"
@@ -82,9 +76,6 @@
   },
   "authSettings.deleted": {
     "defaultMessage": "Credenziale eliminata"
-  },
-  "authSettings.description": {
-    "defaultMessage": "Gestisci le credenziali dei provider memorizzate localmente da goose."
   },
   "authSettings.empty": {
     "defaultMessage": "Nessuna credenziale di provider memorizzata localmente è stata trovata."
@@ -170,12 +161,6 @@
   "cardButtons.launch": {
     "defaultMessage": "Avvia"
   },
-  "chat.notification.taskComplete.body": {
-    "defaultMessage": "Fai clic qui per riportare Goose in primo piano."
-  },
-  "chat.notification.taskComplete.title": {
-    "defaultMessage": "Goose ha completato l'attività."
-  },
   "chatInput.contextWindow": {
     "defaultMessage": "Finestra di contesto"
   },
@@ -224,14 +209,8 @@
   "chatInput.waitingForImages": {
     "defaultMessage": "In attesa del salvataggio delle immagini..."
   },
-  "chatSettings.modeDescription": {
-    "defaultMessage": "Scegli la modalità predefinita che Goose usa per le nuove sessioni. Le sessioni esistenti mantengono la loro modalità corrente."
-  },
   "chatSettings.modeTitle": {
     "defaultMessage": "Modalità predefinita"
-  },
-  "chatSettings.responseStylesDescription": {
-    "defaultMessage": "Scegli come Goose deve formattare e definire lo stile delle sue risposte"
   },
   "chatSettings.responseStylesTitle": {
     "defaultMessage": "Stili di risposta"
@@ -250,12 +229,6 @@
   },
   "configSettings.configurationEditor": {
     "defaultMessage": "Editor di configurazione"
-  },
-  "configSettings.description": {
-    "defaultMessage": "Modifica le impostazioni di configurazione di goose"
-  },
-  "configSettings.descriptionWithProvider": {
-    "defaultMessage": "Modifica le impostazioni di configurazione di goose (impostazioni correnti per {provider})"
   },
   "configSettings.done": {
     "defaultMessage": "Fatto"
@@ -325,9 +298,6 @@
   },
   "conversationLimitsDropdown.maxTurns": {
     "defaultMessage": "Numero massimo di turni"
-  },
-  "conversationLimitsDropdown.maxTurnsDescription": {
-    "defaultMessage": "Numero massimo di turni dell'agente prima che Goose richieda l'input dell'utente"
   },
   "costTracker.costUnavailable": {
     "defaultMessage": "Dati sui costi non disponibili per {model} ({inputTokens} token di input, {outputTokens} token di output)"
@@ -782,9 +752,6 @@
   "defaultCardButtons.editSettings": {
     "defaultMessage": "Modifica le impostazioni di {name}"
   },
-  "defaultCardButtons.getStarted": {
-    "defaultMessage": "Inizia con goose!"
-  },
   "defaultProviderSetupForm.apiHostLabel": {
     "defaultMessage": "Host API"
   },
@@ -962,9 +929,6 @@
   "elicitationRequest.cancelled": {
     "defaultMessage": "La richiesta di informazioni è stata annullata."
   },
-  "elicitationRequest.defaultMessage": {
-    "defaultMessage": "Goose ha bisogno di alcune informazioni da te."
-  },
   "elicitationRequest.expired": {
     "defaultMessage": "Questa richiesta è scaduta. L'estensione dovrà chiedere di nuovo."
   },
@@ -1006,9 +970,6 @@
   },
   "errorBoundary.errorGeneric": {
     "defaultMessage": "Si è verificato un errore."
-  },
-  "errorBoundary.errorWithVersion": {
-    "defaultMessage": "Si è verificato un errore in Goose v{version}."
   },
   "errorBoundary.heading": {
     "defaultMessage": "Honk!"
@@ -1196,9 +1157,6 @@
   "extensionsView.defaultNote": {
     "defaultMessage": "Le estensioni abilitate qui vengono usate come predefinite per le nuove chat. Puoi anche attivare o disattivare le estensioni attive durante una chat."
   },
-  "extensionsView.description": {
-    "defaultMessage": "Queste estensioni usano il Model Context Protocol (MCP). Possono ampliare le capacità di Goose tramite tre componenti principali: Prompt, Risorse e Strumenti. {searchShortcut} per cercare."
-  },
   "extensionsView.heading": {
     "defaultMessage": "Estensioni"
   },
@@ -1214,32 +1172,17 @@
   "externalBackendSection.certFingerprintPlaceholder": {
     "defaultMessage": "AA:BB:CC:... o sha256/base64"
   },
-  "externalBackendSection.description": {
-    "defaultMessage": "Per impostazione predefinita goose avvia un server per te; usa questa opzione per connetterti a un server goose esterno"
-  },
   "externalBackendSection.fingerprintRequiresHttps": {
     "defaultMessage": "Certificate fingerprint requires an https URL"
   },
-  "externalBackendSection.restartNote": {
-    "defaultMessage": "Le modifiche richiedono il riavvio di Goose per avere effetto. Le nuove finestre di chat si connetteranno al server esterno."
-  },
   "externalBackendSection.secretKey": {
     "defaultMessage": "Chiave segreta"
-  },
-  "externalBackendSection.secretKeyHelp": {
-    "defaultMessage": "La chiave segreta configurata sul server Goose (GOOSE_SERVER__SECRET_KEY)"
   },
   "externalBackendSection.secretKeyPlaceholder": {
     "defaultMessage": "Inserisci la chiave segreta del server"
   },
   "externalBackendSection.serverUrl": {
     "defaultMessage": "URL del server"
-  },
-  "externalBackendSection.serverUrlHelp": {
-    "defaultMessage": "Enter the HTTP(S) base URL. Goose checks /status and connects to /acp under this base."
-  },
-  "externalBackendSection.title": {
-    "defaultMessage": "Server Goose"
   },
   "externalBackendSection.urlBaseError": {
     "defaultMessage": "URL must be the backend base URL before /acp, without query parameters or fragments"
@@ -1252,9 +1195,6 @@
   },
   "externalBackendSection.useExternalServer": {
     "defaultMessage": "Usa un server esterno"
-  },
-  "externalBackendSection.useExternalServerDescription": {
-    "defaultMessage": "Connettiti a un server goose in esecuzione altrove (richiede il riavvio dell'app)"
   },
   "externalBackendSection.workingDir": {
     "defaultMessage": "Directory di lavoro remota (facoltativa)"
@@ -1270,9 +1210,6 @@
   },
   "goosehintsModal.developer": {
     "defaultMessage": "Developer"
-  },
-  "goosehintsModal.dialogDescription": {
-    "defaultMessage": "Fornisci ulteriore contesto sul tuo progetto per migliorare la comunicazione con Goose"
   },
   "goosehintsModal.dialogTitle": {
     "defaultMessage": "Configura i suggerimenti del progetto (.goosehints)"
@@ -1291,9 +1228,6 @@
   },
   "goosehintsModal.fileFound": {
     "defaultMessage": "File .goosehints trovato in: {filePath}"
-  },
-  "goosehintsModal.helpText1": {
-    "defaultMessage": ".goosehints è un file di testo usato per fornire ulteriore contesto sul tuo progetto e migliorare la comunicazione con Goose."
   },
   "goosehintsModal.helpText2": {
     "defaultMessage": "Assicurati che l'estensione {bold} sia abilitata nella pagina delle estensioni. Questa estensione è necessaria per usare .goosehints. Dovrai riavviare la sessione affinché gli aggiornamenti di .goosehints abbiano effetto."
@@ -1319,14 +1253,8 @@
   "goosehintsSection.configure": {
     "defaultMessage": "Configura"
   },
-  "goosehintsSection.description": {
-    "defaultMessage": "Configura il file .goosehints del tuo progetto per fornire ulteriore contesto a Goose"
-  },
   "goosehintsSection.title": {
     "defaultMessage": "Suggerimenti del progetto (.goosehints)"
-  },
-  "groupedExtensionLoadingToast.askGoose": {
-    "defaultMessage": "Chiedi a goose"
   },
   "groupedExtensionLoadingToast.collapseDetails": {
     "defaultMessage": "Comprimi i dettagli"
@@ -1445,9 +1373,6 @@
   "huggingFaceSignInPrompt.title": {
     "defaultMessage": "Hugging Face"
   },
-  "imagePreview.altText": {
-    "defaultMessage": "immagine goose"
-  },
   "imagePreview.clickToCollapse": {
     "defaultMessage": "Fai clic per comprimere"
   },
@@ -1492,9 +1417,6 @@
   },
   "importRecipeForm.recipeFileLabel": {
     "defaultMessage": "File della ricetta"
-  },
-  "importRecipeForm.reviewWarning": {
-    "defaultMessage": "Assicurati di esaminare il contenuto dei file delle ricette prima di aggiungerli alla tua interfaccia goose."
   },
   "importRecipeForm.schemaDescription": {
     "defaultMessage": "Il tuo file YAML o JSON deve seguire questa struttura. I campi obbligatori sono: title, description e instructions oppure prompt."
@@ -1604,14 +1526,8 @@
   "keyboardShortcuts.categoryApplication": {
     "defaultMessage": "Scorciatoie dell'applicazione"
   },
-  "keyboardShortcuts.categoryApplicationDescription": {
-    "defaultMessage": "Queste scorciatoie funzionano quando Goose è l'applicazione attiva"
-  },
   "keyboardShortcuts.categoryGlobal": {
     "defaultMessage": "Scorciatoie globali"
-  },
-  "keyboardShortcuts.categoryGlobalDescription": {
-    "defaultMessage": "Queste scorciatoie funzionano a livello di sistema, anche quando Goose non è in primo piano"
   },
   "keyboardShortcuts.categorySearch": {
     "defaultMessage": "Scorciatoie di ricerca"
@@ -1652,12 +1568,6 @@
   "keyboardShortcuts.findPreviousLabel": {
     "defaultMessage": "Trova precedente"
   },
-  "keyboardShortcuts.focusWindowDescription": {
-    "defaultMessage": "Porta la finestra di Goose in primo piano da qualsiasi punto"
-  },
-  "keyboardShortcuts.focusWindowLabel": {
-    "defaultMessage": "Metti a fuoco la finestra di Goose"
-  },
   "keyboardShortcuts.loading": {
     "defaultMessage": "Caricamento in corso..."
   },
@@ -1666,9 +1576,6 @@
   },
   "keyboardShortcuts.newChatLabel": {
     "defaultMessage": "Nuova chat"
-  },
-  "keyboardShortcuts.newChatWindowDescription": {
-    "defaultMessage": "Apri una nuova finestra di Goose"
   },
   "keyboardShortcuts.newChatWindowLabel": {
     "defaultMessage": "Nuova finestra di chat"
@@ -1706,9 +1613,6 @@
   "keyboardShortcuts.resetToDefaultsHeading": {
     "defaultMessage": "Ripristina i valori predefiniti"
   },
-  "keyboardShortcuts.restartDescription": {
-    "defaultMessage": "Le modifiche alle scorciatoie dell'applicazione (come Nuova chat, Impostazioni, ecc.) richiedono il riavvio di Goose per avere effetto. Le scorciatoie globali (Metti a fuoco la finestra, Avvio rapido) funzionano immediatamente."
-  },
   "keyboardShortcuts.restartRequired": {
     "defaultMessage": "Riavvio necessario"
   },
@@ -1736,9 +1640,6 @@
   "keyboardShortcuts.toggleNavigationLabel": {
     "defaultMessage": "Attiva/disattiva navigazione"
   },
-  "launcher.placeholder": {
-    "defaultMessage": "Chiedi qualsiasi cosa a goose..."
-  },
   "liveVoice.connecting": {
     "defaultMessage": "Connecting Live voice"
   },
@@ -1763,32 +1664,14 @@
   "liveVoice.unmute": {
     "defaultMessage": "Unmute microphone"
   },
-  "liveVoiceSettings.description": {
-    "defaultMessage": "Parla con Goose in tempo reale"
-  },
   "liveVoiceSettings.title": {
     "defaultMessage": "Voce in tempo reale"
-  },
-  "loadingGoose.compacting": {
-    "defaultMessage": "goose sta compattando la conversazione..."
-  },
-  "loadingGoose.idle": {
-    "defaultMessage": "goose ci sta lavorando…"
   },
   "loadingGoose.loadingConversation": {
     "defaultMessage": "caricamento conversazione..."
   },
   "loadingGoose.restartingAgent": {
     "defaultMessage": "riavvio della sessione..."
-  },
-  "loadingGoose.streaming": {
-    "defaultMessage": "goose ci sta lavorando…"
-  },
-  "loadingGoose.thinking": {
-    "defaultMessage": "goose sta pensando…"
-  },
-  "loadingGoose.waiting": {
-    "defaultMessage": "goose è in attesa…"
   },
   "localInferenceSettings.deleteConfirm": {
     "defaultMessage": "Eliminare questo modello? Potrai scaricarlo di nuovo in seguito."
@@ -2429,20 +2312,11 @@
   "onboardingGuard.checkProviderErrorDescription": {
     "defaultMessage": "Il server potrebbe essere in fase di avvio o temporaneamente non disponibile."
   },
-  "onboardingGuard.checkProviderErrorTitle": {
-    "defaultMessage": "Impossibile connettersi al server Goose"
-  },
   "onboardingGuard.retry": {
     "defaultMessage": "Riprova"
   },
   "onboardingGuard.welcomeDescription": {
     "defaultMessage": "Il tuo agente IA locale. Collega un provider di modelli IA per iniziare."
-  },
-  "onboardingGuard.welcomeTitle": {
-    "defaultMessage": "Benvenuto in goose"
-  },
-  "onboardingSuccess.allSet": {
-    "defaultMessage": "Tutto è pronto per iniziare a usare goose."
   },
   "onboardingSuccess.connectedTo": {
     "defaultMessage": "Connesso a {providerName}"
@@ -2455,9 +2329,6 @@
   },
   "onboardingSuccess.localModelReady": {
     "defaultMessage": "Modello locale pronto"
-  },
-  "onboardingSuccess.privacyDescription": {
-    "defaultMessage": "I dati di utilizzo anonimi aiutano a migliorare goose. Non raccogliamo mai le tue conversazioni, il tuo codice o i tuoi dati personali."
   },
   "onboardingSuccess.privacyTitle": {
     "defaultMessage": "Privacy"
@@ -2624,12 +2495,6 @@
   "privacyInfoModal.collectSession": {
     "defaultMessage": "Metriche della sessione (durata, numero di interazioni, utilizzo di token)"
   },
-  "privacyInfoModal.collectVersion": {
-    "defaultMessage": "Versione di goose e metodo di installazione"
-  },
-  "privacyInfoModal.description": {
-    "defaultMessage": "I dati di utilizzo anonimi ci aiutano a capire come viene usato goose e a individuare le aree di miglioramento."
-  },
   "privacyInfoModal.neverCollect": {
     "defaultMessage": "Non raccogliamo mai le tue conversazioni, il tuo codice, gli argomenti degli strumenti, i messaggi di errore o alcun dato personale. Puoi modificare questa impostazione in qualsiasi momento in Impostazioni."
   },
@@ -2698,9 +2563,6 @@
   },
   "promptsSettings.failedToSavePrompt": {
     "defaultMessage": "Impossibile salvare il prompt"
-  },
-  "promptsSettings.promptEditingDescription": {
-    "defaultMessage": "Personalizza i prompt che definiscono il comportamento di goose in diversi contesti. Questi prompt usano la sintassi dei template Jinja2. Fai attenzione quando modifichi le variabili dei template, poiché modifiche errate possono compromettere le funzionalità. Condividi eventuali miglioramenti con la community."
   },
   "promptsSettings.promptEditingTitle": {
     "defaultMessage": "Modifica prompt"
@@ -2789,9 +2651,6 @@
   "providerConfigForm.signingIn": {
     "defaultMessage": "Accesso in corso..."
   },
-  "providerConfigurationModal.addApiKeyDescription": {
-    "defaultMessage": "Aggiungi la tua chiave o le tue chiavi API per questo provider da integrare in goose"
-  },
   "providerConfigurationModal.browserWindowHint": {
     "defaultMessage": "Si aprirà una finestra del browser per completare l'accesso."
   },
@@ -2824,9 +2683,6 @@
   },
   "providerConfigurationModal.errorTitle": {
     "defaultMessage": "Errore"
-  },
-  "providerConfigurationModal.externalSetupIntro": {
-    "defaultMessage": "Questo provider è configurato al di fuori di goose. Segui questi passaggi:"
   },
   "providerConfigurationModal.goBack": {
     "defaultMessage": "Torna indietro"
@@ -2908,9 +2764,6 @@
   },
   "providerSettings.loadingProviders": {
     "defaultMessage": "Caricamento provider..."
-  },
-  "providerSettings.onboardingDescription": {
-    "defaultMessage": "Seleziona un provider di modelli IA per iniziare con goose. Dovrai usare le chiavi API generate da ciascun provider, che verranno crittografate e archiviate localmente. Puoi cambiare provider in qualsiasi momento nelle impostazioni."
   },
   "providerSettings.otherProviders": {
     "defaultMessage": "Altri provider"
@@ -3839,9 +3692,6 @@
   "sessions.chatHistory": {
     "defaultMessage": "Cronologia chat"
   },
-  "sessions.chatHistoryDesc": {
-    "defaultMessage": "Visualizza e cerca le tue conversazioni passate con Goose. {shortcut} per cercare."
-  },
   "sessions.close": {
     "defaultMessage": "Chiudi"
   },
@@ -3932,9 +3782,6 @@
   "sessions.toast.updated": {
     "defaultMessage": "Descrizione della sessione aggiornata correttamente"
   },
-  "settings.appearance.description": {
-    "defaultMessage": "Configura l'aspetto di goose sul tuo sistema"
-  },
   "settings.appearance.title": {
     "defaultMessage": "Aspetto"
   },
@@ -3947,14 +3794,8 @@
   "settings.costTracking.title": {
     "defaultMessage": "Monitoraggio dei costi"
   },
-  "settings.dockIcon.description": {
-    "defaultMessage": "Mostra goose nel dock"
-  },
   "settings.dockIcon.title": {
     "defaultMessage": "Icona del dock"
-  },
-  "settings.help.description": {
-    "defaultMessage": "Aiutaci a migliorare goose segnalando problemi o richiedendo nuove funzionalità"
   },
   "settings.help.reportBug": {
     "defaultMessage": "Segnala un bug"
@@ -3964,9 +3805,6 @@
   },
   "settings.help.title": {
     "defaultMessage": "Guida e feedback"
-  },
-  "settings.language.description": {
-    "defaultMessage": "Scegli la lingua di visualizzazione per goose"
   },
   "settings.language.english": {
     "defaultMessage": "English"
@@ -4022,9 +3860,6 @@
   "settings.language.zhTW": {
     "defaultMessage": "Cinese (tradizionale)"
   },
-  "settings.menuBarIcon.description": {
-    "defaultMessage": "Mostra goose nella barra dei menu"
-  },
   "settings.menuBarIcon.title": {
     "defaultMessage": "Icona della barra dei menu"
   },
@@ -4043,9 +3878,6 @@
   "settings.notifications.modal.macStep2": {
     "defaultMessage": "Fai clic su Notifiche"
   },
-  "settings.notifications.modal.macStep3": {
-    "defaultMessage": "Trova e seleziona goose nell'elenco delle applicazioni"
-  },
   "settings.notifications.modal.macStep4": {
     "defaultMessage": "Abilita le notifiche e regola le impostazioni come preferisci"
   },
@@ -4061,17 +3893,11 @@
   "settings.notifications.modal.winStep2": {
     "defaultMessage": "Vai a Sistema > Notifiche"
   },
-  "settings.notifications.modal.winStep3": {
-    "defaultMessage": "Trova e seleziona goose nell'elenco delle applicazioni"
-  },
   "settings.notifications.modal.winStep4": {
     "defaultMessage": "Attiva le notifiche e regola le impostazioni come preferisci"
   },
   "settings.notifications.openSettings": {
     "defaultMessage": "Apri Impostazioni"
-  },
-  "settings.notifications.task.description": {
-    "defaultMessage": "Notifica quando Goose completa un'attività mentre la finestra è in secondo piano"
   },
   "settings.notifications.task.title": {
     "defaultMessage": "Notifiche di completamento attività"
@@ -4079,20 +3905,11 @@
   "settings.notifications.title": {
     "defaultMessage": "Notifiche"
   },
-  "settings.preventSleep.description": {
-    "defaultMessage": "Mantieni il computer attivo mentre goose esegue un'attività (lo schermo può comunque bloccarsi)"
-  },
   "settings.preventSleep.title": {
     "defaultMessage": "Impedisci la sospensione"
   },
-  "settings.theme.description": {
-    "defaultMessage": "Personalizza l'aspetto e lo stile di goose"
-  },
   "settings.theme.title": {
     "defaultMessage": "Tema"
-  },
-  "settings.updates.description": {
-    "defaultMessage": "Controlla e installa gli aggiornamenti per mantenere goose sempre al meglio"
   },
   "settings.updates.title": {
     "defaultMessage": "Aggiornamenti"
@@ -4165,9 +3982,6 @@
   },
   "skillsView.searchSkillsPlaceholder": {
     "defaultMessage": "Cerca competenze..."
-  },
-  "skillsView.skillsDescription": {
-    "defaultMessage": "Visualizza le competenze installate che estendono le funzionalità di Goose. {shortcut} per cercare."
   },
   "skillsView.skillsTitle": {
     "defaultMessage": "Competenze"
@@ -4415,12 +4229,6 @@
   "switchModelModal.useOtherProvider": {
     "defaultMessage": "Usa un altro provider"
   },
-  "telemetryConsentPrompt.description": {
-    "defaultMessage": "Vuoi condividere dati di utilizzo anonimi per aiutare a migliorare goose? Non raccogliamo mai le tue conversazioni, il tuo codice o i tuoi dati personali."
-  },
-  "telemetryConsentPrompt.heading": {
-    "defaultMessage": "Aiuta a migliorare goose"
-  },
   "telemetryConsentPrompt.learnMore": {
     "defaultMessage": "Scopri di più"
   },
@@ -4444,9 +4252,6 @@
   },
   "telemetrySettings.title": {
     "defaultMessage": "Privacy"
-  },
-  "telemetrySettings.toggleDescription": {
-    "defaultMessage": "Aiuta a migliorare goose condividendo statistiche di utilizzo anonime."
   },
   "telemetrySettings.toggleLabel": {
     "defaultMessage": "Dati di utilizzo anonimi"
@@ -4526,12 +4331,6 @@
   "toolConfirmation.allowToolCallWithName": {
     "defaultMessage": "Consentire {toolName}?"
   },
-  "toolConfirmation.gooseWouldLikeToCallWithName": {
-    "defaultMessage": "Goose desidera richiamare {toolName}. Consentire?"
-  },
-  "updateSection.autoDownload": {
-    "defaultMessage": "Goose scaricherà l'aggiornamento in background e lo installerà al prossimo arresto o riavvio."
-  },
   "updateSection.autoDownloadDisabledByEnv": {
     "defaultMessage": "I download automatici sono disabilitati tramite la variabile d'ambiente GOOSE_DISABLE_AUTO_DOWNLOAD."
   },
@@ -4549,9 +4348,6 @@
   },
   "updateSection.disableAutoDownload": {
     "defaultMessage": "Disabilita i download automatici degli aggiornamenti"
-  },
-  "updateSection.disableAutoDownloadDesc": {
-    "defaultMessage": "Se abilitato, Goose ti avviserà delle nuove versioni ma non le scaricherà automaticamente."
   },
   "updateSection.downloadNow": {
     "defaultMessage": "Scarica ora"
