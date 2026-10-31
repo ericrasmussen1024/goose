@@ -4,9 +4,15 @@ import config from './config.json';
 import { LanAuthService } from './service';
 import { LAN_AUTH_CHANNELS } from './types';
 
+interface AppWindows {
+  requireStateReader: (event: IpcMainInvokeEvent) => BrowserWindow;
+  getWindows: () => BrowserWindow[];
+}
+
 export function registerLanAuth(
   requireRenderer: (event: IpcMainInvokeEvent) => BrowserWindow,
-  getWindows: () => BrowserWindow[]
+  getWindows: () => BrowserWindow[],
+  appWindows: AppWindows
 ): LanAuthService {
   let wasAuthenticated = false;
   const auth = new LanAuthService(
@@ -16,6 +22,11 @@ export function registerLanAuth(
     (state) => {
       const locked = wasAuthenticated && state.user === null;
       wasAuthenticated = state.user !== null;
+      for (const win of appWindows.getWindows()) {
+        if (win.isDestroyed()) continue;
+        if (locked) win.destroy();
+        else win.webContents.send(LAN_AUTH_CHANNELS.changed, state);
+      }
       for (const win of getWindows()) {
         if (win.isDestroyed()) continue;
         win.webContents.send(LAN_AUTH_CHANNELS.changed, state);
@@ -26,7 +37,7 @@ export function registerLanAuth(
   );
 
   ipcMain.handle(LAN_AUTH_CHANNELS.state, (event) => {
-    requireRenderer(event);
+    appWindows.requireStateReader(event);
     auth.isAuthenticated();
     return auth.state();
   });

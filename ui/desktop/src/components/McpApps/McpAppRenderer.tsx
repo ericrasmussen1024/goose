@@ -371,12 +371,12 @@ function GooseAppFrame({
   useEffect(() => {
     const bridge = bridgeRef.current;
     if (!connected || !bridge) return;
-    void Promise.resolve(bridge.sendSandboxResourceReady({ html, csp: sandbox.csp })).catch(
+    void Promise.resolve(bridge.sendSandboxResourceReady({ html, csp: sandbox.csp, sandbox: sandbox.permissions })).catch(
       (error: unknown) => {
         onErrorRef.current(error instanceof Error ? error : new Error(String(error)));
       }
     );
-  }, [connected, html, sandbox.csp]);
+  }, [connected, html, sandbox.csp, sandbox.permissions]);
 
   useEffect(() => {
     const bridge = bridgeRef.current;
@@ -514,6 +514,7 @@ export default function McpAppRenderer({
   onDisplayModeChange,
 }: McpAppRendererProps) {
   const intl = useIntl();
+  const [dismissed, setDismissed] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -886,10 +887,12 @@ export default function McpAppRenderer({
     if (!readySandboxUrl) return null;
     return {
       url: readySandboxUrl,
-      permissions: meta.permissions || DEFAULT_SANDBOX_PERMISSIONS,
+      permissions: (resourceUri === 'ui://play-doom/mcp-app.html'
+          ? `${meta.permissions || DEFAULT_SANDBOX_PERMISSIONS} allow-pointer-lock`
+          : meta.permissions || DEFAULT_SANDBOX_PERMISSIONS),
       csp: mcpUiCsp,
     };
-  }, [readySandboxUrl, meta.permissions, mcpUiCsp]);
+  }, [readySandboxUrl, meta.permissions, mcpUiCsp, resourceUri, extensionName]);
 
   const hostContext = useMemo((): McpUiHostContext => {
     const context: McpUiHostContext = {
@@ -939,6 +942,12 @@ export default function McpAppRenderer({
   const isError = state.status === 'error';
   const isReady = state.status === 'ready';
 
+  const closeApp = () => {
+    // Exit fullscreen/PiP, then unmount the MCP App iframe.
+    changeDisplayMode('inline');
+    setDismissed(true);
+  };
+
   const renderContent = () => {
     if (isError) {
       return (
@@ -987,8 +996,7 @@ export default function McpAppRenderer({
     );
   };
 
-  const showControls =
-    !isStandalone && !isError && (appSupportsFullscreen || appSupportsPip || isFullscreen || isPip);
+  const showControls = !isStandalone && !isError && !dismissed;
 
   const fullscreenTitle = useMemo(() => {
     if (appTitle) return appTitle;
@@ -1016,6 +1024,9 @@ export default function McpAppRenderer({
             <PictureInPicture2 size={16} />
           </button>
         )}
+        <button type="button" onClick={closeApp}
+          className="no-drag cursor-pointer rounded-md px-2 py-1 text-sm text-text-secondary hover:text-text-primary"
+          title="Close app" aria-label="Close app">Close app</button>
         <button
           ref={fullscreenCloseRef}
           onClick={() => changeDisplayMode('inline')}
@@ -1041,6 +1052,9 @@ export default function McpAppRenderer({
     // Inline mode — show controls on hover or keyboard focus
     return (
       <div className="absolute top-2 right-2 z-10 flex gap-1 opacity-0 transition-opacity group-hover/mcp-app:opacity-100 focus-within:opacity-100">
+        <button type="button" onClick={closeApp}
+          className="cursor-pointer rounded-md bg-black/40 p-1.5 text-white hover:bg-black/60"
+          title="Close app" aria-label="Close app"><X size={14} /></button>
         {appSupportsFullscreen && (
           <button
             onClick={() => changeDisplayMode('fullscreen')}
@@ -1084,7 +1098,7 @@ export default function McpAppRenderer({
         ? pipPanelStyle(pip.geometry)
         : {
             width: '100%',
-            height: `${effectiveInlineHeight}px`,
+            height: `${dismissed ? 52 : effectiveInlineHeight}px`,
           }),
   };
 
@@ -1113,7 +1127,7 @@ export default function McpAppRenderer({
             {...pip}
             title={fullscreenTitle}
             onFullscreen={appSupportsFullscreen ? () => changeDisplayMode('fullscreen') : undefined}
-            onClose={() => changeDisplayMode('inline')}
+            onClose={closeApp}
           />
         )}
         <div
@@ -1131,7 +1145,30 @@ export default function McpAppRenderer({
             )}
           >
             {!isPip && renderDisplayModeControls()}
-            {renderContent()}
+            <div
+              className={
+                dismissed
+                  ? 'pointer-events-none invisible absolute left-0 top-0 w-full'
+                  : 'relative h-full w-full'
+              }
+              style={dismissed ? { height: `${effectiveInlineHeight}px` } : undefined}
+              aria-hidden={dismissed}
+            >
+              {renderContent()}
+            </div>
+            {dismissed && (
+              <div className="absolute inset-0 z-20 flex items-center justify-between gap-3 bg-background-primary px-3 text-sm">
+                <span>App hidden</span>
+                <button
+                  type="button"
+                  className="cursor-pointer underline"
+                  onClick={() => setDismissed(false)}
+                  aria-label="Reopen app"
+                >
+                  Reopen
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

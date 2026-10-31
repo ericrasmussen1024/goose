@@ -62,14 +62,11 @@ import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-insta
 import { openExternalUrl } from './utils/openExternalUrl';
 import { buildCSP, leaseBackendOrigin, shouldApplyRendererCsp } from './utils/csp';
 import { resolveWorkingDir } from './utils/workingDir';
-import {
-  DesktopFileAccess,
-  isAuthorizedFileAccessRequest,
-  readSelectedRecipe,
-} from './desktopFileAccess';
+import { DesktopFileAccess, readSelectedRecipe } from './desktopFileAccess';
 import { getWindowIconFilename } from './utils/windowIcon';
 import { createBrandTrayImage, getBrandAssetPath } from './branding/native-assets';
 import { registerLanAuth } from './lan-auth/main';
+import { requireDesktopRendererWindow } from './lan-auth/window-access';
 
 const windowIconPath = getBrandAssetPath(getWindowIconFilename(process.platform));
 
@@ -960,33 +957,34 @@ let appConfig = {
 
 const windowMap = new Map<number, BrowserWindow>();
 const appWindows = new Map<string, BrowserWindow>();
+const standaloneAppWindows = new Map<number, BrowserWindow>();
 const desktopFileAccess = new DesktopFileAccess();
 
 function requireRegularRendererWindow(event: IpcMainInvokeEvent): BrowserWindow {
-  const senderWindow = BrowserWindow.fromWebContents(event.sender);
-  const senderFrame = event.senderFrame;
-  if (
-    !senderWindow ||
-    !senderFrame ||
-    !isAuthorizedFileAccessRequest(
-      {
-        isRegisteredWindow: windowMap.get(senderWindow.id) === senderWindow,
-        isMainFrame: senderFrame === event.sender.mainFrame,
-        rendererUrl: senderFrame.url,
-      },
-      getAppUrl()
-    )
-  ) {
-    throw new Error('This renderer is not authorized for local file access');
-  }
-  return senderWindow;
+  return requireDesktopRendererWindow(
+    event,
+    (window) => windowMap.get(window.id) === window,
+    getAppUrl()
+  );
+}
+
+function requireSessionRendererWindow(event: IpcMainInvokeEvent): BrowserWindow {
+  return requireDesktopRendererWindow(
+    event,
+    (window) =>
+      windowMap.get(window.id) === window || standaloneAppWindows.get(window.id) === window,
+    getAppUrl()
+  );
 }
 
 function getRegularWindows(): BrowserWindow[] {
   return [...windowMap.values()].filter((w) => !w.isDestroyed());
 }
 
-const lanAuth = registerLanAuth(requireRegularRendererWindow, getRegularWindows);
+const lanAuth = registerLanAuth(requireRegularRendererWindow, getRegularWindows, {
+  requireStateReader: requireSessionRendererWindow,
+  getWindows: () => [...standaloneAppWindows.values()],
+});
 
 const gooseServeLeases = new GooseServeLeaseRegistry(log);
 
@@ -1968,7 +1966,7 @@ ipcMain.handle('set-setting', (_event, key: SettingKey, value: unknown) => {
 });
 
 ipcMain.handle('get-secret-key', (event) => {
-  requireRegularRendererWindow(event);
+  requireSessionRendererWindow(event);
   if (!lanAuth.isAuthenticated()) return null;
   const windowId = BrowserWindow.fromWebContents(event.sender)?.id;
   if (!windowId) {
@@ -1978,7 +1976,7 @@ ipcMain.handle('get-secret-key', (event) => {
 });
 
 ipcMain.handle('get-acp-url', async (event) => {
-  requireRegularRendererWindow(event);
+  requireSessionRendererWindow(event);
   if (!lanAuth.isAuthenticated()) return null;
   const windowId = BrowserWindow.fromWebContents(event.sender)?.id;
   if (!windowId) {
@@ -2959,13 +2957,12 @@ async function appMain() {
 
   ipcMain.handle('launch-app', async (event, gooseApp: GooseApp) => {
     try {
+      const launchingWindow = requireRegularRendererWindow(event);
+      if (!lanAuth.isAuthenticated()) {
+        throw new Error('Sign in to the desktop before opening an app.');
+      }
       if (isRetiredGooseChatApp(gooseApp)) {
         throw new Error('This built-in Chat app is no longer supported.');
-      }
-
-      const launchingWindow = BrowserWindow.fromWebContents(event.sender);
-      if (!launchingWindow) {
-        throw new Error('Could not find launching window');
       }
 
       const launchingWindowId = launchingWindow.id;
@@ -2985,6 +2982,9 @@ async function appMain() {
         undefined,
         app.getPath('home')
       );
+      if (!lanAuth.isAuthenticated() || launchingWindow.isDestroyed()) {
+        throw new Error('The desktop session ended before the app could open.');
+      }
       const appWindow = new BrowserWindow({
         title: formatAppName(gooseApp.name),
         width: gooseApp.width ?? 800,
@@ -3003,6 +3003,7 @@ async function appMain() {
               GOOSE_LOCALE: getConfiguredGooseLocale(),
               GOOSE_WORKING_DIR: workingDir,
               GOOSE_VERSION: version,
+              GOOSE_WINDOW_ROLE: 'app',
             }),
           ],
           partition: 'persist:goose',
@@ -3012,10 +3013,12 @@ async function appMain() {
       gooseServeLeases.attachWindow(appWindow.id, launchingGooseServeLease);
 
       appWindows.set(gooseApp.name, appWindow);
+      standaloneAppWindows.set(appWindow.id, appWindow);
 
       appWindow.on('closed', () => {
         void gooseServeLeases.releaseWindow(appWindow.id);
-        appWindows.delete(gooseApp.name);
+        standaloneAppWindows.delete(appWindow.id);
+        if (appWindows.get(gooseApp.name) === appWindow) appWindows.delete(gooseApp.name);
       });
 
       const extensionName = gooseApp.mcpServers?.[0] ?? '';
@@ -3030,7 +3033,7 @@ async function appMain() {
 
       url.hash = `/standalone-app?${searchParams.toString()}`;
       await appWindow.loadURL(formatUrl(url));
-      appWindow.show();
+      if (!appWindow.isDestroyed()) appWindow.show();
     } catch (error) {
       console.error('Failed to launch app:', error);
       throw error;

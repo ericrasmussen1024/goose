@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { LanAccountButton, LanAuthGate } from './LanAuthGate';
 import type { LanAuthState } from './types';
 const initial: LanAuthState = {
@@ -15,7 +15,9 @@ const authenticated: LanAuthState = {
   user: { id: 1, username: 'eric', allowedModels: [], expiresAt: '2099-01-01T00:00:00Z' },
 };
 let change: (state: LanAuthState) => void;
+afterEach(() => vi.unstubAllGlobals());
 beforeEach(() => {
+  vi.stubGlobal('appConfig', { get: vi.fn() });
   window.lanAuth = {
     getState: vi.fn().mockResolvedValue(initial),
     login: vi.fn().mockResolvedValue({ ok: true, state: authenticated }),
@@ -27,6 +29,71 @@ beforeEach(() => {
   };
 });
 describe('LAN login screen', () => {
+  function useAppWindow() {
+    vi.stubGlobal('appConfig', {
+      get: (key: string) => (key === 'GOOSE_WINDOW_ROLE' ? 'app' : undefined),
+    });
+  }
+
+  it('opens an app with the existing desktop account without another login screen', async () => {
+    useAppWindow();
+    vi.mocked(window.lanAuth.getState).mockResolvedValue(authenticated);
+    render(
+      <LanAuthGate>
+        <div>Created stopwatch app</div>
+      </LanAuthGate>
+    );
+    expect(screen.getByRole('status')).toHaveTextContent('Opening app');
+    expect(screen.queryByLabelText('Username')).not.toBeInTheDocument();
+    await screen.findByText('Created stopwatch app');
+    expect(window.lanAuth.login).not.toHaveBeenCalled();
+    expect(window.lanAuth.logout).not.toHaveBeenCalled();
+  });
+
+  it('keeps a signed-out app locked and directs the user to the main desktop', async () => {
+    useAppWindow();
+    render(
+      <LanAuthGate>
+        <div>Created stopwatch app</div>
+      </LanAuthGate>
+    );
+    expect(
+      await screen.findByText('Sign in in the main desktop window, then reopen this app.')
+    ).toBeInTheDocument();
+    expect(screen.queryByText('Created stopwatch app')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Password')).not.toBeInTheDocument();
+  });
+
+  it('does not offer app-window login if the shared state bridge rejects the request', async () => {
+    useAppWindow();
+    vi.mocked(window.lanAuth.getState).mockRejectedValue(new Error('unregistered renderer'));
+    render(
+      <LanAuthGate>
+        <div>Created stopwatch app</div>
+      </LanAuthGate>
+    );
+    expect(await screen.findByRole('status')).toBeInTheDocument();
+    await screen.findByText(
+      'Could not check the desktop session. Close this window and reopen the app from the desktop.'
+    );
+    expect(screen.queryByLabelText('Username')).not.toBeInTheDocument();
+    expect(screen.queryByText('Created stopwatch app')).not.toBeInTheDocument();
+  });
+
+  it('unmounts an app as soon as the shared desktop account is lost', async () => {
+    useAppWindow();
+    vi.mocked(window.lanAuth.getState).mockResolvedValue(authenticated);
+    render(
+      <LanAuthGate>
+        <div>Created stopwatch app</div>
+      </LanAuthGate>
+    );
+    await screen.findByText('Created stopwatch app');
+    act(() => change({ ...initial, revision: 2 }));
+    expect(screen.queryByText('Created stopwatch app')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Password')).not.toBeInTheDocument();
+  });
+
   it('does not mount Goose children before successful login', async () => {
     const mounted = vi.fn();
     function Child() {

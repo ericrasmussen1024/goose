@@ -57,6 +57,13 @@ state to the renderer. Expiry, revocation, logout, and periodic account checks
 close the UI gate and reload regular app windows. The login shares the app's
 saved Light/Dark/Aura/System theme provider from initial render.
 
+Created Apps share this main-process account instead of asking for a separate
+login. Their registered desktop shells can read public account state and their
+bound local ACP connection while signed in. Login/logout and local file access
+remain limited to regular desktop windows; generated app iframes cannot call the
+shared-session IPC handlers. All created App windows are destroyed when the
+session ends, and new app launches require a signed-in desktop window.
+
 This is the desktop integration for that server. The Phase 1 backend remains
 a separate deployment. It does not yet proxy model inference or enforce grants
 on inference requests, and this patch does not add remote MCP authentication.

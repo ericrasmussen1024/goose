@@ -8,6 +8,7 @@ activities:
   - Initialize test workspace and logging infrastructure
   - Test file operations (create, read, update, delete, undo)
   - Validate Desktop LAN login, account lookup, expiry, and logout boundaries
+  - Validate shared login for created App windows and close them on session loss
   - Validate shell command execution and error handling
   - Validate Azure AI Foundry provider routing and deployment aliases
   - Validate the configurable Databricks AI Gateway path across all inference routes
@@ -69,6 +70,12 @@ instructions: |
   - pnpm exec vitest run src/lan-auth src/preload.fileAccess.test.ts
   - pnpm run typecheck
   - pnpm exec eslint src/lan-auth --max-warnings 0
+  Verify that created App windows inherit the signed-in desktop account without a
+  login form or another login request. They must receive their bound ACP endpoint
+  and local secret only from registered, first-party top-level renderer frames.
+  Login/logout and local file access remain limited to regular desktop windows.
+  Check two windows of the same created App and confirm both close on logout,
+  expiry, or server revocation. Reopen the App after signing back in.
   Record pass/fail and distinguish mocked UI/IPC coverage from live LAN or packaged
   application testing. If dependencies or a desktop runtime are missing, record
   those checks as skipped. Do not request or print real user passwords or tokens.

@@ -53,6 +53,7 @@ export function LanAccountButton() {
 }
 
 export function LanAuthGate({ children }: { children: ReactNode }) {
+  const isAppWindow = window.appConfig?.get('GOOSE_WINDOW_ROLE') === 'app';
   const [state, setState] = useState<LanAuthState | null>(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -83,13 +84,18 @@ export function LanAuthGate({ children }: { children: ReactNode }) {
       .getState()
       .then(apply)
       .catch(() => {
-        if (alive.current) setError('Could not initialize login. Restart the application.');
+        if (alive.current)
+          setError(
+            isAppWindow
+              ? 'Could not check the desktop session. Close this window and reopen the app from the desktop.'
+              : 'Could not initialize login. Restart the application.'
+          );
       });
     return () => {
       alive.current = false;
       unsubscribe();
     };
-  }, []);
+  }, [isAppWindow]);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -118,6 +124,19 @@ export function LanAuthGate({ children }: { children: ReactNode }) {
 
   if (state?.user) {
     return <AccountContext.Provider value={state.user}>{children}</AccountContext.Provider>;
+  }
+
+  if (isAppWindow) {
+    return (
+      <main className="lan-login">
+        <section className="lan-login-card" role="status">
+          {error ||
+            (bridgeReady
+              ? 'Sign in in the main desktop window, then reopen this app.'
+              : 'Opening app…')}
+        </section>
+      </main>
+    );
   }
 
   return (
