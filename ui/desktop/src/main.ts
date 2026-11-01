@@ -66,6 +66,7 @@ import { DesktopFileAccess, readSelectedRecipe } from './desktopFileAccess';
 import { getWindowIconFilename } from './utils/windowIcon';
 import { createBrandTrayImage, getBrandAssetPath } from './branding/native-assets';
 import { registerLanAuth } from './lan-auth/main';
+import { registerGilbertFilePreviews } from './gilbert-preview/main';
 import { requireDesktopRendererWindow } from './lan-auth/window-access';
 
 const windowIconPath = getBrandAssetPath(getWindowIconFilename(process.platform));
@@ -985,6 +986,9 @@ const lanAuth = registerLanAuth(requireRegularRendererWindow, getRegularWindows,
   requireStateReader: requireSessionRendererWindow,
   getWindows: () => [...standaloneAppWindows.values()],
 });
+
+// Local, read-only file preview IPC. Only trusted Gilbert desktop windows can invoke it.
+registerGilbertFilePreviews(requireRegularRendererWindow);
 
 const gooseServeLeases = new GooseServeLeaseRegistry(log);
 

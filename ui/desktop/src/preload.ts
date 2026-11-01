@@ -5,6 +5,7 @@ import type { GooseApp } from './types/apps';
 import type { Settings, SettingKey } from './utils/settings';
 import { defaultSettings } from './utils/settings';
 import type { OpenExternalUrlResult } from './utils/urlSecurity';
+import type { GilbertPreviewResult } from './gilbert-preview/types';
 
 // Mapping from settings keys to their old localStorage keys for lazy migration
 const localStorageKeyMap: Partial<Record<SettingKey, string>> = {
@@ -102,6 +103,10 @@ type ElectronAPI = {
   platform: string;
   arch: string;
   reactReady: () => void;
+  gilbertPreviewChoose: () => Promise<GilbertPreviewResult | null>;
+  gilbertPreviewPath: (filePath: string) => Promise<GilbertPreviewResult | null>;
+  gilbertPreviewPage: (id: string, page: number) => Promise<GilbertPreviewResult>;
+  gilbertPreviewClose: (id: string) => Promise<void>;
   getConfig: () => Record<string, unknown>;
   hideWindow: () => void;
   directoryChooser: () => Promise<Electron.OpenDialogReturnValue>;
@@ -195,6 +200,10 @@ const electronAPI: ElectronAPI = {
   platform: process.platform,
   arch: process.arch,
   reactReady: () => ipcRenderer.send('react-ready'),
+  gilbertPreviewChoose: () => ipcRenderer.invoke('gilbert-preview:choose'),
+  gilbertPreviewPath: (filePath: string) => ipcRenderer.invoke('gilbert-preview:open-path', filePath),
+  gilbertPreviewPage: (id: string, page: number) => ipcRenderer.invoke('gilbert-preview:page', id, page),
+  gilbertPreviewClose: (id: string) => ipcRenderer.invoke('gilbert-preview:close', id),
   getConfig: () => {
     if (!config || Object.keys(config).length === 0) {
       console.warn(
@@ -233,6 +242,8 @@ const electronAPI: ElectronAPI = {
   setDockIcon: (show: boolean) => ipcRenderer.invoke('set-dock-icon', show),
   getDockIconState: () => ipcRenderer.invoke('get-dock-icon-state'),
   getSetting: async <K extends SettingKey>(key: K): Promise<Settings[K]> => {
+    // Honor the distribution flag even if an old localStorage preference is true.
+    if (key === 'showPricing') return false as Settings[K];
     try {
       // Check for localStorage value first (lazy migration)
       const localStorageKey = localStorageKeyMap[key];
@@ -252,6 +263,8 @@ const electronAPI: ElectronAPI = {
     }
   },
   setSetting: async <K extends SettingKey>(key: K, value: Settings[K]): Promise<void> => {
+    // Disallow re-enabling cost tracking through the renderer API.
+    if (key === 'showPricing') value = false as Settings[K];
     // Clear any localStorage version when writing
     const localStorageKey = localStorageKeyMap[key];
     if (localStorageKey) {

@@ -1,0 +1,38 @@
+{
+  "base_archive": "src.zip",
+  "changed_files": [
+    "src/main.ts",
+    "src/preload.ts",
+    "src/components/BaseChat.tsx",
+    "src/gilbert-preview/main.ts",
+    "src/gilbert-preview/types.ts",
+    "src/gilbert-preview/GilbertFilePreview.tsx"
+  ],
+  "sha256": {
+    "src/main.ts": {
+      "original": "58304101f962d4d164af822853b16c9486deb00ebe362df5bf35e996b7112185",
+      "updated": "33aa6c8dd08a219ff4e16bcc15c740ca6dc58a8987ac5ec65439516091e39eac"
+    },
+    "src/preload.ts": {
+      "original": "444271f245d45d4e490ba1f1b04a21b85690276a6574f58ed5c4a8a1b95e4e1e",
+      "updated": "735712480ceac46aa4085cc67a9ba26b2aafbc757b04348f2088fd12f03f8c8a"
+    },
+    "src/components/BaseChat.tsx": {
+      "original": "c60068bf135b46506fc23289196d43b234725a495c9d7c40c7897ebfb2e78754",
+      "updated": "a0def37258b9ccb0de4e5df5baa7a17a9d755d849d0c1da5a1beab3adc6f7feb"
+    },
+    "src/gilbert-preview/main.ts": {
+      "original": null,
+      "updated": "561b0d656345b42f79d205cd075849fde205c2c19d3cc267be8e48b85ac7f943"
+    },
+    "src/gilbert-preview/types.ts": {
+      "original": null,
+      "updated": "86ba8f4e70a9eebd1837f8d9b8783b82b993eb5193df65d40f29a10b4cfee040"
+    },
+    "src/gilbert-preview/GilbertFilePreview.tsx": {
+      "original": null,
+      "updated": "38f2b253f36ce6c6b9351be4238c559f7851cbc72f8c112c89bedd0c2fbb6db4"
+    }
+  },
+  "validation": "typescript-transpile-and-local-electron-ipc-smoke-tests"
+}

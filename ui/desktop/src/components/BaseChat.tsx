@@ -5,6 +5,7 @@ import { defineMessages, useIntl } from '../i18n';
 import { useLocation, useNavigate } from 'react-router';
 import { SearchView } from './conversation/SearchView';
 import LoadingGoose from './LoadingGoose';
+import GilbertFilePreview from '../gilbert-preview/GilbertFilePreview';
 import MessageList from './MessageList';
 import { MainPanelLayout } from './Layout/MainPanelLayout';
 import ChatInput from './ChatInput';
@@ -479,6 +480,7 @@ export default function BaseChat({
           </div>
 
           <SessionActionsHeader session={session} onSessionChange={updateSession} />
+          <GilbertFilePreview key={sessionId} messages={messages} />
 
           <ScrollArea
             ref={scrollRef}
