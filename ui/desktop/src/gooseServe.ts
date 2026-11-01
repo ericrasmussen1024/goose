@@ -1,4 +1,5 @@
 import { brandText } from './branding';
+import { TELEMETRY_ENABLED } from './updates';
 import { spawn, type ChildProcess } from 'child_process';
 import fs from 'node:fs';
 import { createServer } from 'node:net';
@@ -315,6 +316,7 @@ const buildGooseServeEnv = (
   }
 
   env.GOOSE_SERVER__SECRET_KEY = serverSecret;
+  if (!TELEMETRY_ENABLED) env.GOOSE_TELEMETRY_OFF = 'true';
 
   return env;
 };

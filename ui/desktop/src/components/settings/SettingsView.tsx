@@ -23,7 +23,11 @@ import ChatSettingsSection from './chat/ChatSettingsSection';
 import KeyboardShortcutsSection from './keyboard/KeyboardShortcutsSection';
 import AuthSettingsSection from './auth/AuthSettingsSection';
 import LocalInferenceSection from './localInference/LocalInferenceSection';
-import { CONFIGURATION_ENABLED } from '../../updates';
+import {
+  AUTH_SETTINGS_ENABLED,
+  CONFIGURATION_ENABLED,
+  LOCAL_INFERENCE_ENABLED,
+} from '../../updates';
 import { trackSettingsTabViewed } from '../../utils/analytics';
 import { useFeatures } from '../../contexts/FeaturesContext';
 import { defineMessages, useIntl } from '../../i18n';
@@ -72,6 +76,10 @@ const i18n = defineMessages({
 const settingsTabClass =
   'w-full gap-3 rounded-full px-3 py-2 text-sm font-medium hover:bg-background-tertiary/60 data-[state=active]:bg-background-tertiary data-[state=active]:shadow-none';
 
+function isSettingsTabEnabled(tab: string, localInference: boolean): boolean {
+  return (tab !== 'auth' || AUTH_SETTINGS_ENABLED) && (tab !== 'local-inference' || localInference);
+}
+
 export type SettingsViewOptions = {
   deepLinkConfig?: ExtensionConfig;
   showEnvVars?: boolean;
@@ -89,7 +97,8 @@ export default function SettingsView({
 }) {
   const [activeTab, setActiveTab] = useState('models');
   const hasTrackedInitialTab = useRef(false);
-  const { localInference } = useFeatures();
+  const { localInference: supportsLocalInference } = useFeatures();
+  const localInference = LOCAL_INFERENCE_ENABLED && supportsLocalInference;
   const { navWidth } = useNavigationContext();
   const intl = useIntl();
 
@@ -105,6 +114,7 @@ export default function SettingsView({
   }[activeTab];
 
   const handleTabChange = (tab: string) => {
+    if (!isSettingsTabEnabled(tab, localInference)) return;
     setActiveTab(tab);
     trackSettingsTabViewed(tab);
   };
@@ -130,15 +140,15 @@ export default function SettingsView({
       };
 
       const targetTab = sectionToTab[viewOptions.section];
-      if (targetTab && (targetTab !== 'local-inference' || localInference)) {
-        setActiveTab(targetTab);
+      if (targetTab) {
+        setActiveTab(isSettingsTabEnabled(targetTab, localInference) ? targetTab : 'models');
       }
     }
   }, [viewOptions.section, localInference]);
 
   // Reset active tab if local-inference becomes unavailable
   useEffect(() => {
-    if (!localInference && activeTab === 'local-inference') {
+    if (!isSettingsTabEnabled(activeTab, localInference)) {
       setActiveTab('models');
     }
   }, [localInference, activeTab]);
@@ -236,19 +246,17 @@ export default function SettingsView({
                 <Keyboard className="h-5 w-5 text-text-secondary" />
                 {intl.formatMessage(i18n.tabKeyboard)}
               </TabsTrigger>
-              <TabsTrigger
-                value="auth"
-                className={settingsTabClass}
-                data-testid="settings-auth-tab"
-              >
-                <KeyRound className="h-5 w-5 text-text-secondary" />
-                {intl.formatMessage(i18n.tabAuth)}
-              </TabsTrigger>
-              <TabsTrigger
-                value="app"
-                className={settingsTabClass}
-                data-testid="settings-app-tab"
-              >
+              {AUTH_SETTINGS_ENABLED && (
+                <TabsTrigger
+                  value="auth"
+                  className={settingsTabClass}
+                  data-testid="settings-auth-tab"
+                >
+                  <KeyRound className="h-5 w-5 text-text-secondary" />
+                  {intl.formatMessage(i18n.tabAuth)}
+                </TabsTrigger>
+              )}
+              <TabsTrigger value="app" className={settingsTabClass} data-testid="settings-app-tab">
                 <Monitor className="h-5 w-5 text-text-secondary" />
                 {intl.formatMessage(i18n.tabApp)}
               </TabsTrigger>
@@ -312,12 +320,14 @@ export default function SettingsView({
                 <KeyboardShortcutsSection />
               </TabsContent>
 
-              <TabsContent
-                value="auth"
-                className="mt-0 focus-visible:outline-none focus-visible:ring-0"
-              >
-                <AuthSettingsSection />
-              </TabsContent>
+              {AUTH_SETTINGS_ENABLED && (
+                <TabsContent
+                  value="auth"
+                  className="mt-0 focus-visible:outline-none focus-visible:ring-0"
+                >
+                  <AuthSettingsSection />
+                </TabsContent>
+              )}
 
               <TabsContent
                 value="app"

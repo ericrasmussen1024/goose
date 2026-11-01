@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, useMemo } from 'react';
 import { getAcpFeatureCapabilities } from '../acp/capabilities';
+import { LOCAL_INFERENCE_ENABLED } from '../updates';
 
 interface FeaturesContextValue {
   localInference: boolean;
@@ -10,9 +11,10 @@ const FeaturesContext = createContext<FeaturesContextValue | null>(null);
 
 export function FeaturesProvider({ children }: { children: React.ReactNode }) {
   const [localInference, setLocalInference] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(LOCAL_INFERENCE_ENABLED);
 
   useEffect(() => {
+    if (!LOCAL_INFERENCE_ENABLED) return;
     (async () => {
       try {
         const capabilities = await getAcpFeatureCapabilities();

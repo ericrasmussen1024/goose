@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/Tooltip';
 import { fetchCanonicalModelInfo, type CanonicalModelInfo } from '../../utils/canonical';
 import { defineMessages, useIntl } from '../../i18n';
+import { COST_TRACKING_ENABLED } from '../../updates';
 
 const i18n = defineMessages({
   pricingUnavailable: {
@@ -10,7 +11,8 @@ const i18n = defineMessages({
   },
   costUnavailable: {
     id: 'costTracker.costUnavailable',
-    defaultMessage: 'Cost data not available for {model} ({inputTokens} input, {outputTokens} output tokens)',
+    defaultMessage:
+      'Cost data not available for {model} ({inputTokens} input, {outputTokens} output tokens)',
   },
   totalSessionCost: {
     id: 'costTracker.totalSessionCost',
@@ -18,7 +20,8 @@ const i18n = defineMessages({
   },
   inputOutputTooltip: {
     id: 'costTracker.inputOutputTooltip',
-    defaultMessage: 'Input: {inputTokens} tokens ({inputCost}) | Output: {outputTokens} tokens ({outputCost})',
+    defaultMessage:
+      'Input: {inputTokens} tokens ({inputCost}) | Output: {outputTokens} tokens ({outputCost})',
   },
 });
 
@@ -40,11 +43,12 @@ export function CostTracker({
   const intl = useIntl();
   const [costInfo, setCostInfo] = useState<CanonicalModelInfo | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [showPricing, setShowPricing] = useState(true);
+  const [showPricing, setShowPricing] = useState(COST_TRACKING_ENABLED);
   const [pricingFailed, setPricingFailed] = useState(false);
 
   // Check if pricing is enabled
   useEffect(() => {
+    if (!COST_TRACKING_ENABLED) return;
     const loadPricingSetting = async () => {
       const enabled = await window.electron.getSetting('showPricing');
       setShowPricing(enabled);
@@ -61,6 +65,7 @@ export function CostTracker({
   }, []);
 
   useEffect(() => {
+    if (!COST_TRACKING_ENABLED) return;
     const loadCostInfo = async () => {
       if (!currentModel || !currentProvider) {
         setIsLoading(false);
@@ -89,7 +94,7 @@ export function CostTracker({
   }, [currentModel, currentProvider]);
 
   // Return null early if pricing is disabled
-  if (!showPricing) {
+  if (!COST_TRACKING_ENABLED || !showPricing) {
     return null;
   }
 
@@ -117,8 +122,7 @@ export function CostTracker({
 
   if (
     accumulatedCost == null &&
-    (!costInfo ||
-      (costInfo.inputTokenCost === undefined && costInfo.outputTokenCost === undefined))
+    (!costInfo || (costInfo.inputTokenCost === undefined && costInfo.outputTokenCost === undefined))
   ) {
     const freeProviders = ['ollama', 'local', 'localhost'];
     if (freeProviders.includes(currentProvider.toLowerCase())) {
@@ -163,17 +167,22 @@ export function CostTracker({
   // Build tooltip content
   const getTooltipContent = (): string => {
     if (pricingFailed) {
-      return intl.formatMessage(i18n.pricingUnavailable, { model: `${currentProvider}/${currentModel}` });
+      return intl.formatMessage(i18n.pricingUnavailable, {
+        model: `${currentProvider}/${currentModel}`,
+      });
     }
 
     if (accumulatedCost != null) {
-      return intl.formatMessage(i18n.totalSessionCost, { cost: `${currency}${totalCost.toFixed(4)}` })
-        + `\n` + intl.formatMessage(i18n.inputOutputTooltip, {
+      return (
+        intl.formatMessage(i18n.totalSessionCost, { cost: `${currency}${totalCost.toFixed(4)}` }) +
+        `\n` +
+        intl.formatMessage(i18n.inputOutputTooltip, {
           inputTokens: inputTokens.toLocaleString(),
           inputCost: `${currency}${((inputTokens * (costInfo?.inputTokenCost || 0)) / 1_000_000).toFixed(6)}`,
           outputTokens: outputTokens.toLocaleString(),
           outputCost: `${currency}${((outputTokens * (costInfo?.outputTokenCost || 0)) / 1_000_000).toFixed(6)}`,
-        });
+        })
+      );
     }
 
     const inputCostStr = `${currency}${((inputTokens * (costInfo?.inputTokenCost || 0)) / 1_000_000).toFixed(6)}`;

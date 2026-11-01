@@ -186,6 +186,31 @@ describe('startGooseServe', () => {
     }
   );
 
+  it.skipIf(process.platform === 'win32')(
+    'forces telemetry off in the actual desktop backend child process',
+    async () => {
+      const tempDir = makeTempDir();
+      const record = path.join(tempDir, 'telemetry.txt');
+      const goosePath = makeExecutable(
+        path.join(tempDir, 'goose'),
+        '#!/bin/sh\nprintf "%s\\n" "$GOOSE_TELEMETRY_OFF" > "$TEST_RECORD_PATH"\nwhile true; do sleep 1; done\n'
+      );
+      vi.stubEnv('GOOSE_BINARY', goosePath);
+      vi.stubEnv('GOOSE_TELEMETRY_OFF', 'false');
+      const result = await startGooseServe({
+        serverSecret: 'test-secret',
+        dir: tempDir,
+        env: { TEST_RECORD_PATH: record, GOOSE_TELEMETRY_OFF: 'false' },
+        readinessFetch: async () => new Response(null, { status: 200 }),
+      });
+      try {
+        expect(await waitForFileLines(record)).toEqual(['true']);
+      } finally {
+        await result.cleanup();
+      }
+    }
+  );
+
   it.skipIf(process.platform === 'win32')('uses the injected readiness fetch', async () => {
     const tempDir = makeTempDir();
     const goosePath = makeExecutable(

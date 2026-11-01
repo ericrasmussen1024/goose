@@ -3,6 +3,7 @@ import { RefreshCw } from 'lucide-react';
 import { acpClearDefaults } from '../../../acp/providers';
 import { View, ViewOptions } from '../../../utils/navigationUtils';
 import { defineMessages, useIntl } from '../../../i18n';
+import { PROVIDER_RESET_ENABLED } from '../../../updates';
 
 const i18n = defineMessages({
   resetButton: {
@@ -11,7 +12,8 @@ const i18n = defineMessages({
   },
   resetDescription: {
     id: 'resetProviderSection.resetDescription',
-    defaultMessage: "This will clear your selected model and provider settings. If no defaults are available, you'll be taken to the welcome screen to set them up again.",
+    defaultMessage:
+      "This will clear your selected model and provider settings. If no defaults are available, you'll be taken to the welcome screen to set them up again.",
   },
 });
 
@@ -22,7 +24,10 @@ interface ResetProviderSectionProps {
 export default function ResetProviderSection(_props: ResetProviderSectionProps) {
   const intl = useIntl();
 
+  if (!PROVIDER_RESET_ENABLED) return null;
+
   const handleResetProvider = async () => {
+    if (!PROVIDER_RESET_ENABLED) return;
     try {
       await acpClearDefaults();
 

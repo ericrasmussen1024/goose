@@ -14,7 +14,12 @@ import {
 } from '../../ui/dropdown-menu';
 import UpdateSection from './UpdateSection';
 
-import { COST_TRACKING_ENABLED, UPDATES_ENABLED } from '../../../updates';
+import {
+  COST_TRACKING_ENABLED,
+  HELP_AND_FEEDBACK_ENABLED,
+  TELEMETRY_UI_ENABLED,
+  UPDATES_ENABLED,
+} from '../../../updates';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/card';
 import ThemeSelector from '../../GooseSidebar/ThemeSelector';
 import BrandIcon from '../../../branding/BrandIcon';
@@ -144,7 +149,7 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
   const [isMacOS, setIsMacOS] = useState(false);
   const [isDockSwitchDisabled, setIsDockSwitchDisabled] = useState(false);
   const [showNotificationModal, setShowNotificationModal] = useState(false);
-  const [showPricing, setShowPricing] = useState(true);
+  const [showPricing, setShowPricing] = useState(COST_TRACKING_ENABLED);
   const [language, setLanguage] = useState<LanguageSetting>('system');
   const updateSectionRef = useRef<HTMLDivElement>(null);
   const shouldShowUpdates = !window.appConfig.get('GOOSE_VERSION');
@@ -154,12 +159,12 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
   }, []);
 
   useEffect(() => {
-    window.electron.getSetting('showPricing').then(setShowPricing);
+    if (COST_TRACKING_ENABLED) window.electron.getSetting('showPricing').then(setShowPricing);
     window.electron.getSetting('language').then((value) => setLanguage(value ?? 'system'));
   }, []);
 
   useEffect(() => {
-    if (scrollToSection === 'update' && updateSectionRef.current) {
+    if (UPDATES_ENABLED && scrollToSection === 'update' && updateSectionRef.current) {
       setTimeout(() => {
         updateSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }, 100);
@@ -244,6 +249,7 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
   };
 
   const handleShowPricingToggle = async (checked: boolean) => {
+    if (!COST_TRACKING_ENABLED) return;
     setShowPricing(checked);
     await window.electron.setSetting('showPricing', checked);
     trackSettingToggled('cost_tracking', checked);
@@ -446,44 +452,46 @@ export default function AppSettingsSection({ scrollToSection }: AppSettingsSecti
           </DropdownMenu>
         </CardContent>
       </Card>
-      <TelemetrySettings />
+      {TELEMETRY_UI_ENABLED && <TelemetrySettings />}
 
-      <Card className="rounded-lg">
-        <CardHeader className="pb-0">
-          <CardTitle className="mb-1">{intl.formatMessage(i18n.helpTitle)}</CardTitle>
-          <CardDescription>
-            {intl.formatMessage(brandMessage('settings.help.description'))}
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="pt-4 px-4">
-          <div className="flex space-x-4">
-            <Button
-              onClick={() => {
-                window.open(
-                  'https://github.com/aaif-goose/goose/issues/new?template=bug_report.md',
-                  '_blank'
-                );
-              }}
-              variant="secondary"
-              size="sm"
-            >
-              {intl.formatMessage(i18n.reportBug)}
-            </Button>
-            <Button
-              onClick={() => {
-                window.open(
-                  'https://github.com/aaif-goose/goose/issues/new?template=feature_request.md',
-                  '_blank'
-                );
-              }}
-              variant="secondary"
-              size="sm"
-            >
-              {intl.formatMessage(i18n.requestFeature)}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+      {HELP_AND_FEEDBACK_ENABLED && (
+        <Card className="rounded-lg">
+          <CardHeader className="pb-0">
+            <CardTitle className="mb-1">{intl.formatMessage(i18n.helpTitle)}</CardTitle>
+            <CardDescription>
+              {intl.formatMessage(brandMessage('settings.help.description'))}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-4 px-4">
+            <div className="flex space-x-4">
+              <Button
+                onClick={() => {
+                  window.open(
+                    'https://github.com/aaif-goose/goose/issues/new?template=bug_report.md',
+                    '_blank'
+                  );
+                }}
+                variant="secondary"
+                size="sm"
+              >
+                {intl.formatMessage(i18n.reportBug)}
+              </Button>
+              <Button
+                onClick={() => {
+                  window.open(
+                    'https://github.com/aaif-goose/goose/issues/new?template=feature_request.md',
+                    '_blank'
+                  );
+                }}
+                variant="secondary"
+                size="sm"
+              >
+                {intl.formatMessage(i18n.requestFeature)}
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Version Section - only show if GOOSE_VERSION is set */}
       {!shouldShowUpdates && (

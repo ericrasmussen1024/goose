@@ -54,7 +54,7 @@ import {
   setupAutoUpdater,
   updateTrayMenu,
 } from './utils/autoUpdater';
-import { UPDATES_ENABLED } from './updates';
+import { COST_TRACKING_ENABLED, UPDATES_ENABLED } from './updates';
 import './utils/gitBranchIpc';
 import './utils/recipeHash';
 import type { GooseApp } from './types/apps';
@@ -71,8 +71,8 @@ import { requireDesktopRendererWindow } from './lan-auth/window-access';
 const windowIconPath = getBrandAssetPath(getWindowIconFilename(process.platform));
 
 function shouldSetupUpdater(): boolean {
-  // Setup updater if either the flag is enabled OR dev updates are enabled
-  return UPDATES_ENABLED || process.env.ENABLE_DEV_UPDATES === 'true';
+  // A distribution-level disable also applies to development builds.
+  return UPDATES_ENABLED;
 }
 
 // =======================================================================
@@ -1910,6 +1910,7 @@ ipcMain.handle('list-git-worktree-dirs', async (_event, dir: string) => {
 });
 
 ipcMain.handle('get-setting', (_event, key: SettingKey) => {
+  if (key === 'showPricing' && !COST_TRACKING_ENABLED) return false;
   const settings = getSettings();
   return settings[key];
 });
@@ -1935,6 +1936,7 @@ const validSettingKeys: Set<string> = new Set([
 ]);
 
 ipcMain.handle('set-setting', (_event, key: SettingKey, value: unknown) => {
+  if (key === 'showPricing' && !COST_TRACKING_ENABLED) value = false;
   // Validate key at runtime to prevent prototype pollution
   if (!validSettingKeys.has(key)) {
     console.error(`Invalid setting key rejected: ${key}`);

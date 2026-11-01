@@ -1,4 +1,5 @@
 import { brandText } from '../branding';
+import { UPDATES_ENABLED } from '../updates';
 import { createBrandTrayImage, getBrandAssetPath } from '../branding/native-assets';
 import { autoUpdater, UpdateInfo } from 'electron-updater';
 import {
@@ -25,6 +26,10 @@ import {
 } from './analytics';
 
 let updateAvailable = false;
+if (!UPDATES_ENABLED) {
+  autoUpdater.autoDownload = false;
+  autoUpdater.autoInstallOnAppQuit = false;
+}
 let trayRef: Tray | null = null;
 let isUsingGitHubFallback = false;
 let githubUpdateInfo: {
@@ -47,13 +52,13 @@ let ipcUpdateHandlersRegistered = false;
 let autoDownloadDisabled = false;
 
 export function setAutoDownloadDisabled(disabled: boolean) {
-  autoDownloadDisabled = disabled;
-  autoUpdater.autoDownload = !disabled;
-  log.info(`Auto-download ${disabled ? 'disabled' : 'enabled'}`);
+  autoDownloadDisabled = !UPDATES_ENABLED || disabled;
+  autoUpdater.autoDownload = UPDATES_ENABLED && !disabled;
+  log.info(`Auto-download ${autoDownloadDisabled ? 'disabled' : 'enabled'}`);
 }
 
 export function getAutoDownloadDisabled(): boolean {
-  return autoDownloadDisabled;
+  return !UPDATES_ENABLED || autoDownloadDisabled;
 }
 
 // A copy set up by the Windows installer updates by running the next installer, so it never
@@ -79,6 +84,9 @@ export function registerUpdateIpcHandlers() {
 
   // IPC handlers for renderer process
   ipcMain.handle('check-for-updates', async () => {
+    if (!UPDATES_ENABLED) {
+      return { updateInfo: null, error: 'Updates are disabled in this desktop build.' };
+    }
     const currentVersion = autoUpdater.currentVersion?.version || app.getVersion();
     const checkStartTime = Date.now();
 
@@ -220,6 +228,9 @@ export function registerUpdateIpcHandlers() {
   });
 
   ipcMain.handle('download-update', async () => {
+    if (!UPDATES_ENABLED) {
+      return { success: false, error: 'Updates are disabled in this desktop build.' };
+    }
     try {
       if (isUsingGitHubFallback && githubUpdateInfo.downloadUrl && githubUpdateInfo.latestVersion) {
         log.info('Using GitHub fallback for download...');
@@ -275,6 +286,9 @@ export function registerUpdateIpcHandlers() {
   });
 
   ipcMain.handle('install-update', async () => {
+    if (!UPDATES_ENABLED) {
+      return { success: false, error: 'Updates are disabled in this desktop build.' };
+    }
     try {
       if (isUsingGitHubFallback) {
         log.info('Installing update from GitHub fallback...');
@@ -327,20 +341,22 @@ export function registerUpdateIpcHandlers() {
   });
 
   ipcMain.handle('get-update-state', () => {
+    if (!UPDATES_ENABLED) return { updateAvailable: false };
     return lastUpdateState;
   });
 
   ipcMain.handle('is-using-github-fallback', () => {
-    return isUsingGitHubFallback;
+    return UPDATES_ENABLED && isUsingGitHubFallback;
   });
 
   ipcMain.handle('get-auto-download-disabled', () => {
-    return autoDownloadDisabled;
+    return !UPDATES_ENABLED || autoDownloadDisabled;
   });
 }
 
 // Configure auto-updater
 export function setupAutoUpdater() {
+  if (!UPDATES_ENABLED) return;
   log.info('Setting up auto-updater...');
   log.info(`Current app version: ${app.getVersion()}`);
   log.info(`Platform: ${process.platform}, Arch: ${process.arch}`);
@@ -729,6 +745,7 @@ async function githubAutoDownload(
 }
 
 function updateTrayIcon(hasUpdate: boolean) {
+  hasUpdate = UPDATES_ENABLED && hasUpdate;
   if (!trayRef) return;
 
   if (process.env.GOOSE_VERSION) {
@@ -769,7 +786,7 @@ export function updateTrayMenu(hasUpdate: boolean) {
   const menuItems: MenuItemConstructorOptions[] = [];
 
   // Add update menu item if update is available
-  if (hasUpdate) {
+  if (UPDATES_ENABLED && hasUpdate) {
     menuItems.push({
       label: 'Update Available...',
       click: openUpdateSettings,
@@ -832,5 +849,5 @@ export function setTrayRef(tray: Tray) {
 }
 
 export function getUpdateAvailable(): boolean {
-  return updateAvailable;
+  return UPDATES_ENABLED && updateAvailable;
 }

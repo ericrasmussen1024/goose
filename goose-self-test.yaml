@@ -5,6 +5,7 @@ author:
   contact: goose-self-test
 
 activities:
+  - Validate disabled Desktop settings, direct-link guards, updater, and telemetry policy
   - Initialize test workspace and logging infrastructure
   - Test file operations (create, read, update, delete, undo)
   - Validate Desktop LAN login, account lookup, expiry, and logout boundaries
@@ -60,6 +61,19 @@ parameters:
     description: "Clean up test artifacts after completion"
 
 instructions: |
+  ## Restricted Desktop settings
+
+  From ui/desktop, run pnpm exec vitest run
+  src/components/settings/desktop-features.test.tsx src/contexts/FeaturesContext.test.tsx
+  src/acp/local-inference.disabled.test.ts src/utils/autoUpdater.disabled.test.ts
+  src/gooseServe.test.ts src/components/MessageUsageStats.test.tsx,
+  then pnpm run typecheck. Confirm App settings omit Updates,
+  Help and Feedback, Privacy, and Cost Tracking; Auth and Local Inference links
+  fall back to Models; and provider reset is hidden. Verify disabled update IPC
+  makes no network calls, message costs are hidden while token stats remain visible,
+  and the Desktop-owned backend starts with telemetry off.
+  Keep native installer and manual GUI verification separate from these checks.
+
   You are testing yourself - a running goose instance validating its own capabilities through meta-testing.
   This is true first-person integration testing where you use your own tools to test your own functionality.
 

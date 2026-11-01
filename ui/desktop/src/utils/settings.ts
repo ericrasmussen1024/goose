@@ -1,3 +1,4 @@
+import { COST_TRACKING_ENABLED } from '../updates';
 export type RecentModel = {
   provider: string;
   model: string;
@@ -93,7 +94,7 @@ export const defaultSettings: Settings = {
   useSystemTheme: true,
   language: 'system',
   responseStyle: 'concise',
-  showPricing: true,
+  showPricing: COST_TRACKING_ENABLED,
   seenAnnouncementIds: [],
   recentModels: [],
 };

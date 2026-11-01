@@ -4,6 +4,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from './ui/Tooltip';
 import { defineMessages, useIntl } from '../i18n';
 import { cn } from '../utils';
 import type { MessageUsage } from '../types/message';
+import { COST_TRACKING_ENABLED } from '../updates';
 import {
   formatCost,
   formatDuration,
@@ -141,7 +142,7 @@ export default function MessageUsageStats({
       </span>
     );
   }
-  if (hasValue(cost)) {
+  if (COST_TRACKING_ENABLED && hasValue(cost)) {
     chipSegments.push(
       <span key="cost">
         {costSource === 'estimated' ? '~' : ''}
@@ -174,7 +175,7 @@ export default function MessageUsageStats({
     hasValue(cacheReadTokens) ||
     hasValue(cacheWriteTokens);
   const hasTimingSection = hasValue(timeToFirstTokenMs) || hasValue(elapsedMs) || tps !== null;
-  const hasCostSection = hasValue(cost);
+  const hasCostSection = COST_TRACKING_ENABLED && hasValue(cost);
 
   const section = 'py-1.5 first:pt-0 last:pb-0 space-y-[3px]';
 

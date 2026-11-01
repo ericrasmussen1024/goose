@@ -1,9 +1,20 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
+import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { MessageUsage } from '../types/message';
 import { IntlTestWrapper } from '../i18n/test-utils';
 import MessageUsageStats from './MessageUsageStats';
+
+const flags = vi.hoisted(() => ({ costTrackingEnabled: true }));
+vi.mock('../updates', () => ({
+  get COST_TRACKING_ENABLED() {
+    return flags.costTrackingEnabled;
+  },
+}));
+
+beforeEach(() => {
+  flags.costTrackingEnabled = true;
+});
 
 // Radix Tooltip positioning (floating-ui) needs ResizeObserver, which jsdom lacks.
 class ResizeObserverStub {
@@ -40,6 +51,29 @@ function renderUsage(usage: MessageUsage, operationLogs?: string[]) {
 }
 
 describe('MessageUsageStats', () => {
+  it('hides disabled costs in both the chip and tooltip while retaining token and timing data', async () => {
+    flags.costTrackingEnabled = false;
+    const user = userEvent.setup();
+    const { container } = renderUsage(FULL_USAGE);
+
+    expect(screen.getByText('81.0 tok/s')).toBeInTheDocument();
+    expect(screen.getByText('1.5k tok')).toBeInTheDocument();
+    expect(container.textContent).not.toContain('$');
+
+    await user.hover(screen.getByText('1.5k tok'));
+    const tooltip = within(await screen.findByRole('tooltip'));
+    expect(tooltip.getByText('Input')).toBeInTheDocument();
+    expect(tooltip.getByText('Speed')).toBeInTheDocument();
+    expect(tooltip.queryByText('Cost')).not.toBeInTheDocument();
+    expect(tooltip.queryByText('(estimated)')).not.toBeInTheDocument();
+  });
+
+  it('renders no chip for disabled cost-only usage', () => {
+    flags.costTrackingEnabled = false;
+    const { container } = renderUsage({ cost: 0.0123, costSource: 'provider_reported' });
+    expect(container).toBeEmptyDOMElement();
+  });
+
   it('shows speed, estimated cost, and total tokens in the chip', () => {
     renderUsage(FULL_USAGE);
 
