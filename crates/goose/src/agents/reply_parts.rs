@@ -187,10 +187,16 @@ pub(crate) fn prepare_inference_tools(
 ) -> Vec<Tool> {
     #[cfg(feature = "code-mode")]
     if code_execution_active {
+        use crate::agents::final_output_tool::FINAL_OUTPUT_TOOL_NAME;
+        use crate::agents::state_machine::SkillOperation;
+
         tools.retain(|tool| {
             let owner = crate::agents::extension_manager::get_tool_owner(tool);
-            (tool.name == crate::agents::final_output_tool::FINAL_OUTPUT_TOOL_NAME
-                && owner.is_none())
+            (owner.is_none()
+                && matches!(
+                    tool.name.as_ref(),
+                    FINAL_OUTPUT_TOOL_NAME | SkillOperation::TOOL_NAME
+                ))
                 || owner.is_some_and(|owner| {
                     crate::agents::extension_manager::is_first_class_extension(&owner)
                 })
@@ -1459,13 +1465,18 @@ mod tests {
     }
     #[cfg(feature = "code-mode")]
     #[test]
-    fn code_mode_keeps_first_class_resource_and_final_output_tools() {
+    fn code_mode_keeps_first_class_resource_and_agent_tools() {
         use crate::agents::final_output_tool::FINAL_OUTPUT_TOOL_NAME;
+        use crate::agents::state_machine::SkillOperation;
         let mut final_output = make_tool_with_meta(None);
         final_output.name = FINAL_OUTPUT_TOOL_NAME.into();
         let mut extension_final_output =
             make_tool_with_meta(Some(serde_json::json!({"goose_extension": "recipe"})));
         extension_final_output.name = FINAL_OUTPUT_TOOL_NAME.into();
+        let mut load_skill = make_tool_with_meta(None);
+        load_skill.name = SkillOperation::TOOL_NAME.into();
+        let mut extension_load_skill = extension_final_output.clone();
+        extension_load_skill.name = SkillOperation::TOOL_NAME.into();
         let mut first_class =
             make_tool_with_meta(Some(serde_json::json!({"goose_extension": "developer"})));
         first_class.name = "shell".into();
@@ -1485,6 +1496,8 @@ mod tests {
                 hidden,
                 final_output,
                 extension_final_output,
+                load_skill,
+                extension_load_skill,
             ],
             true,
         );
@@ -1492,7 +1505,15 @@ mod tests {
             .iter()
             .map(|tool| tool.name.as_ref())
             .collect::<Vec<_>>();
-        assert_eq!(names, [FINAL_OUTPUT_TOOL_NAME, "resource__view", "shell"]);
+        assert_eq!(
+            names,
+            [
+                SkillOperation::TOOL_NAME,
+                FINAL_OUTPUT_TOOL_NAME,
+                "resource__view",
+                "shell"
+            ]
+        );
     }
 }
 

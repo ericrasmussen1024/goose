@@ -28,8 +28,6 @@ use crate::conversation::Conversation;
 use crate::hooks::HookManager;
 use crate::session::Session;
 
-const LOAD_SKILL_TOOL_NAME: &str = "load_skill";
-
 pub struct SkillOperation {
     hook_manager: HookManager,
     extension_lease: Arc<StdMutex<Option<Arc<ExtensionLease>>>>,
@@ -51,7 +49,7 @@ fn skill_tool() -> Result<Tool> {
         .cloned()
         .ok_or_else(|| anyhow!("load_skill schema is not an object"))?;
     Ok(Tool::new(
-        LOAD_SKILL_TOOL_NAME,
+        SkillOperation::TOOL_NAME,
         "Load a skill's full content into your context so you can follow its instructions.\n\n\
          Skills are listed in your system instructions. When you need to use one, \
          load it first to get the detailed instructions.",
@@ -195,6 +193,8 @@ fn load_supporting_file(
 }
 
 impl SkillOperation {
+    pub(in crate::agents) const TOOL_NAME: &'static str = "load_skill";
+
     pub fn new(
         hook_manager: HookManager,
         extension_lease: Arc<StdMutex<Option<Arc<ExtensionLease>>>>,
@@ -331,7 +331,7 @@ impl Operation<Session, GooseEffect> for SkillOperation {
                 request
                     .tool_call
                     .as_ref()
-                    .is_ok_and(|tool_call| tool_call.name.as_ref() == LOAD_SKILL_TOOL_NAME)
+                    .is_ok_and(|tool_call| tool_call.name.as_ref() == Self::TOOL_NAME)
             })
             .collect();
         if pending.is_empty() {
