@@ -47,10 +47,26 @@ and regeneration instructions.
 
 ## LAN login
 
-Set `serverUrl` to the server reachable from user workstations, such as
-`https://ai-server.lan:8443`. Workstations must trust its HTTPS certificate. The
-login adapter expects the attached Phase 1 server's `/auth/login`, `/auth/me`,
-and `/auth/logout` endpoints and its opaque bearer tokens.
+Set `serverUrl` in `src/lan-auth/config.json` to the HTTPS origin that
+workstations can reach, such as `https://ai-server.lan:8443`. Give the server a
+stable LAN IP and publish its hostname in the DNS resolver distributed to
+workstations by DHCP. The login adapter uses the gateway's `/auth/login`,
+`/auth/me`, and `/auth/logout` endpoints and opaque bearer tokens.
+
+For an offline site build, copy the active gateway's public Caddy `root.crt`
+to `ui/desktop/gilbert-lan-ca.crt` on each build host and set `useBundledCa`
+to `true` in `src/lan-auth/config.json`. Run the usual `pnpm run package` or
+`pnpm run make` build. The build requires a valid PEM root CA certificate and
+embeds it in the Electron main bundle. For system Caddy on Ubuntu, the default
+root path is `/var/lib/caddy/.local/share/caddy/pki/authorities/local/root.crt`.
+Keep the CA's private key on the server.
+
+The bundled CA is scoped to login requests at the configured HTTPS origin,
+with normal TLS hostname and certificate verification. The default
+`useBundledCa: false` setting and overrides to a different origin via
+`GOOSE_LAN_AUTH_URL` use Electron's standard certificate trust. Rebuild the
+site installers when the Caddy root CA changes. Ordinary server certificate
+renewal under the same root needs only the existing installer.
 
 The main process keeps the token in memory and exposes only public account
 state to the renderer. Expiry, revocation, logout, and periodic account checks

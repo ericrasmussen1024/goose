@@ -7,6 +7,8 @@ let dispose: (() => void) | undefined;
 afterEach(() => {
   dispose?.();
   dispose = undefined;
+  vi.unstubAllEnvs();
+  vi.doUnmock('undici');
 });
 beforeEach(() => {
   vi.resetModules();
@@ -50,6 +52,47 @@ async function setup() {
   return { auth, fetcher, windows, appWindows, requireRenderer, requireStateReader, invoke };
 }
 describe('Electron login boundary', () => {
+  it('uses the bundled CA transport for the configured origin and never retries a TLS failure', async () => {
+    vi.stubEnv('GILBERT_LAN_CA', 'site root');
+    vi.stubEnv('GOOSE_LAN_AUTH_URL', 'https://ai-server.lan:8443/');
+    const tlsFetch = vi.fn().mockRejectedValue(new Error('TLS verification failed'));
+    vi.doMock('undici', async (importOriginal) => ({
+      ...(await importOriginal<typeof import('undici')>()),
+      fetch: tlsFetch,
+    }));
+    const { fetcher, invoke } = await setup();
+
+    await expect(invoke(LAN_AUTH_CHANNELS.login, 'eric', 'test-password')).resolves.toMatchObject({
+      ok: false,
+    });
+    expect(tlsFetch).toHaveBeenCalledExactlyOnceWith(
+      'https://ai-server.lan:8443/auth/login',
+      expect.objectContaining({ dispatcher: expect.anything(), redirect: 'error' })
+    );
+    expect(fetcher).not.toHaveBeenCalled();
+  });
+
+  it('keeps the bundled CA away from a different origin selected at runtime', async () => {
+    vi.stubEnv('GILBERT_LAN_CA', 'site root');
+    vi.stubEnv('GOOSE_LAN_AUTH_URL', 'https://ai-server.lan:9443');
+    const tlsFetch = vi.fn();
+    vi.doMock('undici', async (importOriginal) => ({
+      ...(await importOriginal<typeof import('undici')>()),
+      fetch: tlsFetch,
+    }));
+    const { fetcher, invoke } = await setup();
+    fetcher.mockResolvedValueOnce(new Response(null, { status: 401 }));
+
+    await expect(invoke(LAN_AUTH_CHANNELS.login, 'eric', 'test-password')).resolves.toMatchObject({
+      error: 'Invalid username or password.',
+    });
+    expect(fetcher).toHaveBeenCalledWith(
+      'https://ai-server.lan:9443/auth/login',
+      expect.anything()
+    );
+    expect(tlsFetch).not.toHaveBeenCalled();
+  });
+
   it('checks caller provenance for every exposed IPC handler', async () => {
     const { invoke, requireRenderer, requireStateReader } = await setup();
     requireRenderer.mockImplementation(() => {

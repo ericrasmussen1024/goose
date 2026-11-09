@@ -1,3 +1,4 @@
 {
-  "serverUrl": "https://ai-server.lan:8443"
+  "serverUrl": "https://ai-server.lan:8443",
+  "useBundledCa": true
 }

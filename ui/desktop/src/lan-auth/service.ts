@@ -1,7 +1,19 @@
 /* global RequestInit */
 import type { LanAuthResult, LanAuthState, LanAuthUser } from './types';
 
-type Fetcher = (url: string, options: RequestInit) => Promise<Response>;
+type AuthRequestOptions = Omit<RequestInit, 'body' | 'headers'> & {
+  body?: string;
+  headers: Record<string, string>;
+};
+
+type AuthResponse = Pick<Response, 'ok' | 'status' | 'arrayBuffer'> & {
+  headers: {
+    get(name: string): string | null;
+    entries(): Iterable<[string, string]>;
+  };
+};
+
+type Fetcher = (url: string, options: AuthRequestOptions) => Promise<AuthResponse>;
 
 export function normalizeAuthServer(value: string): string {
   const url = new URL(value);
@@ -156,7 +168,7 @@ export class LanAuthService {
       if (!response.ok) throw new ApiError(response.status, response.headers.get('Retry-After'));
       return new Response(bytes.byteLength ? bytes : null, {
         status: response.status,
-        headers: response.headers,
+        headers: Array.from(response.headers.entries()),
       });
     } finally {
       clearTimeout(timeout);

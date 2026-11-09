@@ -1,5 +1,6 @@
 import { APP_NAME } from '../branding';
 import { app, BrowserWindow, ipcMain, session, type IpcMainInvokeEvent } from 'electron';
+import { Agent, fetch as fetchWithDispatcher } from 'undici';
 import config from './config.json';
 import { LanAuthService } from './service';
 import { LAN_AUTH_CHANNELS } from './types';
@@ -15,10 +16,20 @@ export function registerLanAuth(
   appWindows: AppWindows
 ): LanAuthService {
   let wasAuthenticated = false;
+  const bundledCa: string | null | undefined = import.meta.env.GILBERT_LAN_CA;
+  const siteAgent = bundledCa
+    ? new Agent({ connect: { ca: bundledCa, rejectUnauthorized: true } })
+    : undefined;
+  const siteOrigin = siteAgent ? new URL(config.serverUrl).origin : undefined;
   const auth = new LanAuthService(
     APP_NAME,
     process.env.GOOSE_LAN_AUTH_URL || String(config.serverUrl || ''),
-    (url, options) => session.fromPartition('lan-auth').fetch(url, options),
+    (url, options) => {
+      if (siteAgent && new URL(url).origin === siteOrigin) {
+        return fetchWithDispatcher(url, { ...options, dispatcher: siteAgent });
+      }
+      return session.fromPartition('lan-auth').fetch(url, options);
+    },
     (state) => {
       const locked = wasAuthenticated && state.user === null;
       wasAuthenticated = state.user !== null;
@@ -59,6 +70,7 @@ export function registerLanAuth(
   app.once('will-quit', () => {
     if (timer) clearInterval(timer);
     auth.dispose();
+    void siteAgent?.destroy();
   });
   return auth;
 }

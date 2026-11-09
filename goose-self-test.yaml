@@ -84,6 +84,10 @@ instructions: |
   - pnpm exec vitest run src/lan-auth src/preload.fileAccess.test.ts
   - pnpm run typecheck
   - pnpm exec eslint src/lan-auth --max-warnings 0
+  Verify that the bundled CA transport is scoped to the configured HTTPS origin
+  and that TLS errors reach the login gate without a retry. For manual package
+  verification, sign in from a client that uses LAN DNS and a site build with
+  the Caddy root bundled in the app.
   Verify that created App windows inherit the signed-in desktop account without a
   login form or another login request. They must receive their bound ACP endpoint
   and local secret only from registered, first-party top-level renderer frames.
