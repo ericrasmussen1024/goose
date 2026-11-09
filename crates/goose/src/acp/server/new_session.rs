@@ -7,7 +7,7 @@ use crate::providers::get_from_registry;
 use crate::recipe::Recipe;
 use crate::session::{ExtensionData, Session, SessionType};
 
-use super::AcpConnection;
+use super::{managed_inference_enabled, resolve_default_provider_model_config, AcpConnection};
 use agent_client_protocol::schema::v1::{Meta, NewSessionRequest, NewSessionResponse, SessionId};
 use agent_client_protocol::{Client, ConnectionTo};
 use goose_providers::model::ModelConfig;
@@ -136,18 +136,21 @@ impl AcpConnection {
             )
             .await?;
 
-        let recipe_settings = rendered.as_ref().and_then(|r| r.settings.as_ref());
-        let requested_provider = meta_string(args.meta.as_ref(), "provider")?;
-        if let Some(provider) = recipe_settings
-            .and_then(|s| s.goose_provider.as_deref())
-            .or(requested_provider.as_deref())
-        {
-            get_from_registry(provider).await.invalid_params_err()?;
-        }
-        let (provider, model_config) =
+        let (provider, model_config) = if managed_inference_enabled() {
+            resolve_default_provider_model_config(config)?
+        } else {
+            let recipe_settings = rendered.as_ref().and_then(|r| r.settings.as_ref());
+            let requested_provider = meta_string(args.meta.as_ref(), "provider")?;
+            if let Some(provider) = recipe_settings
+                .and_then(|s| s.goose_provider.as_deref())
+                .or(requested_provider.as_deref())
+            {
+                get_from_registry(provider).await.invalid_params_err()?;
+            }
             resolve_provider_and_model_config(config, requested_provider, recipe_settings)
                 .await
-                .internal_err_ctx("Failed to resolve provider and model")?;
+                .internal_err_ctx("Failed to resolve provider and model")?
+        };
 
         let goose_extensions = meta_goose_extensions(args.meta.as_ref())?;
         let recipe_extensions = rendered.as_ref().and_then(|r| r.extensions.as_deref());

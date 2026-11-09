@@ -608,6 +608,13 @@ fn push_or_replace_extension(extensions: &mut Vec<ExtensionConfig>, extension: E
     extensions.push(extension);
 }
 
+fn managed_inference_enabled() -> bool {
+    matches!(
+        std::env::var("GILBERT_MANAGED_INFERENCE").as_deref(),
+        Ok("1")
+    )
+}
+
 fn resolve_default_provider_model_config(
     config: &Config,
 ) -> Result<(String, goose_providers::model::ModelConfig), agent_client_protocol::Error> {
@@ -1084,7 +1091,14 @@ impl AcpConnection {
             session_needs_update = true;
         }
 
-        if session.provider_name.is_none() || session.model_config.is_none() {
+        let session_model = session
+            .model_config
+            .as_ref()
+            .map(|model| model.model_name.as_str());
+        let needs_managed_model = managed_inference_enabled()
+            && (session.provider_name != config.get_goose_provider().ok()
+                || session_model != config.get_goose_model().ok().as_deref());
+        if session.provider_name.is_none() || session_model.is_none() || needs_managed_model {
             let (resolved_provider, resolved_model_config) =
                 resolve_default_provider_model_config(config)?;
             builder = builder
@@ -1792,6 +1806,13 @@ impl AcpConnection {
                 agent_client_protocol::Error::resource_not_found(Some(session_id.to_string()))
                     .data(format!("Session not found: {}", session_id))
             })?;
+        let session = if managed_inference_enabled() {
+            let cwd = session.working_dir.clone();
+            self.prepare_session_for_activation(session, cwd, Vec::new(), false)
+                .await?
+        } else {
+            session
+        };
         self.activate_acp_session(cx, &session).await?;
         Ok(())
     }
@@ -2509,6 +2530,14 @@ impl AcpConnection {
             current_model
         };
         let model = model_name.unwrap_or(&default_model);
+        if managed_inference_enabled()
+            && (config.get_goose_provider().ok().as_deref()
+                != Some(resolved_provider_name.as_str())
+                || config.get_goose_model().ok().as_deref() != Some(model))
+        {
+            return Err(agent_client_protocol::Error::invalid_params()
+                .data("This Gilbert build uses the model managed by your server."));
+        }
         let model_config =
             crate::model_config::model_config_from_user_config_with_session_settings(
                 &resolved_provider_name,

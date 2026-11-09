@@ -6,7 +6,15 @@ type AuthRequestOptions = Omit<RequestInit, 'body' | 'headers'> & {
   headers: Record<string, string>;
 };
 
+export interface InferenceBody {
+  getReader(): {
+    read(): Promise<{ done: boolean; value?: Uint8Array }>;
+    cancel(): Promise<void>;
+  };
+}
+
 type AuthResponse = Pick<Response, 'ok' | 'status' | 'arrayBuffer'> & {
+  body: InferenceBody | null;
   headers: {
     get(name: string): string | null;
     entries(): Iterable<[string, string]>;
@@ -14,6 +22,11 @@ type AuthResponse = Pick<Response, 'ok' | 'status' | 'arrayBuffer'> & {
 };
 
 type Fetcher = (url: string, options: AuthRequestOptions) => Promise<AuthResponse>;
+
+export const MANAGED_MODEL = 'gilbert-default';
+export const INFERENCE_MODELS_PATH = '/v1/models';
+export const INFERENCE_CHAT_PATH = '/v1/chat/completions';
+export type InferencePath = typeof INFERENCE_MODELS_PATH | typeof INFERENCE_CHAT_PATH;
 
 export function normalizeAuthServer(value: string): string {
   const url = new URL(value);
@@ -79,6 +92,7 @@ function friendlyError(error: unknown, login: boolean): string {
 
 export class LanAuthService {
   private token: string | null = null;
+  private inferenceSession = new AbortController();
   private user: LanAuthUser | null = null;
   private message: string | null = null;
   private revision = 0;
@@ -138,11 +152,33 @@ export class LanAuthService {
   private lock(message: string | null): void {
     this.generation += 1;
     this.token = null;
+    this.inferenceSession.abort();
     this.user = null;
     this.message = message;
     if (this.expiryTimer) clearTimeout(this.expiryTimer);
     this.expiryTimer = null;
     this.publish();
+  }
+
+  inferenceSessionSignal(): AbortSignal | null {
+    return this.isAuthenticated() ? this.inferenceSession.signal : null;
+  }
+
+  async requestInference(path: InferencePath, signal: AbortSignal, body?: string) {
+    if (signal.aborted || !this.isAuthenticated() || this.token === null) return null;
+    return this.fetcher(this.serverUrl + path, {
+      method: path === INFERENCE_CHAT_PATH ? 'POST' : 'GET',
+      headers: {
+        Accept: 'application/json, text/event-stream',
+        Authorization: `Bearer ${this.token}`,
+        ...(body === undefined ? {} : { 'Content-Type': 'application/json' }),
+      },
+      body,
+      signal: AbortSignal.any([signal, this.inferenceSession.signal]),
+      redirect: 'error',
+      credentials: 'omit',
+      cache: 'no-store',
+    });
   }
 
   private async request(endpoint: string, token: string | null, body?: unknown): Promise<Response> {
@@ -229,6 +265,7 @@ export class LanAuthService {
         return { ok: false, state: this.state(), error: 'Sign-in was cancelled.' };
       }
       this.token = issuedToken;
+      this.inferenceSession = new AbortController();
       this.user = user;
       this.message = null;
       this.scheduleExpiry();
@@ -299,6 +336,7 @@ export class LanAuthService {
   dispose(): void {
     this.generation += 1;
     this.token = null;
+    this.inferenceSession.abort();
     this.user = null;
     if (this.expiryTimer) clearTimeout(this.expiryTimer);
     this.expiryTimer = null;

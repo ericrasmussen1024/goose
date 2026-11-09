@@ -88,6 +88,10 @@ instructions: |
   and that TLS errors reach the login gate without a retry. For manual package
   verification, sign in from a client that uses LAN DNS and a site build with
   the Caddy root bundled in the app.
+  With managed inference enabled and a gilbert-default grant, open a new chat
+  and resume an existing chat. Verify both stream a response through the signed-in
+  gateway and can execute a local tool call. Verify that requests after logout
+  and requests for ungranted models are rejected.
   Verify that created App windows inherit the signed-in desktop account without a
   login form or another login request. They must receive their bound ACP endpoint
   and local secret only from registered, first-party top-level renderer frames.

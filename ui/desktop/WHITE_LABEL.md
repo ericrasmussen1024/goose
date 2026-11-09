@@ -80,9 +80,14 @@ remain limited to regular desktop windows; generated app iframes cannot call the
 shared-session IPC handlers. All created App windows are destroyed when the
 session ends, and new app launches require a signed-in desktop window.
 
-This is the desktop integration for that server. The Phase 1 backend remains
-a separate deployment. It does not yet proxy model inference or enforce grants
-on inference requests, and this patch does not add remote MCP authentication.
+With `managedInference: true`, the local Goose runtime uses the gateway model
+`gilbert-default` for new and resumed chats. A loopback bridge in Electron
+forwards `/v1/models` and `/v1/chat/completions` using the signed-in user's
+session and the login connection's HTTPS trust. The gateway needs those routes
+enabled and a `gilbert-default` grant for each account that uses chat. Site
+administrators switch LM Studio and SGLang through the gateway's YAML settings.
+Set `managedInference: false` for a build that uses normal provider setup.
+
 Desktop login does not isolate local data or tools from other users of the same
 OS profile. Use separate OS accounts when that isolation is required.
 

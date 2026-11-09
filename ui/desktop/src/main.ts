@@ -66,6 +66,8 @@ import { DesktopFileAccess, readSelectedRecipe } from './desktopFileAccess';
 import { getWindowIconFilename } from './utils/windowIcon';
 import { createBrandTrayImage, getBrandAssetPath } from './branding/native-assets';
 import { registerLanAuth } from './lan-auth/main';
+import lanAuthConfig from './lan-auth/config.json';
+import { startInferenceBridge } from './lan-auth/inference-bridge';
 import { registerGilbertFilePreviews } from './gilbert-preview/main';
 import { requireDesktopRendererWindow } from './lan-auth/window-access';
 
@@ -987,6 +989,17 @@ const lanAuth = registerLanAuth(requireRegularRendererWindow, getRegularWindows,
   getWindows: () => [...standaloneAppWindows.values()],
 });
 
+let inferenceBridge: ReturnType<typeof startInferenceBridge> | undefined;
+
+function getInferenceBridge() {
+  if (!lanAuthConfig.managedInference) return undefined;
+  inferenceBridge ??= startInferenceBridge(lanAuth).catch((error) => {
+    inferenceBridge = undefined;
+    throw error;
+  });
+  return inferenceBridge;
+}
+
 // Local, read-only file preview IPC. Only trusted Gilbert desktop windows can invoke it.
 registerGilbertFilePreviews(requireRegularRendererWindow);
 
@@ -1028,7 +1041,7 @@ const createChat = async (
 
   let externalBackend: ExternalBackend | null;
   try {
-    externalBackend = getActiveExternalBackend(settings);
+    externalBackend = lanAuthConfig.managedInference ? null : getActiveExternalBackend(settings);
   } catch (error) {
     dialog.showMessageBoxSync({
       type: 'error',
@@ -1174,11 +1187,13 @@ const createChat = async (
 
     let gooseServeResult: Awaited<ReturnType<typeof startGooseServe>>;
     try {
+      const bridge = await getInferenceBridge();
       gooseServeResult = await startGooseServe({
         serverSecret,
         dir: workingDir,
         tls: true,
         env: {
+          ...bridge?.env,
           GOOSE_PATH_ROOT: appConfig.GOOSE_PATH_ROOT as string | undefined,
         },
         loginShellPath,
@@ -3105,6 +3120,7 @@ async function getAllowList(): Promise<string[] | null> {
 }
 
 app.on('will-quit', async () => {
+  void inferenceBridge?.then((bridge) => bridge.close(), () => undefined);
   const gooseServeLeaseCount = gooseServeLeases.activeLeaseCount();
   if (gooseServeLeaseCount > 0) {
     log.info(`App quitting, cleaning up ${gooseServeLeaseCount} backend lease(s)`);
