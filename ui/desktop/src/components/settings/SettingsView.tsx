@@ -2,7 +2,6 @@ import { ScrollArea } from '../ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { View, ViewOptions } from '../../utils/navigationUtils';
 import ModelsSection from './models/ModelsSection';
-import ExternalBackendSection from './app/ExternalBackendSection';
 import AgentLoopSettings from './AgentLoopSettings';
 import AppSettingsSection from './app/AppSettingsSection';
 import ConfigSettings from './config/ConfigSettings';
@@ -302,7 +301,6 @@ export default function SettingsView({
               >
                 <div className="space-y-4 pb-8">
                   <AgentLoopSettings />
-                  <ExternalBackendSection />
                 </div>
               </TabsContent>
 

@@ -8,6 +8,7 @@ import { LAN_AUTH_CHANNELS } from './types';
 interface AppWindows {
   requireStateReader: (event: IpcMainInvokeEvent) => BrowserWindow;
   getWindows: () => BrowserWindow[];
+  onLock: (windows: BrowserWindow[]) => void;
 }
 
 export function registerLanAuth(
@@ -33,16 +34,17 @@ export function registerLanAuth(
     (state) => {
       const locked = wasAuthenticated && state.user === null;
       wasAuthenticated = state.user !== null;
+      const regularWindows = getWindows();
+      if (locked) appWindows.onLock(regularWindows);
       for (const win of appWindows.getWindows()) {
         if (win.isDestroyed()) continue;
         if (locked) win.destroy();
         else win.webContents.send(LAN_AUTH_CHANNELS.changed, state);
       }
-      for (const win of getWindows()) {
-        if (win.isDestroyed()) continue;
-        win.webContents.send(LAN_AUTH_CHANNELS.changed, state);
-        // Reload clears ACP sockets, module state, and cached conversation data.
-        if (locked) win.webContents.reload();
+      if (!locked) {
+        for (const win of regularWindows) {
+          if (!win.isDestroyed()) win.webContents.send(LAN_AUTH_CHANNELS.changed, state);
+        }
       }
     }
   );

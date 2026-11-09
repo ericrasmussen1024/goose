@@ -27,6 +27,7 @@ async function setup() {
   }));
   const requireRenderer = vi.fn();
   const requireStateReader = vi.fn();
+  const onLock = vi.fn();
   vi.doMock('electron', () => ({
     app: { whenReady: () => new Promise(() => {}), on: vi.fn(), once: vi.fn() },
     BrowserWindow: {},
@@ -45,11 +46,12 @@ async function setup() {
   const auth: LanAuthService = registerLanAuth(requireRenderer, () => windows as never, {
     requireStateReader,
     getWindows: () => appWindows as never,
+    onLock,
   });
   dispose = () => auth.dispose();
   const invoke = (channel: string, ...args: unknown[]) =>
     handlers.get(channel)!({} as IpcMainInvokeEvent, ...args);
-  return { auth, fetcher, windows, appWindows, requireRenderer, requireStateReader, invoke };
+  return { auth, fetcher, windows, appWindows, requireRenderer, requireStateReader, invoke, onLock };
 }
 describe('Electron login boundary', () => {
   it('uses the bundled CA transport for the configured origin and never retries a TLS failure', async () => {
@@ -119,8 +121,8 @@ describe('Electron login boundary', () => {
     expect(() => invoke(LAN_AUTH_CHANNELS.login, 'eric', 'password')).toThrow('main desktop only');
     expect(() => invoke(LAN_AUTH_CHANNELS.logout)).toThrow('main desktop only');
   });
-  it('broadcasts public account state and reloads every regular window on logout', async () => {
-    const { auth, fetcher, windows, appWindows, invoke } = await setup();
+  it('broadcasts public account state and retires every regular window on logout', async () => {
+    const { auth, fetcher, windows, appWindows, invoke, onLock } = await setup();
     const token = 'a'.repeat(43);
     fetcher
       .mockResolvedValueOnce(Response.json({ access_token: token, token_type: 'bearer' }))
@@ -130,6 +132,7 @@ describe('Electron login boundary', () => {
           username: 'eric',
           enabled: true,
           allowed_models: [],
+          history_id: 'a'.repeat(32),
           session_expires_at: new Date(Date.now() + 60_000).toISOString(),
         })
       )
@@ -152,11 +155,11 @@ describe('Electron login boundary', () => {
     const logout = invoke(LAN_AUTH_CHANNELS.logout);
     expect(auth.isAuthenticated()).toBe(false);
     for (const win of appWindows) expect(win.destroy).toHaveBeenCalledOnce();
-    for (const win of windows) expect(win.webContents.reload).toHaveBeenCalledOnce();
+    expect(onLock).toHaveBeenCalledExactlyOnceWith(windows);
     await logout;
   });
   it('closes every app window when the server revokes the shared session', async () => {
-    const { auth, fetcher, appWindows, windows, invoke } = await setup();
+    const { auth, fetcher, appWindows, windows, invoke, onLock } = await setup();
     fetcher
       .mockResolvedValueOnce(Response.json({ access_token: 'b'.repeat(43), token_type: 'bearer' }))
       .mockResolvedValueOnce(
@@ -165,6 +168,7 @@ describe('Electron login boundary', () => {
           username: 'eric',
           enabled: true,
           allowed_models: [],
+          history_id: 'a'.repeat(32),
           session_expires_at: new Date(Date.now() + 60_000).toISOString(),
         })
       )
@@ -173,6 +177,6 @@ describe('Electron login boundary', () => {
     await auth.validate();
     expect(auth.isAuthenticated()).toBe(false);
     for (const win of appWindows) expect(win.destroy).toHaveBeenCalledOnce();
-    for (const win of windows) expect(win.webContents.reload).toHaveBeenCalledOnce();
+    expect(onLock).toHaveBeenCalledExactlyOnceWith(windows);
   });
 });

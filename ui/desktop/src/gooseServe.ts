@@ -34,11 +34,14 @@ export interface StartGooseServeOptions extends FindGooseBinaryOptions {
   dir?: string;
   serverSecret: string;
   tls?: boolean;
+  privateRoot?: string;
+  signal?: AbortSignal;
   env?: Record<string, string | undefined>;
   loginShellPath?: string | null;
   logger?: Logger;
   diagnosticsDir?: string;
   readinessFetch?: ReadinessFetch;
+  onCertificateFingerprint?: (fingerprint: string) => void;
 }
 
 export interface GooseServeResult {
@@ -174,6 +177,7 @@ const waitForGooseServeReady = async (
   shouldStopWaiting: () => boolean,
   options: {
     healthUrl: string;
+    canProbe?: () => boolean;
     readinessFetch: ReadinessFetch;
     onEvent?: (name: string, details?: Record<string, unknown>) => void;
   }
@@ -215,7 +219,7 @@ const waitForGooseServeReady = async (
       return false;
     }
 
-    if (await fetchStatus(statusUrl, options.readinessFetch)) {
+    if ((options.canProbe?.() ?? true) && (await fetchStatus(statusUrl, options.readinessFetch))) {
       options.onEvent?.('healthcheck_success', {
         ...probeDetails,
         attempt,
@@ -325,6 +329,8 @@ export const startGooseServe = async ({
   dir,
   serverSecret,
   tls = false,
+  privateRoot,
+  signal,
   env: additionalEnv = {},
   loginShellPath,
   isPackaged,
@@ -332,6 +338,7 @@ export const startGooseServe = async ({
   logger = defaultLogger,
   diagnosticsDir,
   readinessFetch = fetch,
+  onCertificateFingerprint,
 }: StartGooseServeOptions): Promise<GooseServeResult> => {
   const workingDir = dir || process.cwd();
   const startupTrace = createGooseServeStartupDiagnostics(diagnosticsDir, workingDir);
@@ -352,7 +359,9 @@ export const startGooseServe = async ({
     throw new Error(withStartupDiagnosticsPath(message, startupDiagnosticsPath), { cause: error });
   }
 
+  signal?.throwIfAborted();
   const port = await findAvailablePort();
+  signal?.throwIfAborted();
   const localServeScheme: LocalServeScheme = tls ? 'https' : 'http';
   const { httpBaseUrl, statusUrl, healthUrl, acpUrl, redactedAcpUrl } = buildLocalServeUrls(
     port,
@@ -363,6 +372,7 @@ export const startGooseServe = async ({
   const args = [
     'serve',
     ...(tls ? ['--tls'] : []),
+    ...(privateRoot ? ['--gilbert-private'] : []),
     '--platform',
     'desktop',
     '--enable-scheduler',
@@ -390,7 +400,12 @@ export const startGooseServe = async ({
   }
 
   const spawnOptions = {
-    env: buildGooseServeEnv(secretKey, goosePath, additionalEnv, loginShellPath),
+    env: buildGooseServeEnv(
+      secretKey,
+      goosePath,
+      { ...additionalEnv, GILBERT_PRIVATE_ROOT: privateRoot ?? '' },
+      loginShellPath
+    ),
     cwd: workingDir,
     windowsHide: true,
     shell: false as const,
@@ -438,6 +453,7 @@ export const startGooseServe = async ({
       return;
     }
     certFingerprint = fingerprint;
+    onCertificateFingerprint?.(fingerprint);
     logger.info(`Pinned cert fingerprint: ${certFingerprint}`);
     startupTrace?.record('fingerprint_received', { certFingerprint });
     resolveFingerprint(certFingerprint);
@@ -498,7 +514,7 @@ export const startGooseServe = async ({
 
   const cleanup = async (): Promise<void> => {
     return new Promise<void>((resolve) => {
-      if (exited || gooseProcess.killed) {
+      if (exited || spawnFailed) {
         resolve();
         return;
       }
@@ -507,6 +523,7 @@ export const startGooseServe = async ({
       const finish = () => {
         if (!resolved) {
           resolved = true;
+          clearTimeout(killTimer);
           resolve();
         }
       };
@@ -526,8 +543,8 @@ export const startGooseServe = async ({
         logger.error('Error while terminating goose serve process:', error);
       }
 
-      setTimeout(() => {
-        if (!exited && !gooseProcess.killed && process.platform !== 'win32') {
+      const killTimer = setTimeout(() => {
+        if (!exited && process.platform !== 'win32') {
           gooseProcess.kill('SIGKILL');
         }
         finish();
@@ -535,11 +552,22 @@ export const startGooseServe = async ({
     });
   };
 
-  const ready = await waitForGooseServeReady(statusUrl, errorLog, () => exited || spawnFailed, {
-    healthUrl,
-    readinessFetch,
-    onEvent: startupTrace?.record,
-  });
+  let stopping: Promise<void> | undefined;
+  const stop = () => (stopping ??= cleanup());
+  const stopOnAbort = () => void stop();
+  signal?.addEventListener('abort', stopOnAbort, { once: true });
+
+  const ready = await waitForGooseServeReady(
+    statusUrl,
+    errorLog,
+    () => exited || spawnFailed || signal?.aborted === true,
+    {
+      healthUrl,
+      readinessFetch,
+      canProbe: onCertificateFingerprint ? () => certFingerprint !== null : undefined,
+      onEvent: startupTrace?.record,
+    }
+  );
 
   const stopOutputCollection = () => {
     stopStdoutCollection();
@@ -547,9 +575,11 @@ export const startGooseServe = async ({
     gooseProcess.stderr?.resume();
   };
 
-  if (!ready) {
+  if (!ready || signal?.aborted) {
     stopOutputCollection();
-    await cleanup();
+    signal?.removeEventListener('abort', stopOnAbort);
+    await stop();
+    signal?.throwIfAborted();
     const exitDetails = exited
       ? ` Process exited with code ${exitCode} and signal ${exitSignal}.`
       : '';
@@ -565,9 +595,11 @@ export const startGooseServe = async ({
   if (tls) {
     startupTrace?.record('fingerprint_wait_start', { timeoutMs: TLS_FINGERPRINT_TIMEOUT_MS });
     const fingerprint = await waitForFingerprint(fingerprintReady, TLS_FINGERPRINT_TIMEOUT_MS);
-    if (!fingerprint) {
+    if (!fingerprint || signal?.aborted) {
       stopOutputCollection();
-      await cleanup();
+      signal?.removeEventListener('abort', stopOnAbort);
+      await stop();
+      signal?.throwIfAborted();
       const exitDetails = exited
         ? ` Process exited with code ${exitCode} and signal ${exitSignal}.`
         : '';
@@ -595,7 +627,10 @@ export const startGooseServe = async ({
     process: gooseProcess,
     errorLog,
     certFingerprint,
-    cleanup,
+    cleanup: () => {
+      signal?.removeEventListener('abort', stopOnAbort);
+      return stop();
+    },
     hasExited: () => exited,
     getExitDetails: () => ({ code: exitCode, signal: exitSignal }),
     startupDiagnosticsPath,

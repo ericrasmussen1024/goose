@@ -44,6 +44,45 @@ describe('GooseServeLeaseRegistry', () => {
     expect(store.getSecretKey(1)).toBe('local-secret');
   });
 
+  it('shares one startup and restricts the lease to its sign-in session', async () => {
+    const store = new GooseServeLeaseRegistry(createLogger());
+    const alice = new AbortController();
+    const bob = new AbortController();
+    const window = new AbortController();
+    const lease = store.create(createGooseServeResult(), 'alice-secret');
+    const start = vi.fn(async () => lease);
+    await Promise.all([
+      store.ensureForSession(1, alice.signal, window.signal, start),
+      store.ensureForSession(1, alice.signal, window.signal, start),
+    ]);
+    expect(start).toHaveBeenCalledOnce();
+    store.attachWindow(2, lease);
+    expect(store.getForSession(2, alice.signal)).toBe(lease);
+    expect(store.getForSession(2, bob.signal)).toBeNull();
+    alice.abort();
+    expect(store.getForSession(1, alice.signal)).toBeNull();
+    expect(store.getForSession(2, alice.signal)).toBeNull();
+    await store.cleanupAll();
+    expect(lease.cleanup).toHaveBeenCalledOnce();
+  });
+
+  it.each(['sign-out', 'window close'])('cleans up a pending backend after %s', async (event) => {
+    const store = new GooseServeLeaseRegistry(createLogger());
+    const session = new AbortController();
+    const window = new AbortController();
+    const lease = store.create(createGooseServeResult(), 'obsolete-secret');
+    let resolve!: (value: typeof lease) => void;
+    const promise = new Promise<typeof lease>((finish) => {
+      resolve = finish;
+    });
+    const starting = store.ensureForSession(1, session.signal, window.signal, () => promise);
+    (event === 'sign-out' ? session : window).abort();
+    resolve(lease);
+    await starting;
+    expect(store.get(1)).toBeNull();
+    expect(lease.cleanup).toHaveBeenCalledOnce();
+  });
+
   it('throws a recovery message after the process exits', () => {
     const logger = createLogger();
     const store = new GooseServeLeaseRegistry(logger);

@@ -1,4 +1,5 @@
 /* global RequestInit */
+import { createHash } from 'node:crypto';
 import type { LanAuthResult, LanAuthState, LanAuthUser } from './types';
 
 type AuthRequestOptions = Omit<RequestInit, 'body' | 'headers'> & {
@@ -49,7 +50,9 @@ class ApiError extends Error {
   }
 }
 
-function userFromResponse(body: unknown): LanAuthUser {
+class MissingHistoryIdentity extends Error {}
+
+function userFromResponse(body: unknown, serverUrl: string): LanAuthUser {
   const value = body as Record<string, unknown> | null;
   if (
     !value ||
@@ -63,8 +66,14 @@ function userFromResponse(body: unknown): LanAuthUser {
   ) {
     throw new Error('Invalid account response');
   }
+  if (typeof value.history_id !== 'string' || !/^[a-f0-9]{32}$/.test(value.history_id)) {
+    throw new MissingHistoryIdentity();
+  }
   return {
     id: value.id as number,
+    conversationScope: createHash('sha256')
+      .update(serverUrl + '/' + value.history_id)
+      .digest('hex'),
     username: value.username,
     allowedModels: value.allowed_models,
     expiresAt: value.session_expires_at,
@@ -72,6 +81,9 @@ function userFromResponse(body: unknown): LanAuthUser {
 }
 
 function friendlyError(error: unknown, login: boolean): string {
+  if (error instanceof MissingHistoryIdentity) {
+    return 'Update the Gilbert gateway to sign in with private conversation history.';
+  }
   if (error instanceof ApiError) {
     if (error.status === 401) {
       return login ? 'Invalid username or password.' : 'Your session ended. Please sign in again.';
@@ -162,6 +174,11 @@ export class LanAuthService {
 
   inferenceSessionSignal(): AbortSignal | null {
     return this.isAuthenticated() ? this.inferenceSession.signal : null;
+  }
+
+  conversationSession() {
+    const signal = this.inferenceSessionSignal();
+    return signal && this.user ? { scope: this.user.conversationScope, signal } : null;
   }
 
   async requestInference(path: InferencePath, signal: AbortSignal, body?: string) {
@@ -259,7 +276,7 @@ export class LanAuthService {
       }
       issuedToken = body.access_token;
       const account = await this.request('/auth/me', issuedToken);
-      const user = userFromResponse(await account.json());
+      const user = userFromResponse(await account.json(), this.serverUrl);
       if (generation !== this.generation) {
         void this.revoke(issuedToken);
         return { ok: false, state: this.state(), error: 'Sign-in was cancelled.' };
@@ -302,8 +319,12 @@ export class LanAuthService {
     const operation = (async () => {
       try {
         const response = await this.request('/auth/me', token);
-        const user = userFromResponse(await response.json());
+        const user = userFromResponse(await response.json(), this.serverUrl);
         if (generation !== this.generation) return;
+        if (user.conversationScope !== this.user?.conversationScope) {
+          this.lock('The account changed. Please sign in again.');
+          return;
+        }
         this.user = user;
         this.scheduleExpiry();
         this.publish();

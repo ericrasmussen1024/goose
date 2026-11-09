@@ -8,6 +8,7 @@ function account(overrides = {}) {
     username: 'eric',
     enabled: true,
     allowed_models: ['qwen'],
+    history_id: 'a'.repeat(32),
     session_expires_at: new Date(Date.now() + 60_000).toISOString(),
     ...overrides,
   };
@@ -72,6 +73,50 @@ describe('LAN authentication service', () => {
     expect(JSON.stringify(result)).not.toContain(token);
     expect(JSON.stringify(result)).not.toContain('test password');
   });
+  it('keeps history through a rename and separates accounts even if a numeric ID is reused', async () => {
+    const { auth, fetcher } = signedIn();
+    keep(auth);
+    await auth.login('eric', 'test-password');
+    const first = auth.conversationSession()!;
+    fetcher.mockResolvedValueOnce(Response.json(account({ username: 'renamed' })));
+    await auth.validate();
+    expect(auth.state().user?.username).toBe('renamed');
+    expect(auth.conversationSession()).toEqual(first);
+
+    fetcher.mockResolvedValueOnce(new Response(null, { status: 204 }));
+    await auth.logout();
+    expect(first.signal.aborted).toBe(true);
+    expect(auth.conversationSession()).toBeNull();
+    fetcher
+      .mockResolvedValueOnce(Response.json({ access_token: token, token_type: 'bearer' }))
+      .mockResolvedValueOnce(Response.json(account({ history_id: 'b'.repeat(32) })));
+    await auth.login('eric', 'test-password');
+    expect(auth.conversationSession()?.scope).not.toBe(first.scope);
+  });
+
+  it('locks instead of changing conversation stores during an existing sign-in', async () => {
+    const { auth, fetcher } = signedIn();
+    keep(auth);
+    await auth.login('eric', 'test-password');
+    const first = auth.conversationSession()!;
+    fetcher.mockResolvedValueOnce(Response.json(account({ history_id: 'b'.repeat(32) })));
+    await auth.validate();
+    expect(first.signal.aborted).toBe(true);
+    expect(auth.conversationSession()).toBeNull();
+  });
+
+  it('requires a gateway that provides stable history identities', async () => {
+    const fetcher = vi
+      .fn()
+      .mockResolvedValueOnce(Response.json({ access_token: token, token_type: 'bearer' }))
+      .mockResolvedValueOnce(Response.json(account({ history_id: undefined })))
+      .mockResolvedValueOnce(new Response(null, { status: 204 }));
+    const auth = keep(new LanAuthService('Test', 'https://ai-server.lan', fetcher, vi.fn()));
+    const result = await auth.login('eric', 'test-password');
+    expect(result.error).toContain('Update the Gilbert gateway');
+    expect(auth.conversationSession()).toBeNull();
+  });
+
   it('does not send oversized UTF-8 passwords', async () => {
     const fetcher = vi.fn();
     const auth = keep(new LanAuthService('Test', 'https://ai-server.lan', fetcher, vi.fn()));

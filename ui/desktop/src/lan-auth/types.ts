@@ -1,5 +1,6 @@
 export interface LanAuthUser {
   id: number;
+  conversationScope: string;
   username: string;
   allowedModels: string[];
   expiresAt: string;

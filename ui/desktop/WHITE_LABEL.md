@@ -69,8 +69,8 @@ site installers when the Caddy root CA changes. Ordinary server certificate
 renewal under the same root needs only the existing installer.
 
 The main process keeps the token in memory and exposes only public account
-state to the renderer. Expiry, revocation, logout, and periodic account checks
-close the UI gate and reload regular app windows. The login shares the app's
+state to the renderer. Logout, expiry, and revocation close the account's
+windows and open a fresh sign-in window. The login shares the app's
 saved Light/Dark/Aura/System theme provider from initial render.
 
 Created Apps share this main-process account instead of asking for a separate
@@ -88,8 +88,21 @@ enabled and a `gilbert-default` grant for each account that uses chat. Site
 administrators switch LM Studio and SGLang through the gateway's YAML settings.
 Set `managedInference: false` for a build that uses normal provider setup.
 
-Desktop login does not isolate local data or tools from other users of the same
-OS profile. Use separate OS accounts when that isolation is required.
+### Private conversation history
+
+Update the gateway first so its database migration gives each account a
+permanent history ID. Then rebuild the desktop package and its bundled Goose
+binary. Each account gets separate conversations, recent prompts, and schedules
+on that workstation. Renames preserve access. Deleting an account and creating
+one with the same username creates a fresh history.
+
+The upgrade leaves the old shared conversation database in place and keeps it
+out of every account's history. It has no ownership information. Conversation
+history stays on the workstation. Gilbert uses the bundled local Goose runtime
+for conversation storage, with the LAN gateway still handling managed inference.
+
+Use separate OS accounts if users need protection from each other's filesystem
+or shell access. Gilbert's history separation applies within the app.
 
 ## Artwork coverage
 

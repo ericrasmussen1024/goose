@@ -45,16 +45,24 @@ impl Paths {
         value.map(PathBuf::from).filter(|path| path.is_absolute())
     }
 
+    pub fn gilbert_private_root() -> Option<PathBuf> {
+        Self::validated_path_root(std::env::var_os("GILBERT_PRIVATE_ROOT"))
+    }
+
     pub fn config_dir() -> PathBuf {
         Self::get_dir(DirType::Config)
     }
 
     pub fn data_dir() -> PathBuf {
-        Self::get_dir(DirType::Data)
+        Self::gilbert_private_root()
+            .map(|root| root.join("data"))
+            .unwrap_or_else(|| Self::get_dir(DirType::Data))
     }
 
     pub fn state_dir() -> PathBuf {
-        Self::get_dir(DirType::State)
+        Self::gilbert_private_root()
+            .map(|root| root.join("state"))
+            .unwrap_or_else(|| Self::get_dir(DirType::State))
     }
 
     pub fn plugins_dir() -> PathBuf {

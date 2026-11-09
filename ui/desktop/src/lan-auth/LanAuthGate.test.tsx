@@ -12,7 +12,13 @@ const initial: LanAuthState = {
 const authenticated: LanAuthState = {
   ...initial,
   revision: 1,
-  user: { id: 1, username: 'eric', allowedModels: [], expiresAt: '2099-01-01T00:00:00Z' },
+  user: {
+    id: 1,
+    conversationScope: 'a'.repeat(64),
+    username: 'eric',
+    allowedModels: [],
+    expiresAt: '2099-01-01T00:00:00Z',
+  },
 };
 let change: (state: LanAuthState) => void;
 afterEach(() => vi.unstubAllGlobals());

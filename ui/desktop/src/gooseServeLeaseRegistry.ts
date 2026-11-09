@@ -16,6 +16,8 @@ export interface GooseServeLease {
 
 export class GooseServeLeaseRegistry {
   private leasesByWindowId = new Map<number, GooseServeLease>();
+  private leaseSessions = new WeakMap<GooseServeLease, AbortSignal>();
+  private pendingLeases = new Map<number, Promise<void>>();
 
   constructor(private readonly logger: Logger) {}
 
@@ -89,6 +91,40 @@ export class GooseServeLeaseRegistry {
 
   get(windowId: number): GooseServeLease | null {
     return this.leasesByWindowId.get(windowId) ?? null;
+  }
+
+  getForSession(windowId: number, session: AbortSignal | null): GooseServeLease | null {
+    const lease = this.get(windowId);
+    return lease && session && !session.aborted && this.leaseSessions.get(lease) === session
+      ? lease
+      : null;
+  }
+
+  async ensureForSession(
+    windowId: number,
+    session: AbortSignal,
+    windowClosed: AbortSignal,
+    start: () => Promise<GooseServeLease>
+  ): Promise<void> {
+    if (session.aborted || windowClosed.aborted || this.getForSession(windowId, session)) return;
+    const pending = this.pendingLeases.get(windowId);
+    if (pending) return pending;
+
+    const starting = (async () => {
+      const lease = await start();
+      if (session.aborted || windowClosed.aborted) {
+        await this.cleanupLease(lease);
+        return;
+      }
+      this.leaseSessions.set(lease, session);
+      this.attachWindow(windowId, lease);
+    })();
+    this.pendingLeases.set(windowId, starting);
+    try {
+      await starting;
+    } finally {
+      this.pendingLeases.delete(windowId);
+    }
   }
 
   getAcpUrl(windowId: number): string | null {

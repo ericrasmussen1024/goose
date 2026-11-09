@@ -284,15 +284,16 @@ describe('startGooseServe', () => {
   });
 
   it.skipIf(process.platform === 'win32')(
-    'uses TLS URLs and args when TLS is enabled',
+    'pins TLS before readiness and passes the private storage requirement to the child',
     async () => {
       const tempDir = makeTempDir();
       const argsPath = path.join(tempDir, 'args.txt');
+      const privateRoot = path.join(tempDir, 'account');
       const goosePath = makeExecutable(
         path.join(tempDir, 'goose'),
         [
           '#!/usr/bin/env sh',
-          'printf "%s\\n" "$@" > "$TEST_ARGS_PATH"',
+          'printf "%s\\n" "$@" "$GILBERT_PRIVATE_ROOT" > "$TEST_ARGS_PATH"',
           'printf "GOOSED_CERT_FINGERPRINT=DD:EE:FF\\n"',
           'while true; do sleep 1; done',
           '',
@@ -301,6 +302,7 @@ describe('startGooseServe', () => {
       vi.stubEnv('GOOSE_BINARY', goosePath);
 
       const readinessUrls: string[] = [];
+      const onCertificateFingerprint = vi.fn();
       const logger = {
         info: vi.fn(),
         error: vi.fn(),
@@ -314,11 +316,13 @@ describe('startGooseServe', () => {
         serverSecret: 'test-secret',
         dir: tempDir,
         tls: true,
+        privateRoot,
         env: {
           TEST_ARGS_PATH: argsPath,
         },
         logger,
         readinessFetch,
+        onCertificateFingerprint,
       });
 
       try {
@@ -328,6 +332,10 @@ describe('startGooseServe', () => {
         const args = await waitForFileLines(argsPath);
         expect(args).toContain('--tls');
         expect(args).toContain('--enable-scheduler');
+        expect(args).toContain('--gilbert-private');
+        expect(args).toContain(privateRoot);
+        expect(onCertificateFingerprint).toHaveBeenCalledWith('DD:EE:FF');
+        expect(onCertificateFingerprint).toHaveBeenCalledBefore(readinessFetch);
       } finally {
         await result.cleanup();
       }

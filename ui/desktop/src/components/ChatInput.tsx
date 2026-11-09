@@ -9,6 +9,7 @@ import { Attach, Close, Microphone } from './icons';
 import { ChatState } from '../types/chatState';
 import debounce from 'lodash/debounce';
 import { LocalMessageStorage } from '../utils/localMessageStorage';
+import { useLanAccount } from '../lan-auth/LanAuthGate';
 import { DirSwitcher } from './bottom_menu/DirSwitcher';
 import { GitBranchIndicator } from './GitBranchIndicator';
 import ModelsBottomBar from './settings/models/bottom_bar/ModelsBottomBar';
@@ -255,6 +256,11 @@ export default function ChatInput({
   appendQuote,
   onAppendQuoteConsumed,
 }: ChatInputProps) {
+  const conversationScope = useLanAccount()?.conversationScope;
+  const messageHistory = useMemo(
+    () => new LocalMessageStorage(conversationScope),
+    [conversationScope]
+  );
   const [_value, setValue] = useState(initialValue);
   const [displayValue, setDisplayValue] = useState(initialValue); // For immediate visual feedback
   const [isFocused, setIsFocused] = useState(false);
@@ -446,7 +452,7 @@ export default function ChatInput({
       const shouldProcessQueue = !queuePausedRef.current || lastInterruption || shouldSendAfterStop;
 
       if (shouldProcessQueue) {
-        LocalMessageStorage.addMessage(messageToSend.content);
+        messageHistory.addMessage(messageToSend.content);
         handleSubmit({ msg: messageToSend.content, images: messageToSend.images });
         if (shouldSendAfterStop) {
           clearPendingSendAfterStop(messageToSend.id);
@@ -479,6 +485,7 @@ export default function ChatInput({
     isSubmissionBusy,
     queueProcessingBlocked,
     queuedMessages,
+    messageHistory,
     handleSubmit,
     lastInterruption,
     clearPendingSendAfterStop,
@@ -1050,7 +1057,7 @@ export default function ChatInput({
     evt.preventDefault();
 
     // Get global history once to avoid multiple calls
-    const globalHistory = LocalMessageStorage.getRecentMessages() || [];
+    const globalHistory = messageHistory.getRecentMessages();
 
     // Save current input if we're just starting to navigate history
     if (historyIndex === -1) {
@@ -1168,13 +1175,13 @@ export default function ChatInput({
       if (textToSend || imageData.length > 0) {
         // Store original message in history
         if (displayValue.trim()) {
-          LocalMessageStorage.addMessage(displayValue);
+          messageHistory.addMessage(displayValue);
         } else {
           const droppedFilePaths = allDroppedFiles
             .filter((file) => !file.isImage && !file.error && !file.isLoading)
             .map((file) => file.path);
           if (droppedFilePaths.length > 0) {
-            LocalMessageStorage.addMessage(droppedFilePaths.join(' '));
+            messageHistory.addMessage(droppedFilePaths.join(' '));
           }
         }
 
@@ -1201,6 +1208,7 @@ export default function ChatInput({
       }
     },
     [
+      messageHistory,
       convertImagesToImageData,
       appendDroppedFilePaths,
       displayValue,
@@ -1445,7 +1453,7 @@ export default function ChatInput({
 
     if (!isSubmissionBusy) {
       setQueuedMessages((prev) => removeQueuedMessage(prev, messageId));
-      LocalMessageStorage.addMessage(messageToSend.content);
+      messageHistory.addMessage(messageToSend.content);
       handleSubmit({ msg: messageToSend.content, images: messageToSend.images });
       return;
     }
@@ -1465,7 +1473,7 @@ export default function ChatInput({
         });
 
         if (steerAccepted) {
-          LocalMessageStorage.addMessage(messageToSend.content);
+          messageHistory.addMessage(messageToSend.content);
           clearPendingSendAfterStop(messageId);
           setQueuedMessages((prev) => {
             const newQueue = removeQueuedMessage(prev, messageId);
@@ -1491,7 +1499,7 @@ export default function ChatInput({
           }
           return newQueue;
         });
-        LocalMessageStorage.addMessage(messageToSend.content);
+        messageHistory.addMessage(messageToSend.content);
         handleSubmit({ msg: messageToSend.content, images: messageToSend.images });
         return;
       }
@@ -1515,7 +1523,7 @@ export default function ChatInput({
     setLastInterruption(null);
     if (!isSubmissionBusy && !queueProcessingBlocked && queuedMessages.length > 0) {
       const nextMessage = queuedMessages[0];
-      LocalMessageStorage.addMessage(nextMessage.content);
+      messageHistory.addMessage(nextMessage.content);
       handleSubmit({ msg: nextMessage.content, images: nextMessage.images });
       setQueuedMessages((prev) => {
         const newQueue = prev.slice(1);

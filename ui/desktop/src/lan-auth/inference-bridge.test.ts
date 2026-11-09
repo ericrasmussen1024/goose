@@ -24,6 +24,7 @@ it('streams only signed-in requests and keeps the LAN credential out of the chil
           username: 'alice',
           enabled: true,
           allowed_models: ['gilbert-default'],
+          history_id: 'a'.repeat(32),
           session_expires_at: new Date(Date.now() + 60_000).toISOString(),
         })
       );

@@ -81,7 +81,7 @@ instructions: |
 
   When test_phases is all or desktop-lan-login and the Desktop sources are available,
   run the focused noninteractive checks from ui/desktop:
-  - pnpm exec vitest run src/lan-auth src/preload.fileAccess.test.ts
+  - pnpm exec vitest run src/lan-auth src/preload.fileAccess.test.ts src/gooseServeLeaseRegistry.test.ts
   - pnpm run typecheck
   - pnpm exec eslint src/lan-auth --max-warnings 0
   Verify that the bundled CA transport is scoped to the configured HTTPS origin
@@ -98,6 +98,12 @@ instructions: |
   Login/logout and local file access remain limited to regular desktop windows.
   Check two windows of the same created App and confirm both close on logout,
   expiry, or server revocation. Reopen the App after signing back in.
+  On one desktop, create a conversation and send a unique prompt under account A.
+  Sign out and sign in as account B. Confirm that history, search, the direct
+  resume link for the conversation, and recent-prompt navigation reveal no
+  account A content. Create a conversation as B, then sign back in as A and
+  confirm A can reopen only its own conversation. Start with a legacy shared
+  database and verify that neither account can browse it.
   Record pass/fail and distinguish mocked UI/IPC coverage from live LAN or packaged
   application testing. If dependencies or a desktop runtime are missing, record
   those checks as skipped. Do not request or print real user passwords or tokens.

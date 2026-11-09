@@ -8,9 +8,16 @@ const MAX_MESSAGES = 500;
 const EXPIRY_DAYS = 30;
 
 export class LocalMessageStorage {
-  private static getStoredMessages(): StoredMessage[] {
+  constructor(private readonly scope: string | undefined) {}
+
+  private get key() {
+    return this.scope ? `${STORAGE_KEY}:${this.scope}` : null;
+  }
+
+  private getStoredMessages(): StoredMessage[] {
+    if (!this.key) return [];
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
+      const stored = localStorage.getItem(this.key);
       if (!stored) return [];
 
       const messages = JSON.parse(stored) as StoredMessage[];
@@ -34,15 +41,16 @@ export class LocalMessageStorage {
     }
   }
 
-  private static setStoredMessages(messages: StoredMessage[]) {
+  private setStoredMessages(messages: StoredMessage[]) {
+    if (!this.key) return;
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+      localStorage.setItem(this.key, JSON.stringify(messages));
     } catch (error) {
       console.error('Error saving message history:', error);
     }
   }
 
-  static addMessage(content: string) {
+  addMessage(content: string) {
     if (!content.trim()) return;
 
     const messages = this.getStoredMessages();
@@ -64,13 +72,9 @@ export class LocalMessageStorage {
     this.setStoredMessages(validMessages);
   }
 
-  static getRecentMessages(): string[] {
+  getRecentMessages(): string[] {
     return this.getStoredMessages()
       .map((msg) => msg.content)
       .reverse(); // Most recent first
-  }
-
-  static clearHistory() {
-    localStorage.removeItem(STORAGE_KEY);
   }
 }

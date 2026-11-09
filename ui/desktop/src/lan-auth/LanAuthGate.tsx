@@ -16,8 +16,12 @@ import './login.css';
 
 const AccountContext = createContext<LanAuthUser | null>(null);
 
+export function useLanAccount() {
+  return useContext(AccountContext);
+}
+
 export function LanAccountButton() {
-  const user = useContext(AccountContext);
+  const user = useLanAccount();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   if (!user) return null;

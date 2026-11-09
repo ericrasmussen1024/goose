@@ -904,6 +904,9 @@ enum Command {
         #[arg(long, help = "Enable scheduled recipe execution")]
         enable_scheduler: bool,
 
+        #[arg(long, hide = true)]
+        gilbert_private: bool,
+
         /// Also expose this server over goose roam (p2p) so paired devices can connect remotely
         #[cfg(feature = "roaming")]
         #[arg(
@@ -2863,9 +2866,13 @@ pub async fn cli() -> anyhow::Result<()> {
             dangerously_unauthenticated,
             allowed_origins,
             enable_scheduler,
+            gilbert_private,
             #[cfg(feature = "roaming")]
             roam,
         }) => {
+            if gilbert_private && goose::config::paths::Paths::gilbert_private_root().is_none() {
+                anyhow::bail!("Gilbert requires an absolute GILBERT_PRIVATE_ROOT");
+            }
             handle_serve_command(ServeCommandArgs {
                 host,
                 port,
